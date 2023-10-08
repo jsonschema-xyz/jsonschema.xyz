@@ -1,0 +1,11 @@
+{
+    "$schema": "https://jsonschema.xyz/global.json.schema",
+    "msbuild-sdks": {
+        "Microsoft.NET.Sdk": "5.0.0"
+    },
+    "sdk": {
+        "version": "5.0.100",
+        "rollForward": "latestPatch",
+        "allowPrerelease": true
+    }
+}

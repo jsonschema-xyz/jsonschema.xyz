@@ -1,0 +1,23 @@
+blank_issues_enabled: false
+contact_links:
+  - name: jsonchema.xyz Discussions
+    url: https://discuss.jsonschema.xyz
+    about: Ask questions and share ideas related to JustinWritesCode projects here
+  - name: GitHub Community Support
+    url: https://github.com/orgs/community/discussions
+    about: Please ask and answer questions here.
+  - name: GitHub Security Bug Bounty
+    url: https://bounty.github.com/
+    about: Please report security vulnerabilities here.
+  - name: Bug Report
+    url: bug_report.yml
+    about: Please report bugs here.
+  - name: Feature Request
+    url: feature_request.yml
+    about: Please request features here.
+  - name: Security Vulnerability
+    url: https://github.com/jsonschema-xyz/jsonschema.xyz/security/advisories/new
+    about: Please report security vulnerabilities here.
+  - name: General Comments
+    url: general.yml
+    about: Please comment on anything you like here. Or you can <a href="https://discuss.jsonschema.xyz">open a discussion</a>.

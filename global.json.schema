@@ -1,0 +1,23 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "$id": "https://jsonschema.xyz/global.json.schema",
+    "contentMediaType": "application/schema+json",
+    "allOf": [
+        {
+            "$ref": "https://json.schemastore.org/global"
+        }
+    ],
+    "properties": {
+        "msbuild-sdks": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "string",
+                "format": "semver",
+                "pattern": "^(?<major>0|[1-9]\\d*)\\.(?<minor>0|[1-9]\\d*)\\.(?<patch>0|[1-9]\\d*)(?:-(?<prerelease>(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+(?<buildmetadata>[0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+            }
+        }
+    },
+    "title": "Extended JSON schema for the .NET global configuration file",
+    "type": "object",
+    "additionalProperties": true
+}

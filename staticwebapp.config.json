@@ -1,0 +1,13 @@
+{
+    "mimeTypes": {
+        ".config": "application/xml",
+        ".schema": "application/schema+json"
+    },
+    "trailingSlash": "always",
+    "globalHeaders": {
+        "X-Author": "David G. Moore, Jr. <david@dgmjr.io>",
+        "X-License": "MIT",
+        "X-Source": "https://github.com/jsonschema-xyz/jsonschema.xyz",
+        "X-Source-Branch": "main"
+    }
+}
