@@ -1,6 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id":"https://jsonschema.xyz/telegram.json.schema",
+    "$id": "https://jsonschema.xyz/telegram.json.schema",
+    "contentMediaType": "application/schema+json",
     "components": {
         "responses": {
             "BadRequest": {
