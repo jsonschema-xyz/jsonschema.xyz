@@ -1,0 +1,4478 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "MicrosoftIdentityOptions",
+    "definitions": {
+        "CertificateDescription": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/CredentialDescription"
+                },
+                {
+                    "type": "object",
+                    "description": "Description of a certificate.",
+                    "additionalProperties": false,
+                    "properties": {
+                        "X509KeyStorageFlags": {
+                            "description": "Defines where and how to import the private key of an X.509 certificate.\n            ",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/definitions/X509KeyStorageFlags"
+                                }
+                            ]
+                        },
+                        "Certificate": {
+                            "description": ".",
+                            "oneOf": [
+                                {
+                                    "type": "null"
+                                },
+                                {
+                                    "$ref": "#/definitions/X509Certificate2"
+                                }
+                            ]
+                        },
+                        "SourceType": {
+                            "description": ".",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/definitions/CertificateSource"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "X509KeyStorageFlags": {
+            "type": "integer",
+            "description": "",
+            "x-enumFlags": true,
+            "x-enumNames": [
+                "DefaultKeySet",
+                "UserKeySet",
+                "MachineKeySet",
+                "Exportable",
+                "UserProtected",
+                "PersistKeySet",
+                "EphemeralKeySet"
+            ],
+            "enum": [
+                0,
+                1,
+                2,
+                4,
+                8,
+                16,
+                32
+            ]
+        },
+        "X509Certificate2": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/X509Certificate"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "Archived": {
+                            "type": "boolean"
+                        },
+                        "Extensions": {
+                            "type": "array",
+                            "items": {}
+                        },
+                        "FriendlyName": {
+                            "type": "string"
+                        },
+                        "HasPrivateKey": {
+                            "type": "boolean"
+                        },
+                        "PrivateKey": {
+                            "x-deprecated": true,
+                            "x-deprecatedMessage": "X509Certificate2.PrivateKey is obsolete. Use the appropriate method to get the private key, such as GetRSAPrivateKey, or use the CopyWithPrivateKey method to create a new instance with a private key.",
+                            "oneOf": [
+                                {
+                                    "type": "null"
+                                },
+                                {
+                                    "$ref": "#/definitions/AsymmetricAlgorithm"
+                                }
+                            ]
+                        },
+                        "IssuerName": {
+                            "$ref": "#/definitions/X500DistinguishedName"
+                        },
+                        "NotAfter": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "NotBefore": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "PublicKey": {
+                            "$ref": "#/definitions/PublicKey"
+                        },
+                        "RawData": {
+                            "type": "string",
+                            "format": "byte"
+                        },
+                        "RawDataMemory": {
+                            "$ref": "#/definitions/ReadOnlyMemoryOfByte"
+                        },
+                        "SerialNumber": {
+                            "type": "string"
+                        },
+                        "SignatureAlgorithm": {
+                            "$ref": "#/definitions/Oid"
+                        },
+                        "SubjectName": {
+                            "$ref": "#/definitions/X500DistinguishedName"
+                        },
+                        "Thumbprint": {
+                            "type": "string"
+                        },
+                        "Version": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                }
+            ]
+        },
+        "AsymmetricAlgorithm": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "KeySize": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "LegalKeySizes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/KeySizes"
+                    }
+                },
+                "SignatureAlgorithm": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "KeyExchangeAlgorithm": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            }
+        },
+        "KeySizes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "MinSize": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "MaxSize": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "SkipSize": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "X500DistinguishedName": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AsnEncodedData"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "Name": {
+                            "type": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "AsnEncodedData": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Oid": {
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/Oid"
+                        }
+                    ]
+                },
+                "RawData": {
+                    "type": "string",
+                    "format": "byte"
+                }
+            }
+        },
+        "Oid": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Value": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "FriendlyName": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            }
+        },
+        "PublicKey": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "EncodedKeyValue": {
+                    "$ref": "#/definitions/AsnEncodedData"
+                },
+                "EncodedParameters": {
+                    "$ref": "#/definitions/AsnEncodedData"
+                },
+                "Key": {
+                    "x-deprecated": true,
+                    "x-deprecatedMessage": "PublicKey.Key is obsolete. Use the appropriate method to get the public key, such as GetRSAPublicKey.",
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/AsymmetricAlgorithm"
+                        }
+                    ]
+                },
+                "Oid": {
+                    "$ref": "#/definitions/Oid"
+                }
+            }
+        },
+        "ReadOnlyMemoryOfByte": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Length": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "IsEmpty": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "X509Certificate": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Handle": {
+                    "$ref": "#/definitions/IntPtr"
+                },
+                "Issuer": {
+                    "type": "string"
+                },
+                "Subject": {
+                    "type": "string"
+                },
+                "SerialNumberBytes": {
+                    "$ref": "#/definitions/ReadOnlyMemoryOfByte"
+                }
+            }
+        },
+        "IntPtr": {
+            "type": "object",
+            "additionalProperties": false
+        },
+        "CertificateSource": {
+            "type": "integer",
+            "description": "Source for a certificate.",
+            "x-enumNames": [
+                "Certificate",
+                "KeyVault",
+                "Base64Encoded",
+                "Path",
+                "StoreWithThumbprint",
+                "StoreWithDistinguishedName"
+            ],
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ]
+        },
+        "CredentialDescription": {
+            "type": "object",
+            "description": "Description of a credential. Credentials are used to prove the identity of the\napplication (See ClientCredentials), or\nto decrypt tokens (See TokenDecryptionCredentials). Credentials can be\nsecrets (client secrets), certificates, or signed assertions. They can be stored or provided in a variety of ways, \nand this class provides a way to describe them. The description is then used by Microsoft.Identity.Web to retrieve the credential.\n(See the DefaultCredentialProvider class)",
+            "additionalProperties": false,
+            "properties": {
+                "Id": {
+                    "type": "string",
+                    "description": "Gets a unique identifier for a CredentialDescription based on SourceType and ReferenceOrValue."
+                },
+                "SourceType": {
+                    "description": "Type of the source of the credential. This property is used to determine which other properties need\nto be provided to describe the credential.",
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/CredentialSource"
+                        }
+                    ]
+                },
+                "Container": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Container in which to find the credential. You will normally not use this property directly. It could be used\nby property editors in tools or IDEs. Instead, use the properties that are specific to the SourceType."
+                },
+                "KeyVaultUrl": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is KeyVault, use this property to specify the\nURL of the Key Vault containing the certificate, in conjunction with KeyVaultCertificateName.",
+                    "x-example": "The JSON fragment below describes a certificate stored in Key Vault used as a client credential in a confidential client application:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"keyvault_json\":::\n\nThe code below describes programmatically in C#, the same certificate stored in Key Vault.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"keyvault_csharp\":::"
+                },
+                "CertificateStorePath": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is StoreWithDistinguishedName or \nStoreWithThumbprint, specifies the certificate store from which to extract\nthe certificate. The format is the concatenation of a value of StoreLocation and a value of StoreName\nseparated by a slash. For instance, use CurrentUser/My for a user certificate, and LocalMachine/My for a computer certificate."
+                },
+                "CertificateDistinguishedName": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is StoreWithDistinguishedName, specifies the distinguished name of\nthe certificate in the store specified by CertificateStorePath.",
+                    "x-example": "The JSON fragment below describes a user certificate stored in the personal certificates folder (<b>CurrentUser/My</b>) and specified by its distinguised name, used as a client credential in a confidential client application:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"distinguishedname_json\":::\n\nThe code below describes programmatically in C#, a computer certificate in the personal certificates folder (<b>LocalMachine/My<b>).\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"distinguishedname_csharp\":::"
+                },
+                "KeyVaultCertificateName": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is KeyVault, use this property to specify the\nthe name of the certificate in Key Vault in conjunction with KeyVaultUrl.",
+                    "x-example": "The JSON fragment below describes a certificate stored in Key Vault used as a client credential in a confidential client application:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"keyvault_json\":::\n\nThe code below describes programmatically in C#, the same certificate stored in Key Vault.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"keyvault_csharp\":::"
+                },
+                "CertificateThumbprint": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is StoreWithThumbprint specifies the thumbprint of the certificate to extract from\nthe certificate store specified by CertificateStorePath.",
+                    "x-example": "The JSON fragment below describes a user certificate stored in the personal certificates folder (<b>CurrentUser/My</b>) and specified by its thumbprint, used as a client credential in a confidential client application:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"thumbprint_json\":::\n\nThe code below describes programmatically in C#, a computer certificate in the personal certificates folder (<b>LocalMachine/My<b>) accessed by its thumbprint.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"thumbprint_csharp\":::"
+                },
+                "CertificateDiskPath": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is Path, specifies the path to the certificate on disk. You can\nuse this property to specify the path to a PFX file containing the certificate and its private key. If a password is needed, \nuse CertificatePassword.",
+                    "x-example": "The JSON fragment below describes a certificate retrieved by its path and a password to be used as a client credential in a confidential client application:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"path_json\":::\n\nThe code below describes programmatically in C#, a the same certificate.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"path_csharp\":::"
+                },
+                "CertificatePassword": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is Path, specifies the password to use to access the certificate which\npath is specified by CertificateDiskPath. Only use this property if the certificate is protected by a password.",
+                    "x-example": "The JSON fragment below describes a certificate retrieved by its path and a password to be used as a client credential in a confidential client application:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"path_json\":::\n\nThe code below describes programmatically in C#, the same certificate.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"path_csharp\":::"
+                },
+                "Base64EncodedValue": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is Base64Encoded, specifies the base64 encoded value of the certificate.",
+                    "x-example": "The JSON fragment below describes a certificate by its base64 encoded value, to be used as a client credential in a confidential client application:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"base64_json\":::\n\nThe code below describes programmatically in C#, the same certificate.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"base64_csharp\":::"
+                },
+                "ClientSecret": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is ClientSecret, describes the client secret to use as a client credential in a confidential client application.\nThe client secret is a string known only to the application and the identity provider. It needs to match the value configured during the application registration.",
+                    "x-example": "The JSON fragment below describes a client secret used as a client credential in a confidential client application:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"secret_json\":::\n\nThe code below describes programmatically in C#, the same client secret.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"secret_csharp\":::"
+                },
+                "ManagedIdentityClientId": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is SignedAssertionFromManagedIdentity, specifies the client ID of the Azure user-assigned managed identity \nused to provide an signed assertion that will be used as a client credential for the application. This requires that the application is deployed on Azure, that the managed identity is configured, \nand that workload identity federation with the managed identity is declared in the application registration. For details, see https://learn.microsoft.com/azure/active-directory/workload-identities/workload-identity-federation.",
+                    "x-example": "The JSON fragment below describes a workload identity federation with a user assigned managed identity:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"msi_json\":::\n\nThe code below describes programmatically in C#, the same workload identity federation with a user assigned managed identity.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"msi_csharp\":::"
+                },
+                "SignedAssertionFileDiskPath": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is SignedAssertionFilePath, optionally specifies the path on disk of a file \ncontaining a signed assertion used as a client assertion for the confidential client application. \nThe signed assertion file is a file containing a signed JWT assertion that is used as a client credential. You will usually use this option when you want to integrate\nwith workload identity federation with Azure Kubernetes Service (AKS). \nFor details, see https://learn.microsoft.com/azure/active-directory/workload-identities/workload-identity-federation.",
+                    "x-example": "The JSON fragment below describes a signed assertion acquired with workload identity federation with Azure Kubernetes Services (AKS):\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"aks_json\":::\n\nThe code below describes programmatically in C#, the same workload identity federation with with Azure Kubernetes Services (AKS) signed assertion.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"aks_csharp\":::"
+                },
+                "DecryptKeysAuthenticationOptions": {
+                    "description": "When SourceType is AutoDecryptKeys, this property describes the authority to use\nto get a token for a web API to get the keys used to decrypt an encrypted token. The cloud instance will be the same as the application, but the application can be a multi-tenant\napplication (tenant = common or organizations), and in this case to get a token on behalf of itself, the\ncredential type needs to provide a tenant. More generally you might want to specify authentication options, including protocol, PopKey, etc ...\nThis credential description is only used for decrypt credentials, not for client credentials.",
+                    "x-example": "The JSON fragment below describes a decrypt credential to get the decrypt keys automatically:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"autodecryp_json\":::\n\nThe code below describes the same, programmatically in C#.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"autodecryp_csharp\":::",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/AuthorizationHeaderProviderOptions"
+                        }
+                    ]
+                },
+                "ReferenceOrValue": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Reference to the certificate or value. You will normally not use this property directly. It could be used\nby property editors in tools or IDEs. Instead, use the properties that are specific to the SourceType."
+                },
+                "Certificate": {
+                    "description": "When SourceType is Certificate, you will use this property to provide the certificate yourself. \nWhen SourceType is Base64Encoded or KeyVault\nor Path or StoreWithDistinguishedName or StoreWithThumbprint\nafter the certificate is retrieved by a ICredentialsLoader, it will be stored in this property and also in the CachedValue.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/X509Certificate2"
+                        }
+                    ]
+                },
+                "CachedValue": {
+                    "description": "When the credential is retrieved by a ICredentialsLoader, it will be stored in this property, where you can retrieve it. If the credential is a certificate,\nit will also be stored in the Certificate property.",
+                    "oneOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "Skip": {
+                    "type": "boolean",
+                    "description": "Skip this credential description. This is useful when, you specify a list of\ncredentials, some of which don't apply in a particular deployment.\nIt will also be used by the ICredentialsLoader if it cannot find or load the credential."
+                },
+                "CredentialType": {
+                    "description": "Describes the type of credentials, based on the SourceType.",
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/CredentialType"
+                        }
+                    ]
+                }
+            }
+        },
+        "CredentialSource": {
+            "type": "integer",
+            "description": "Source for a credential.\nCredentials are used to prove the identity of the\napplication (See ClientCredentials), or\nto decrypt tokens (See TokenDecryptionCredentials). Credentials can be\nsecrets (client secrets), certificates, or signed assertions. They can be stored or provided in a variety of ways, \nand this enumeration describes these ways. It's used in the SourceType property.",
+            "x-enumNames": [
+                "Certificate",
+                "KeyVault",
+                "Base64Encoded",
+                "Path",
+                "StoreWithThumbprint",
+                "StoreWithDistinguishedName",
+                "ClientSecret",
+                "SignedAssertionFromManagedIdentity",
+                "SignedAssertionFilePath",
+                "SignedAssertionFromVault",
+                "AutoDecryptKeys"
+            ],
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+            ]
+        },
+        "AuthorizationHeaderProviderOptions": {
+            "type": "object",
+            "description": "Options passed-in to call downstream web APIs. To call Microsoft Graph, see rather\nMicrosoftGraphOptions in the Microsoft.Identity.Web.MicrosoftGraph assembly.",
+            "additionalProperties": false,
+            "properties": {
+                "BaseUrl": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Base URL for the called downstream web API. For instance \"https://graph.microsoft.com/beta/\"."
+                },
+                "RelativePath": {
+                    "type": "string",
+                    "description": "Path relative to the BaseUrl (for instance \"me\")."
+                },
+                "HttpMethod": {
+                    "type": "string",
+                    "description": "HTTP method used to call this downstream web API (by default Get).",
+                    "default": "Get"
+                },
+                "CustomizeHttpRequestMessage": {
+                    "description": "Provides an opportunity for the caller app to customize the HttpRequestMessage. For example,\nto customize the headers. This is called after the message was formed, including\nthe Authorization header, and just before the message is sent.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/ActionOfHttpRequestMessage"
+                        }
+                    ]
+                },
+                "AcquireTokenOptions": {
+                    "description": "Options related to token acquisition.",
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/AcquireTokenOptions"
+                        }
+                    ]
+                },
+                "ProtocolScheme": {
+                    "type": "string",
+                    "description": "Name of the protocol scheme used to create the authorization header. By default: \"Bearer\".",
+                    "default": "Bearer"
+                },
+                "RequestAppToken": {
+                    "type": "boolean",
+                    "description": "Describes if the downstream API is called on behalf of the calling service itself\n(App token) or on behalf of a user processed by the service (user token).\nIf true, the token is requested on behalf of the app. Otherwise, it on-behalf of the user."
+                }
+            }
+        },
+        "ActionOfHttpRequestMessage": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "MulticastDelegate": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Delegate"
+                },
+                {
+                    "type": "object",
+                    "x-abstract": true,
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "Delegate": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "Target": {
+                    "oneOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "Method": {
+                    "$ref": "#/definitions/MethodInfo"
+                }
+            }
+        },
+        "MethodInfo": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MethodBase"
+                },
+                {
+                    "type": "object",
+                    "x-abstract": true,
+                    "additionalProperties": false,
+                    "properties": {
+                        "MemberType": {
+                            "$ref": "#/definitions/MemberTypes"
+                        },
+                        "ReturnParameter": {
+                            "$ref": "#/definitions/ParameterInfo"
+                        },
+                        "ReturnType": {
+                            "type": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "MemberTypes": {
+            "type": "integer",
+            "description": "",
+            "x-enumFlags": true,
+            "x-enumNames": [
+                "Constructor",
+                "Event",
+                "Field",
+                "Method",
+                "Property",
+                "TypeInfo",
+                "Custom",
+                "NestedType",
+                "All"
+            ],
+            "enum": [
+                1,
+                2,
+                4,
+                8,
+                16,
+                32,
+                64,
+                128,
+                191
+            ]
+        },
+        "ParameterInfo": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Attributes": {
+                    "$ref": "#/definitions/ParameterAttributes"
+                },
+                "Member": {
+                    "$ref": "#/definitions/MemberInfo"
+                },
+                "Name": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "ParameterType": {
+                    "type": "string"
+                },
+                "Position": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "IsIn": {
+                    "type": "boolean"
+                },
+                "IsLcid": {
+                    "type": "boolean"
+                },
+                "IsOptional": {
+                    "type": "boolean"
+                },
+                "IsOut": {
+                    "type": "boolean"
+                },
+                "IsRetval": {
+                    "type": "boolean"
+                },
+                "DefaultValue": {
+                    "oneOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "RawDefaultValue": {
+                    "oneOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "HasDefaultValue": {
+                    "type": "boolean"
+                },
+                "CustomAttributes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomAttributeData"
+                    }
+                },
+                "MetadataToken": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "ParameterAttributes": {
+            "type": "integer",
+            "description": "",
+            "x-enumFlags": true,
+            "x-enumNames": [
+                "None",
+                "In",
+                "Out",
+                "Lcid",
+                "Retval",
+                "Optional",
+                "HasDefault",
+                "HasFieldMarshal",
+                "Reserved3",
+                "Reserved4",
+                "ReservedMask"
+            ],
+            "enum": [
+                0,
+                1,
+                2,
+                4,
+                8,
+                16,
+                4096,
+                8192,
+                16384,
+                32768,
+                61440
+            ]
+        },
+        "MemberInfo": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "Module": {
+                    "$ref": "#/definitions/Module"
+                },
+                "CustomAttributes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomAttributeData"
+                    }
+                },
+                "IsCollectible": {
+                    "type": "boolean"
+                },
+                "MetadataToken": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "Module": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "Assembly": {
+                    "$ref": "#/definitions/Assembly"
+                },
+                "FullyQualifiedName": {
+                    "type": "string"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "MDStreamVersion": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "ModuleVersionId": {
+                    "type": "string",
+                    "format": "guid"
+                },
+                "ScopeName": {
+                    "type": "string"
+                },
+                "ModuleHandle": {
+                    "$ref": "#/definitions/ModuleHandle"
+                },
+                "CustomAttributes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomAttributeData"
+                    }
+                },
+                "MetadataToken": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "Assembly": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "DefinedTypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "ExportedTypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "CodeBase": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "x-deprecated": true,
+                    "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
+                },
+                "EntryPoint": {
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/MethodInfo"
+                        }
+                    ]
+                },
+                "FullName": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "ImageRuntimeVersion": {
+                    "type": "string"
+                },
+                "IsDynamic": {
+                    "type": "boolean"
+                },
+                "Location": {
+                    "type": "string"
+                },
+                "ReflectionOnly": {
+                    "type": "boolean"
+                },
+                "IsCollectible": {
+                    "type": "boolean"
+                },
+                "IsFullyTrusted": {
+                    "type": "boolean"
+                },
+                "CustomAttributes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomAttributeData"
+                    }
+                },
+                "EscapedCodeBase": {
+                    "type": "string",
+                    "x-deprecated": true,
+                    "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
+                },
+                "ManifestModule": {
+                    "$ref": "#/definitions/Module"
+                },
+                "Modules": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Module"
+                    }
+                },
+                "GlobalAssemblyCache": {
+                    "type": "boolean",
+                    "x-deprecated": true,
+                    "x-deprecatedMessage": "The Global Assembly Cache is not supported."
+                },
+                "HostContext": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "SecurityRuleSet": {
+                    "$ref": "#/definitions/SecurityRuleSet"
+                }
+            }
+        },
+        "CustomAttributeData": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "AttributeType": {
+                    "type": "string"
+                },
+                "Constructor": {
+                    "$ref": "#/definitions/ConstructorInfo"
+                },
+                "ConstructorArguments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomAttributeTypedArgument"
+                    }
+                },
+                "NamedArguments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomAttributeNamedArgument"
+                    }
+                }
+            }
+        },
+        "ConstructorInfo": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MethodBase"
+                },
+                {
+                    "type": "object",
+                    "x-abstract": true,
+                    "additionalProperties": false,
+                    "properties": {
+                        "MemberType": {
+                            "$ref": "#/definitions/MemberTypes"
+                        }
+                    }
+                }
+            ]
+        },
+        "MethodBase": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MemberInfo"
+                },
+                {
+                    "type": "object",
+                    "x-abstract": true,
+                    "additionalProperties": false,
+                    "properties": {
+                        "MethodImplementationFlags": {
+                            "$ref": "#/definitions/MethodImplAttributes"
+                        },
+                        "CallingConvention": {
+                            "$ref": "#/definitions/CallingConventions"
+                        },
+                        "IsAbstract": {
+                            "type": "boolean"
+                        },
+                        "IsConstructor": {
+                            "type": "boolean"
+                        },
+                        "IsFinal": {
+                            "type": "boolean"
+                        },
+                        "IsHideBySig": {
+                            "type": "boolean"
+                        },
+                        "IsSpecialName": {
+                            "type": "boolean"
+                        },
+                        "IsStatic": {
+                            "type": "boolean"
+                        },
+                        "IsVirtual": {
+                            "type": "boolean"
+                        },
+                        "IsAssembly": {
+                            "type": "boolean"
+                        },
+                        "IsFamily": {
+                            "type": "boolean"
+                        },
+                        "IsFamilyAndAssembly": {
+                            "type": "boolean"
+                        },
+                        "IsFamilyOrAssembly": {
+                            "type": "boolean"
+                        },
+                        "IsPrivate": {
+                            "type": "boolean"
+                        },
+                        "IsPublic": {
+                            "type": "boolean"
+                        },
+                        "IsConstructedGenericMethod": {
+                            "type": "boolean"
+                        },
+                        "IsGenericMethod": {
+                            "type": "boolean"
+                        },
+                        "IsGenericMethodDefinition": {
+                            "type": "boolean"
+                        },
+                        "ContainsGenericParameters": {
+                            "type": "boolean"
+                        },
+                        "IsSecurityCritical": {
+                            "type": "boolean"
+                        },
+                        "IsSecuritySafeCritical": {
+                            "type": "boolean"
+                        },
+                        "IsSecurityTransparent": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            ]
+        },
+        "MethodImplAttributes": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "IL",
+                "Managed",
+                "Native",
+                "OPTIL",
+                "CodeTypeMask",
+                "Runtime",
+                "ManagedMask",
+                "Unmanaged",
+                "NoInlining",
+                "ForwardRef",
+                "Synchronized",
+                "NoOptimization",
+                "PreserveSig",
+                "AggressiveInlining",
+                "AggressiveOptimization",
+                "InternalCall",
+                "MaxMethodImplVal"
+            ],
+            "enum": [
+                0,
+                0,
+                1,
+                2,
+                3,
+                3,
+                4,
+                4,
+                8,
+                16,
+                32,
+                64,
+                128,
+                256,
+                512,
+                4096,
+                65535
+            ]
+        },
+        "CallingConventions": {
+            "type": "integer",
+            "description": "",
+            "x-enumFlags": true,
+            "x-enumNames": [
+                "Standard",
+                "VarArgs",
+                "Any",
+                "HasThis",
+                "ExplicitThis"
+            ],
+            "enum": [
+                1,
+                2,
+                3,
+                32,
+                64
+            ]
+        },
+        "CustomAttributeTypedArgument": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "ArgumentType": {
+                    "type": "string"
+                },
+                "Value": {
+                    "oneOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            }
+        },
+        "CustomAttributeNamedArgument": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "MemberInfo": {
+                    "$ref": "#/definitions/MemberInfo"
+                },
+                "TypedValue": {
+                    "$ref": "#/definitions/CustomAttributeTypedArgument"
+                },
+                "MemberName": {
+                    "type": "string"
+                },
+                "IsField": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "SecurityRuleSet": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "None",
+                "Level1",
+                "Level2"
+            ],
+            "enum": [
+                0,
+                1,
+                2
+            ]
+        },
+        "ModuleHandle": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "MDStreamVersion": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "AcquireTokenOptions": {
+            "type": "object",
+            "description": "Options directing the token acquisition. These options are provided to the ITokenAcquirer methods, or\npart of the AuthorizationHeaderProviderOptions, or DownstreamApiOptions.",
+            "additionalProperties": false,
+            "properties": {
+                "AuthenticationOptionsName": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets the name of the options describing the confidential client application (ClientId,\nRegion, Authority, client credentials). In ASP.NET Core, the authenticatiopn options name \nis the same as the authentication scheme."
+                },
+                "CorrelationId": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Sets the correlation id to be used in the request to the STS \"/token\" endpoint.",
+                    "format": "guid"
+                },
+                "ExtraQueryParameters": {
+                    "type": [
+                        "null",
+                        "object"
+                    ],
+                    "description": "Sets query parameters for the query string in the HTTP request to the \n\"/token\" endpoint.",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "ExtraHeadersParameters": {
+                    "type": [
+                        "null",
+                        "object"
+                    ],
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "Claims": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "A string with one or multiple claims to request. It's a json blob (encoded or not)\nNormally used with Conditional Access. It receives the Claims member of the UiRequiredException.\nIt can also be used to request specific optional claims, and for \nCA Auth context "
+                },
+                "ForceRefresh": {
+                    "type": "boolean",
+                    "description": "Specifies if the token request will ignore the access token in the token cache\nand will attempt to acquire a new access token.\nIf true, the request will ignore the token cache. The default is false.\nUse this option with care and only when needed, for instance, if you know that conditional access policies have changed,\nfor it induces performance degradation, as the token cache is not utilized, and the STS might throttle the app."
+                },
+                "PopPublicKey": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Modifies the token acquisition request so that the acquired token is a Proof of Possession token (PoP),\nrather than a Bearer token.\nPoP tokens are similar to Bearer tokens, but are bound to the HTTP request and to a cryptographic key,\nwhich MSAL can manage. See https://aka.ms/msal-net-pop."
+                },
+                "PopClaim": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "In addition to the PopPublicKey, specify the PopClaim when needed in specific POP protocols. "
+                },
+                "LongRunningWebApiSessionKey": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Key used for long running web APIs that need to call downstream web\nAPIs on behalf of the user. Can be null, if you are not developing a long\nrunning web API, LongRunningWebApiSessionKeyAuto if you want\nthe token acquirer to allocate a session key for you, or your own string\nif you want to associate the session with some information you have externally\n(for instance a Microsoft Graph hook identifier)."
+                },
+                "Tenant": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "(Microsoft identity specific)\nEnables to override the tenant/account for which to get a token. \nThis is useful in multi-tenant apps in the cases where a given user account is a guest \nin other tenants, and you want to acquire tokens for a specific tenant."
+                },
+                "UserFlow": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "(Microsoft identity specific)\nIn the case of AzureAD B2C, uses a particular user flow."
+                }
+            }
+        },
+        "CredentialType": {
+            "type": "integer",
+            "description": "Credential type. This is used to specify the type of credential that is being loaded. This value\nis provided in the see CredentialType based on the type of\ncredential (which depends on the type of CredentialSource value of the SourceType).",
+            "x-enumNames": [
+                "Certificate",
+                "Secret",
+                "SignedAssertion",
+                "DecryptKeys"
+            ],
+            "enum": [
+                0,
+                1,
+                2,
+                3
+            ]
+        },
+        "CertificatelessOptions": {
+            "type": "object",
+            "description": "Options for configuring CertificatelessOptions.\nSee https://aka.ms/ms-id-web/certificateless.",
+            "additionalProperties": false,
+            "properties": {
+                "IsEnabled": {
+                    "type": "boolean",
+                    "description": "Is certificateless enabled?"
+                },
+                "ManagedIdentityClientId": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "The value is used to establish a connection between external workload identities\nand Azure Active Directory. If Azure AD is the issuer, this value should be the object\nID of the managed identity service principal in the tenant that will be used to \nimpersonate the app.\nCan be null if you are using the machine assigned managed identity.\nNeeds to be assigned if you are using a user assigned managed identity."
+                }
+            }
+        },
+        "OpenIdConnectOptions": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/RemoteAuthenticationOptions"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "Authority": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "ClientId": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "ClientSecret": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "Configuration": {
+                            "oneOf": [
+                                {
+                                    "type": "null"
+                                },
+                                {
+                                    "$ref": "#/definitions/OpenIdConnectConfiguration"
+                                }
+                            ]
+                        },
+                        "ConfigurationManager": {
+                            "oneOf": [
+                                {
+                                    "type": "null"
+                                },
+                                {
+                                    "$ref": "#/definitions/IConfigurationManagerOfOpenIdConnectConfiguration"
+                                }
+                            ]
+                        },
+                        "GetClaimsFromUserInfoEndpoint": {
+                            "type": "boolean"
+                        },
+                        "ClaimActions": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ClaimAction"
+                            }
+                        },
+                        "RequireHttpsMetadata": {
+                            "type": "boolean"
+                        },
+                        "MetadataAddress": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "Events": {
+                            "$ref": "#/definitions/OpenIdConnectEvents"
+                        },
+                        "MaxAge": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "format": "duration"
+                        },
+                        "ProtocolValidator": {
+                            "$ref": "#/definitions/OpenIdConnectProtocolValidator"
+                        },
+                        "SignedOutCallbackPath": {
+                            "type": "string"
+                        },
+                        "SignedOutRedirectUri": {
+                            "type": "string"
+                        },
+                        "RefreshOnIssuerKeyNotFound": {
+                            "type": "boolean"
+                        },
+                        "AuthenticationMethod": {
+                            "$ref": "#/definitions/OpenIdConnectRedirectBehavior"
+                        },
+                        "Resource": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "ResponseMode": {
+                            "type": "string"
+                        },
+                        "ResponseType": {
+                            "type": "string"
+                        },
+                        "Prompt": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "Scope": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "RemoteSignOutPath": {
+                            "type": "string"
+                        },
+                        "SignOutScheme": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "StateDataFormat": {
+                            "$ref": "#/definitions/ISecureDataFormatOfAuthenticationProperties"
+                        },
+                        "StringDataFormat": {
+                            "$ref": "#/definitions/ISecureDataFormatOfString"
+                        },
+                        "SecurityTokenValidator": {
+                            "x-deprecated": true,
+                            "x-deprecatedMessage": "SecurityTokenValidator is no longer used by default. Use TokenHandler instead. To continue using SecurityTokenValidator, set UseSecurityTokenValidator to true. See https://aka.ms/aspnetcore8/security-token-changes",
+                            "oneOf": [
+                                {
+                                    "$ref": "#/definitions/ISecurityTokenValidator"
+                                }
+                            ]
+                        },
+                        "TokenHandler": {
+                            "$ref": "#/definitions/TokenHandler"
+                        },
+                        "TokenValidationParameters": {
+                            "$ref": "#/definitions/TokenValidationParameters"
+                        },
+                        "UseTokenLifetime": {
+                            "type": "boolean"
+                        },
+                        "SkipUnrecognizedRequests": {
+                            "type": "boolean"
+                        },
+                        "DisableTelemetry": {
+                            "type": "boolean"
+                        },
+                        "NonceCookie": {
+                            "$ref": "#/definitions/CookieBuilder"
+                        },
+                        "UsePkce": {
+                            "type": "boolean"
+                        },
+                        "AutomaticRefreshInterval": {
+                            "type": "string",
+                            "format": "duration"
+                        },
+                        "RefreshInterval": {
+                            "type": "string",
+                            "format": "duration"
+                        },
+                        "MapInboundClaims": {
+                            "type": "boolean"
+                        },
+                        "UseSecurityTokenValidator": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            ]
+        },
+        "OpenIdConnectConfiguration": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BaseConfiguration"
+                },
+                {
+                    "type": "object",
+                    "description": "Contains OpenIdConnect configuration that can be populated from a json string.",
+                    "additionalProperties": {
+                        "oneOf": [
+                            {},
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "properties": {
+                        "AdditionalData": {
+                            "type": [
+                                "null",
+                                "object"
+                            ],
+                            "description": "When deserializing from JSON any properties that are not defined will be placed here.",
+                            "additionalProperties": {}
+                        },
+                        "AcrValuesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'acr_values_supported'",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "AuthorizationEndpoint": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'authorization_endpoint'."
+                        },
+                        "CheckSessionIframe": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'check_session_iframe'."
+                        },
+                        "ClaimsSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'claims_supported'",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "ClaimsLocalesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'claims_locales_supported'",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "ClaimsParameterSupported": {
+                            "type": "boolean",
+                            "description": "Gets or sets the 'claims_parameter_supported'"
+                        },
+                        "ClaimTypesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'claim_types_supported'",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "DisplayValuesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'display_values_supported'",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "EndSessionEndpoint": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'end_session_endpoint'."
+                        },
+                        "FrontchannelLogoutSessionSupported": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'frontchannel_logout_session_supported'."
+                        },
+                        "FrontchannelLogoutSupported": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'frontchannel_logout_supported'."
+                        },
+                        "GrantTypesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'grant_types_supported'",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "HttpLogoutSupported": {
+                            "type": "boolean",
+                            "description": "Boolean value specifying whether the OP supports HTTP-based logout. Default is false."
+                        },
+                        "IdTokenEncryptionAlgValuesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'id_token_encryption_alg_values_supported'.",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "IdTokenEncryptionEncValuesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'id_token_encryption_enc_values_supported'.",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "IdTokenSigningAlgValuesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'id_token_signing_alg_values_supported'.",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "IntrospectionEndpoint": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'introspection_endpoint'."
+                        },
+                        "IntrospectionEndpointAuthMethodsSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'introspection_endpoint_auth_methods_supported'.",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "IntrospectionEndpointAuthSigningAlgValuesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'introspection_endpoint_auth_signing_alg_values_supported'.",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "Issuer": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'issuer'."
+                        },
+                        "JwksUri": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'jwks_uri'"
+                        },
+                        "JsonWebKeySet": {
+                            "description": "Gets or sets the JsonWebKeySet",
+                            "oneOf": [
+                                {
+                                    "type": "null"
+                                },
+                                {
+                                    "$ref": "#/definitions/JsonWebKeySet"
+                                }
+                            ]
+                        },
+                        "LogoutSessionSupported": {
+                            "type": "boolean",
+                            "description": "Boolean value specifying whether the OP can pass a sid (session ID) query parameter to identify the RP session at the OP when the logout_uri is used. Dafault Value is false."
+                        },
+                        "OpPolicyUri": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'op_policy_uri'"
+                        },
+                        "OpTosUri": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'op_tos_uri'"
+                        },
+                        "RegistrationEndpoint": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'registration_endpoint'"
+                        },
+                        "RequestObjectEncryptionAlgValuesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'request_object_encryption_alg_values_supported'.",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "RequestObjectEncryptionEncValuesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'request_object_encryption_enc_values_supported'.",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "RequestObjectSigningAlgValuesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'request_object_signing_alg_values_supported'.",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "RequestParameterSupported": {
+                            "type": "boolean",
+                            "description": "Gets or sets the 'request_parameter_supported'"
+                        },
+                        "RequestUriParameterSupported": {
+                            "type": "boolean",
+                            "description": "Gets or sets the 'request_uri_parameter_supported'"
+                        },
+                        "RequireRequestUriRegistration": {
+                            "type": "boolean",
+                            "description": "Gets or sets the 'require_request_uri_registration'"
+                        },
+                        "ResponseModesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'response_modes_supported'.",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "ResponseTypesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'response_types_supported'.",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "ServiceDocumentation": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'service_documentation'"
+                        },
+                        "ScopesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'scopes_supported'",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "SubjectTypesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'subject_types_supported'.",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "TokenEndpoint": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'token_endpoint'."
+                        },
+                        "ActiveTokenEndpoint": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "This base class property is not used in OpenIdConnect. "
+                        },
+                        "TokenEndpointAuthMethodsSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'token_endpoint_auth_methods_supported'.",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "TokenEndpointAuthSigningAlgValuesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'token_endpoint_auth_signing_alg_values_supported'.",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "UILocalesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'ui_locales_supported'",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "UserInfoEndpoint": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'user_info_endpoint'."
+                        },
+                        "UserInfoEndpointEncryptionAlgValuesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'userinfo_encryption_alg_values_supported'",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "UserInfoEndpointEncryptionEncValuesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'userinfo_encryption_enc_values_supported'",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "UserInfoEndpointSigningAlgValuesSupported": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the collection of 'userinfo_signing_alg_values_supported'",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "JsonWebKeySet": {
+            "type": "object",
+            "description": "Contains a collection of JsonWebKey that can be populated from a json string.",
+            "additionalProperties": {
+                "oneOf": [
+                    {},
+                    {
+                        "type": "null"
+                    }
+                ]
+            },
+            "properties": {
+                "AdditionalData": {
+                    "type": [
+                        "null",
+                        "object"
+                    ],
+                    "description": "When deserializing from JSON any properties that are not defined will be placed here.",
+                    "additionalProperties": {}
+                },
+                "Keys": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Gets the IList`1.",
+                    "items": {
+                        "$ref": "#/definitions/JsonWebKey"
+                    }
+                },
+                "SkipUnresolvedJsonWebKeys": {
+                    "type": "boolean",
+                    "description": "Flag that controls whether unresolved JsonWebKeys will be included in the resulting collection of GetSigningKeys method.",
+                    "default": true
+                }
+            }
+        },
+        "JsonWebKey": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/SecurityKey"
+                },
+                {
+                    "type": "object",
+                    "description": "Represents a JSON Web Key as defined in https://datatracker.ietf.org/doc/html/rfc7517.",
+                    "additionalProperties": {
+                        "oneOf": [
+                            {},
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "properties": {
+                        "AdditionalData": {
+                            "type": [
+                                "null",
+                                "object"
+                            ],
+                            "description": "When deserializing from JSON any properties that are not defined will be placed here.",
+                            "additionalProperties": {}
+                        },
+                        "Alg": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'alg' (KeyType)."
+                        },
+                        "Crv": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'crv' (ECC - Curve)."
+                        },
+                        "D": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'd' (ECC - Private Key OR RSA - Private Exponent)."
+                        },
+                        "DP": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'dp' (RSA - First Factor CRT Exponent)."
+                        },
+                        "DQ": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'dq' (RSA - Second Factor CRT Exponent)."
+                        },
+                        "E": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'e' (RSA - Exponent)."
+                        },
+                        "K": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'k' (Symmetric - Key Value)."
+                        },
+                        "KeyId": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets the key id of this JsonWebKey."
+                        },
+                        "KeyOps": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the 'key_ops' (Key Operations).",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "Kid": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'kid' (Key ID).."
+                        },
+                        "Kty": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'kty' (Key Type)."
+                        },
+                        "N": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'n' (RSA - Modulus)."
+                        },
+                        "Oth": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets or sets the 'oth' (RSA - Other Primes Info).",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "P": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'p' (RSA - First Prime Factor).."
+                        },
+                        "Q": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'q' (RSA - Second  Prime Factor).."
+                        },
+                        "QI": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'qi' (RSA - First CRT Coefficient).."
+                        },
+                        "Use": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'use' (Public Key Use).."
+                        },
+                        "X": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'x' (ECC - X Coordinate).."
+                        },
+                        "X5c": {
+                            "type": [
+                                "array",
+                                "null"
+                            ],
+                            "description": "Gets the 'x5c' collection (X.509 Certificate Chain)..",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "X5t": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'x5t' (X.509 Certificate SHA-1 thumbprint).."
+                        },
+                        "X5tS256": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'x5t#S256' (X.509 Certificate SHA-256 thumbprint).."
+                        },
+                        "X5u": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'x5u' (X.509 URL).."
+                        },
+                        "Y": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "description": "Gets or sets the 'y' (ECC - Y Coordinate).."
+                        },
+                        "KeySize": {
+                            "type": "integer",
+                            "description": "Gets the key size of JsonWebKey.",
+                            "format": "int32"
+                        },
+                        "HasPrivateKey": {
+                            "type": "boolean",
+                            "description": "Gets a bool indicating if a private key exists."
+                        }
+                    }
+                }
+            ]
+        },
+        "SecurityKey": {
+            "type": "object",
+            "description": "Base class for Security Key.",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "KeyId": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets the key id of this SecurityKey."
+                },
+                "CryptoProviderFactory": {
+                    "description": "Gets or sets CryptoProviderFactory.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/CryptoProviderFactory"
+                        }
+                    ]
+                }
+            }
+        },
+        "CryptoProviderFactory": {
+            "type": "object",
+            "description": "Creates cryptographic operators by specifying a SecurityKey's and algorithms.",
+            "additionalProperties": false,
+            "properties": {
+                "CryptoProviderCache": {
+                    "description": "Gets the CryptoProviderCache",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/CryptoProviderCache"
+                        }
+                    ]
+                },
+                "CustomCryptoProvider": {
+                    "description": "Extensibility point for creating custom cryptographic operators.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/ICryptoProvider"
+                        }
+                    ]
+                },
+                "CacheSignatureProviders": {
+                    "type": "boolean",
+                    "description": "Gets or sets a bool controlling if SignatureProvider should be cached.",
+                    "default": true
+                },
+                "SignatureProviderObjectPoolCacheSize": {
+                    "type": "integer",
+                    "description": "Gets or sets the maximum size of the object pool used by the SignatureProvider that are used for crypto objects.",
+                    "format": "int32"
+                }
+            }
+        },
+        "CryptoProviderCache": {
+            "type": "object",
+            "description": "Definition of cache for crypto providers",
+            "x-abstract": true,
+            "additionalProperties": false
+        },
+        "ICryptoProvider": {
+            "type": "object",
+            "description": "Provides extensibility for cryptographic operators.\nIf custom operators are needed for then CustomCryptoProvider can be set to\nreturn these operators. CustomCryptoProvider will be before each creation.",
+            "x-abstract": true,
+            "additionalProperties": false
+        },
+        "BaseConfiguration": {
+            "type": "object",
+            "description": "Represents a generic metadata configuration which is applicable for both XML and JSON based configurations.\n            ",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "Issuer": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets the issuer specified via the metadata endpoint."
+                },
+                "SigningKeys": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Gets the ICollection`1 that the IdentityProvider indicates are to be used in order to sign tokens.",
+                    "items": {
+                        "$ref": "#/definitions/SecurityKey"
+                    }
+                },
+                "TokenEndpoint": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets the token endpoint specified via the metadata endpoint.\nThis is the fed:PassiveRequestorEndpoint in WS-Federation, https://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation-1.2-spec-os.html#:~:text=fed%3ASecurityTokenServiceType/fed%3APassiveRequestorEndpoint\nOr the token_endpoint in the OIDC metadata."
+                },
+                "ActiveTokenEndpoint": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets the token endpoint specified via the metadata endpoint.\nThis is the fed:SecurityTokenServiceType in WS-Federation, http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation-1.2-spec-os.html#:~:text=fed%3ASecurityTokenSerivceEndpoint"
+                },
+                "TokenDecryptionKeys": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Gets the ICollection`1 that the IdentityProvider indicates are to be used in order to decrypt tokens.",
+                    "items": {
+                        "$ref": "#/definitions/SecurityKey"
+                    }
+                }
+            }
+        },
+        "IConfigurationManagerOfOpenIdConnectConfiguration": {
+            "type": "object",
+            "description": "Interface that defines a model for retrieving configuration data.",
+            "x-abstract": true,
+            "additionalProperties": false
+        },
+        "ClaimAction": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "ClaimType": {
+                    "type": "string"
+                },
+                "ValueType": {
+                    "type": "string"
+                }
+            }
+        },
+        "OpenIdConnectEvents": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/RemoteAuthenticationEvents"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "OnAuthenticationFailed": {
+                            "$ref": "#/definitions/FuncOfAuthenticationFailedContextAndTask"
+                        },
+                        "OnAuthorizationCodeReceived": {
+                            "$ref": "#/definitions/FuncOfAuthorizationCodeReceivedContextAndTask"
+                        },
+                        "OnMessageReceived": {
+                            "$ref": "#/definitions/FuncOfMessageReceivedContextAndTask"
+                        },
+                        "OnRedirectToIdentityProvider": {
+                            "$ref": "#/definitions/FuncOfRedirectContextAndTask"
+                        },
+                        "OnRedirectToIdentityProviderForSignOut": {
+                            "$ref": "#/definitions/FuncOfRedirectContextAndTask"
+                        },
+                        "OnSignedOutCallbackRedirect": {
+                            "$ref": "#/definitions/FuncOfRemoteSignOutContextAndTask"
+                        },
+                        "OnRemoteSignOut": {
+                            "$ref": "#/definitions/FuncOfRemoteSignOutContextAndTask"
+                        },
+                        "OnTokenResponseReceived": {
+                            "$ref": "#/definitions/FuncOfTokenResponseReceivedContextAndTask"
+                        },
+                        "OnTokenValidated": {
+                            "$ref": "#/definitions/FuncOfTokenValidatedContextAndTask"
+                        },
+                        "OnUserInformationReceived": {
+                            "$ref": "#/definitions/FuncOfUserInformationReceivedContextAndTask"
+                        }
+                    }
+                }
+            ]
+        },
+        "FuncOfAuthenticationFailedContextAndTask": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "FuncOfAuthorizationCodeReceivedContextAndTask": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "FuncOfMessageReceivedContextAndTask": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "FuncOfRedirectContextAndTask": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "FuncOfRemoteSignOutContextAndTask": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "FuncOfTokenResponseReceivedContextAndTask": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "FuncOfTokenValidatedContextAndTask": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "FuncOfUserInformationReceivedContextAndTask": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "RemoteAuthenticationEvents": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "OnAccessDenied": {
+                    "$ref": "#/definitions/FuncOfAccessDeniedContextAndTask"
+                },
+                "OnRemoteFailure": {
+                    "$ref": "#/definitions/FuncOfRemoteFailureContextAndTask"
+                },
+                "OnTicketReceived": {
+                    "$ref": "#/definitions/FuncOfTicketReceivedContextAndTask"
+                }
+            }
+        },
+        "FuncOfAccessDeniedContextAndTask": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "FuncOfRemoteFailureContextAndTask": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "FuncOfTicketReceivedContextAndTask": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "OpenIdConnectProtocolValidator": {
+            "type": "object",
+            "description": "OpenIdConnectProtocolValidator is used to ensure that an OpenIdConnectMessage\n obtained using OpenIdConnect is compliant with  http://openid.net/specs/openid-connect-core-1_0.html .",
+            "additionalProperties": false,
+            "properties": {
+                "HashAlgorithmMap": {
+                    "type": [
+                        "null",
+                        "object"
+                    ],
+                    "description": "Gets the algorithm mapping between OpenIdConnect and .Net for Hash algorithms.\na IDictionary`2 that contains mappings from the JWT namespace https://datatracker.ietf.org/doc/html/rfc7518 to .Net.",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "NonceLifetime": {
+                    "type": "string",
+                    "description": "Gets or set the TimeSpan defining how long a nonce is valid.",
+                    "format": "duration"
+                },
+                "RequireAcr": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating if an 'acr' claim is required.",
+                    "default": false
+                },
+                "RequireAmr": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating if an 'amr' claim is required.",
+                    "default": false
+                },
+                "RequireAuthTime": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating if an 'auth_time' claim is required.",
+                    "default": false
+                },
+                "RequireAzp": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating if an 'azp' claim is required.",
+                    "default": false
+                },
+                "RequireNonce": {
+                    "type": "boolean",
+                    "description": "Get or sets if a nonce is required.",
+                    "default": true
+                },
+                "RequireState": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating if a 'state' is required.",
+                    "default": true
+                },
+                "RequireStateValidation": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating if validation of 'state' is turned on or off.",
+                    "default": true
+                },
+                "RequireSub": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating if a 'sub' claim is required.",
+                    "default": true
+                },
+                "RequireTimeStampInNonce": {
+                    "type": "boolean",
+                    "description": "Gets or set logic to control if a nonce is prefixed with a timestamp.",
+                    "default": true
+                },
+                "IdTokenValidator": {
+                    "description": "Gets or sets the delegate for validating 'id_token'",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/IdTokenValidator"
+                        }
+                    ]
+                },
+                "CryptoProviderFactory": {
+                    "description": "Gets or sets the CryptoProviderFactory that will be used for crypto operations.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/CryptoProviderFactory"
+                        }
+                    ]
+                }
+            }
+        },
+        "IdTokenValidator": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "description": "Delegate for validating additional claims in 'id_token' ",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "OpenIdConnectRedirectBehavior": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "RedirectGet",
+                "FormPost"
+            ],
+            "enum": [
+                0,
+                1
+            ]
+        },
+        "ISecureDataFormatOfAuthenticationProperties": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false
+        },
+        "ISecureDataFormatOfString": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false
+        },
+        "ISecurityTokenValidator": {
+            "type": "object",
+            "description": "ISecurityTokenValidator",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "CanValidateToken": {
+                    "type": "boolean",
+                    "description": "Returns true if a token can be validated."
+                },
+                "MaximumTokenSizeInBytes": {
+                    "type": "integer",
+                    "description": "Gets and sets the maximum size in bytes, that a will be processed.",
+                    "format": "int32"
+                }
+            }
+        },
+        "TokenHandler": {
+            "type": "object",
+            "description": "Defines properties shared across all security token handlers.",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "MaximumTokenSizeInBytes": {
+                    "type": "integer",
+                    "description": "Gets and sets the maximum token size in bytes that will be processed.",
+                    "format": "int32"
+                },
+                "SetDefaultTimesOnTokenCreation": {
+                    "type": "boolean",
+                    "description": "Gets or sets a bool that controls if token creation will set default 'exp', 'nbf' and 'iat' if not specified.",
+                    "default": true
+                },
+                "TokenLifetimeInMinutes": {
+                    "type": "integer",
+                    "description": "Gets or sets the token lifetime in minutes.",
+                    "format": "int32"
+                }
+            }
+        },
+        "TokenValidationParameters": {
+            "type": "object",
+            "description": "Contains a set of parameters that are used by a SecurityTokenHandler when validating a SecurityToken.",
+            "additionalProperties": false,
+            "properties": {
+                "ActorValidationParameters": {
+                    "description": "Gets or sets TokenValidationParameters.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/TokenValidationParameters"
+                        }
+                    ]
+                },
+                "AlgorithmValidator": {
+                    "description": "Gets or sets a delegate used to validate the cryptographic algorithm used.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/AlgorithmValidator"
+                        }
+                    ]
+                },
+                "AudienceValidator": {
+                    "description": "Gets or sets a delegate that will be used to validate the audience.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/AudienceValidator"
+                        }
+                    ]
+                },
+                "AuthenticationType": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets the AuthenticationType when creating a ClaimsIdentity."
+                },
+                "ClockSkew": {
+                    "type": "string",
+                    "description": "Gets or sets the clock skew to apply when validating a time.",
+                    "format": "duration",
+                    "default": 300
+                },
+                "ConfigurationManager": {
+                    "description": "If set, this property will be used to obtain the issuer and signing keys associated with the metadata endpoint of Issuer.\nThe obtained issuer and signing keys will then be used along with those present on the TokenValidationParameters for validation of the incoming token.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/BaseConfigurationManager"
+                        }
+                    ]
+                },
+                "CryptoProviderFactory": {
+                    "description": "Users can override the default CryptoProviderFactory with this property. This factory will be used for creating signature providers.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/CryptoProviderFactory"
+                        }
+                    ]
+                },
+                "DebugId": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets a string that helps with setting breakpoints when debugging."
+                },
+                "IgnoreTrailingSlashWhenValidatingAudience": {
+                    "type": "boolean",
+                    "description": "Gets or sets a boolean that controls if a '/' is significant at the end of the audience.\nThe default is true.",
+                    "default": true
+                },
+                "IncludeTokenOnFailedValidation": {
+                    "type": "boolean",
+                    "description": "Gets or sets the flag that indicates whether to include the SecurityToken when the validation fails."
+                },
+                "IssuerSigningKeyValidator": {
+                    "description": "Gets or sets a delegate for validating the SecurityKey that signed the token.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/IssuerSigningKeyValidator"
+                        }
+                    ]
+                },
+                "IssuerSigningKeyValidatorUsingConfiguration": {
+                    "description": "Gets or sets a delegate for validating the SecurityKey that signed the token.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/IssuerSigningKeyValidatorUsingConfiguration"
+                        }
+                    ]
+                },
+                "InstancePropertyBag": {
+                    "type": [
+                        "null",
+                        "object"
+                    ],
+                    "description": "Gets a IDictionary`2 that is unique to this instance.\nCalling Clone will result in a new instance of this IDictionary.",
+                    "additionalProperties": {}
+                },
+                "IsClone": {
+                    "type": "boolean",
+                    "description": "Gets a value indicating if Clone was called to obtain this instance."
+                },
+                "IssuerSigningKey": {
+                    "description": "Gets or sets the SecurityKey that is to be used for signature validation.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/SecurityKey"
+                        }
+                    ]
+                },
+                "IssuerSigningKeyResolver": {
+                    "description": "Gets or sets a delegate that will be called to retrieve a SecurityKey used for signature validation.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/IssuerSigningKeyResolver"
+                        }
+                    ]
+                },
+                "IssuerSigningKeyResolverUsingConfiguration": {
+                    "description": "Gets or sets a delegate that will be called to retrieve a SecurityKey used for signature validation using the\nTokenValidationParameters and BaseConfiguration.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/IssuerSigningKeyResolverUsingConfiguration"
+                        }
+                    ]
+                },
+                "IssuerSigningKeys": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Gets or sets an IEnumerable`1 used for signature validation.",
+                    "items": {
+                        "$ref": "#/definitions/SecurityKey"
+                    }
+                },
+                "IssuerValidator": {
+                    "description": "Gets or sets a delegate that will be used to validate the issuer of the token.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/IssuerValidator"
+                        }
+                    ]
+                },
+                "IssuerValidatorUsingConfiguration": {
+                    "description": "Gets or sets a delegate that will be used to validate the issuer of the token.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/IssuerValidatorUsingConfiguration"
+                        }
+                    ]
+                },
+                "TransformBeforeSignatureValidation": {
+                    "description": "Gets or sets a delegate that will be called to transform a token to a supported format before validation.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/TransformBeforeSignatureValidation"
+                        }
+                    ]
+                },
+                "LifetimeValidator": {
+                    "description": "Gets or sets a delegate that will be used to validate the lifetime of the token",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/LifetimeValidator"
+                        }
+                    ]
+                },
+                "LogTokenId": {
+                    "type": "boolean",
+                    "description": "Gets or sets a Boolean that will decide if the token identifier claim needs to be logged.\nDefault value is true.",
+                    "default": true
+                },
+                "LogValidationExceptions": {
+                    "type": "boolean",
+                    "description": "Gets or sets a Boolean that will decide if validation failure needs to be logged as an error.\nDefault value is true for backward compatibility of the behavior.\nIf set to false, validation failures are logged as Information and then thrown.",
+                    "default": true
+                },
+                "NameClaimType": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets a String that defines the NameClaimType."
+                },
+                "NameClaimTypeRetriever": {
+                    "description": "Gets or sets a delegate that will be called to set the property NameClaimType after validating a token.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/FuncOfSecurityTokenAndStringAndString"
+                        }
+                    ]
+                },
+                "PropertyBag": {
+                    "type": [
+                        "null",
+                        "object"
+                    ],
+                    "description": "Gets or sets the IDictionary`2 that contains a collection of custom key/value pairs. This allows addition of parameters that could be used in custom token validation scenarios.",
+                    "additionalProperties": {}
+                },
+                "RefreshBeforeValidation": {
+                    "type": "boolean",
+                    "description": "Gets or sets a boolean to control if configuration required to be refreshed before token validation.",
+                    "default": false
+                },
+                "RequireAudience": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether SAML tokens must have at least one AudienceRestriction.\nThe default is true.",
+                    "default": true
+                },
+                "RequireExpirationTime": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether tokens must have an 'expiration' value.\nThe default is true.",
+                    "default": true
+                },
+                "RequireSignedTokens": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether a SecurityToken can be considered valid if not signed.\nThe default is true.",
+                    "default": true
+                },
+                "RoleClaimType": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets the String that defines the RoleClaimType."
+                },
+                "RoleClaimTypeRetriever": {
+                    "description": "Gets or sets a delegate that will be called to set the property RoleClaimType after validating a token.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/FuncOfSecurityTokenAndStringAndString"
+                        }
+                    ]
+                },
+                "SaveSigninToken": {
+                    "type": "boolean",
+                    "description": "Gets or sets a boolean to control if the original token should be saved after the security token is validated.",
+                    "default": false
+                },
+                "SignatureValidator": {
+                    "description": "Gets or sets a delegate that will be used to validate the signature of the token.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/SignatureValidator"
+                        }
+                    ]
+                },
+                "SignatureValidatorUsingConfiguration": {
+                    "description": "Gets or sets a delegate that will be used to validate the signature of the token using the TokenValidationParameters and\nthe BaseConfiguration.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/SignatureValidatorUsingConfiguration"
+                        }
+                    ]
+                },
+                "TokenDecryptionKey": {
+                    "description": "Gets or sets the SecurityKey that is to be used for decryption.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/SecurityKey"
+                        }
+                    ]
+                },
+                "TokenDecryptionKeyResolver": {
+                    "description": "Gets or sets a delegate that will be called to retreive a SecurityKey used for decryption.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/TokenDecryptionKeyResolver"
+                        }
+                    ]
+                },
+                "TokenDecryptionKeys": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Gets or sets the IEnumerable`1 that is to be used for decrypting inbound tokens.",
+                    "items": {
+                        "$ref": "#/definitions/SecurityKey"
+                    }
+                },
+                "TokenReader": {
+                    "description": "Gets or sets a delegate that will be used to read the token.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/TokenReader"
+                        }
+                    ]
+                },
+                "TokenReplayCache": {
+                    "description": "Gets or set the ITokenReplayCache that store tokens that can be checked to help detect token replay.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/ITokenReplayCache"
+                        }
+                    ]
+                },
+                "TokenReplayValidator": {
+                    "description": "Gets or sets a delegate that will be used to validate the token replay of the token",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/TokenReplayValidator"
+                        }
+                    ]
+                },
+                "TryAllIssuerSigningKeys": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating whether all IssuerSigningKeys should be tried during signature validation when a key is not matched to token kid or if token kid is empty.\nThe default is true.",
+                    "default": true
+                },
+                "TypeValidator": {
+                    "description": "Gets or sets a delegate that will be used to validate the type of the token.\nIf the token type cannot be validated, an exception MUST be thrown by the delegate.\nNote: the 'type' parameter may be null if it couldn't be extracted from its usual location.\nImplementations that need to resolve it from a different location can use the 'token' parameter.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/TypeValidator"
+                        }
+                    ]
+                },
+                "ValidateActor": {
+                    "type": "boolean",
+                    "description": "Gets or sets a value indicating if an actor token is detected, whether it should be validated.\nThe default is false.",
+                    "default": false
+                },
+                "ValidateAudience": {
+                    "type": "boolean",
+                    "description": "Gets or sets a boolean to control if the audience will be validated during token validation.",
+                    "default": true
+                },
+                "ValidateIssuer": {
+                    "type": "boolean",
+                    "description": "Gets or sets a boolean to control if the issuer will be validated during token validation.",
+                    "default": true
+                },
+                "ValidateWithLKG": {
+                    "type": "boolean",
+                    "description": "Gets or sets a boolean to control if the LKG configuration will be used for token validation.",
+                    "default": false
+                },
+                "ValidateIssuerSigningKey": {
+                    "type": "boolean",
+                    "description": "Gets or sets a boolean that controls if validation of the SecurityKey that signed the securityToken is called.",
+                    "default": false
+                },
+                "ValidateLifetime": {
+                    "type": "boolean",
+                    "description": "Gets or sets a boolean to control if the lifetime will be validated during token validation.",
+                    "default": true
+                },
+                "ValidateSignatureLast": {
+                    "type": "boolean",
+                    "description": "Gets or sets a boolean that controls the validation order of the payload and signature during token validation.",
+                    "default": false
+                },
+                "ValidateTokenReplay": {
+                    "type": "boolean",
+                    "description": "Gets or sets a boolean to control if the token replay will be validated during token validation.",
+                    "default": false
+                },
+                "ValidAlgorithms": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Gets or sets the valid algorithms for cryptographic operations.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "ValidAudience": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets a string that represents a valid audience that will be used to check against the token's audience.\nThe default is null."
+                },
+                "ValidAudiences": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Gets or sets the IEnumerable`1 that contains valid audiences that will be used to check against the token's audience.\nThe default is null.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "ValidIssuer": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets a String that represents a valid issuer that will be used to check against the token's issuer.\nThe default is null."
+                },
+                "ValidIssuers": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Gets or sets the IEnumerable`1 that contains valid issuers that will be used to check against the token's issuer.\nThe default is null.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "ValidTypes": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Gets or sets the IEnumerable`1 that contains valid types that will be used to check against the JWT header's 'typ' claim.\nIf this property is not set, the 'typ' header claim will not be validated and all types will be accepted.\nIn the case of a JWE, this property will ONLY apply to the inner token header.\nThe default is null.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "AlgorithmValidator": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "description": "Definition for AlgorithmValidator",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "AudienceValidator": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "description": "Definition for AudienceValidator.",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "BaseConfigurationManager": {
+            "type": "object",
+            "description": "Represents a generic configuration manager.",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "AutomaticRefreshInterval": {
+                    "type": "string",
+                    "description": "Gets or sets the TimeSpan that controls how often an automatic metadata refresh should occur.",
+                    "format": "duration"
+                },
+                "LastKnownGoodConfiguration": {
+                    "description": "The last known good configuration or LKG (a configuration retrieved in the past that we were able to successfully validate a token against).",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/BaseConfiguration"
+                        }
+                    ]
+                },
+                "LastKnownGoodLifetime": {
+                    "type": "string",
+                    "description": "The length of time that a last known good configuration is valid for.",
+                    "format": "duration"
+                },
+                "MetadataAddress": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "The metadata address to retrieve the configuration from."
+                },
+                "RefreshInterval": {
+                    "type": "string",
+                    "description": "The minimum time between retrievals, in the event that a retrieval failed, or that a refresh was explicitly requested.",
+                    "format": "duration"
+                },
+                "UseLastKnownGoodConfiguration": {
+                    "type": "boolean",
+                    "description": "Indicates whether the last known good feature should be used, true by default."
+                },
+                "IsLastKnownGoodValid": {
+                    "type": "boolean",
+                    "description": "Indicates whether the last known good configuration is still fresh, depends on when the LKG was first used and it's lifetime."
+                }
+            }
+        },
+        "IssuerSigningKeyValidator": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "description": "Definition for IssuerSigningKeyValidator.",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "IssuerSigningKeyValidatorUsingConfiguration": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "description": "Definition for IssuerSigningKeyValidatorUsingConfiguration.",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "IssuerSigningKeyResolver": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "description": "Definition for IssuerSigningKeyResolver.",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "IssuerSigningKeyResolverUsingConfiguration": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "description": "Definition for IssuerSigningKeyResolverUsingConfiguration.",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "IssuerValidator": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "description": "Definition for IssuerValidator.",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "IssuerValidatorUsingConfiguration": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "description": "Definition for IssuerValidatorUsingConfiguration.",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "TransformBeforeSignatureValidation": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "description": "Definition for TransformBeforeSignatureValidation.",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "LifetimeValidator": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "description": "Definition for LifetimeValidator.",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "FuncOfSecurityTokenAndStringAndString": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "SignatureValidator": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "description": "Definition for SignatureValidator.",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "SignatureValidatorUsingConfiguration": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "description": "Definition for SignatureValidator.",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "TokenDecryptionKeyResolver": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "description": "Definition for TokenDecryptionKeyResolver.",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "TokenReader": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "description": "Definition for TokenReader.",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "ITokenReplayCache": {
+            "type": "object",
+            "description": "Interface that defines a simple cache for tacking replaying of security tokens.",
+            "x-abstract": true,
+            "additionalProperties": false
+        },
+        "TokenReplayValidator": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "description": "Definition for TokenReplayValidator.",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "TypeValidator": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "description": "Definition for TypeValidator.",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "CookieBuilder": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Name": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "Path": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "Domain": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "HttpOnly": {
+                    "type": "boolean"
+                },
+                "SameSite": {
+                    "$ref": "#/definitions/SameSiteMode"
+                },
+                "SecurePolicy": {
+                    "$ref": "#/definitions/CookieSecurePolicy"
+                },
+                "Expiration": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "format": "duration"
+                },
+                "MaxAge": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "format": "duration"
+                },
+                "IsEssential": {
+                    "type": "boolean"
+                },
+                "Extensions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "SameSiteMode": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "None",
+                "Lax",
+                "Strict",
+                "Unspecified"
+            ],
+            "enum": [
+                0,
+                1,
+                2,
+                -1
+            ]
+        },
+        "CookieSecurePolicy": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "SameAsRequest",
+                "Always",
+                "None"
+            ],
+            "enum": [
+                0,
+                1,
+                2
+            ]
+        },
+        "RemoteAuthenticationOptions": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AuthenticationSchemeOptions"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "BackchannelTimeout": {
+                            "type": "string",
+                            "format": "duration"
+                        },
+                        "BackchannelHttpHandler": {
+                            "oneOf": [
+                                {
+                                    "type": "null"
+                                },
+                                {
+                                    "$ref": "#/definitions/HttpMessageHandler"
+                                }
+                            ]
+                        },
+                        "Backchannel": {
+                            "$ref": "#/definitions/HttpClient"
+                        },
+                        "DataProtectionProvider": {
+                            "oneOf": [
+                                {
+                                    "type": "null"
+                                },
+                                {
+                                    "$ref": "#/definitions/IDataProtectionProvider"
+                                }
+                            ]
+                        },
+                        "CallbackPath": {
+                            "type": "string"
+                        },
+                        "AccessDeniedPath": {
+                            "type": "string"
+                        },
+                        "ReturnUrlParameter": {
+                            "type": "string"
+                        },
+                        "SignInScheme": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "RemoteAuthenticationTimeout": {
+                            "type": "string",
+                            "format": "duration"
+                        },
+                        "Events": {
+                            "$ref": "#/definitions/RemoteAuthenticationEvents"
+                        },
+                        "SaveTokens": {
+                            "type": "boolean"
+                        },
+                        "CorrelationCookie": {
+                            "$ref": "#/definitions/CookieBuilder"
+                        }
+                    }
+                }
+            ]
+        },
+        "HttpMessageHandler": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false
+        },
+        "HttpClient": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/HttpMessageInvoker"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "DefaultRequestHeaders": {
+                            "$ref": "#/definitions/HttpRequestHeaders"
+                        },
+                        "DefaultRequestVersion": {
+                            "type": "string"
+                        },
+                        "DefaultVersionPolicy": {
+                            "$ref": "#/definitions/HttpVersionPolicy"
+                        },
+                        "BaseAddress": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "format": "uri"
+                        },
+                        "Timeout": {
+                            "type": "string",
+                            "format": "duration"
+                        },
+                        "MaxResponseContentBufferSize": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                }
+            ]
+        },
+        "HttpRequestHeaders": {
+            "allOf": [
+                {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/KeyValuePairOfStringAndIEnumerableOfString"
+                    }
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "Accept": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MediaTypeWithQualityHeaderValue"
+                            }
+                        },
+                        "AcceptCharset": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/StringWithQualityHeaderValue"
+                            }
+                        },
+                        "AcceptEncoding": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/StringWithQualityHeaderValue"
+                            }
+                        },
+                        "AcceptLanguage": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/StringWithQualityHeaderValue"
+                            }
+                        },
+                        "Authorization": {
+                            "oneOf": [
+                                {
+                                    "type": "null"
+                                },
+                                {
+                                    "$ref": "#/definitions/AuthenticationHeaderValue"
+                                }
+                            ]
+                        },
+                        "ExpectContinue": {
+                            "type": [
+                                "boolean",
+                                "null"
+                            ]
+                        },
+                        "From": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "Host": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "IfMatch": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/EntityTagHeaderValue"
+                            }
+                        },
+                        "IfModifiedSince": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "format": "date-time"
+                        },
+                        "IfNoneMatch": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/EntityTagHeaderValue"
+                            }
+                        },
+                        "IfRange": {
+                            "oneOf": [
+                                {
+                                    "type": "null"
+                                },
+                                {
+                                    "$ref": "#/definitions/RangeConditionHeaderValue"
+                                }
+                            ]
+                        },
+                        "IfUnmodifiedSince": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "format": "date-time"
+                        },
+                        "MaxForwards": {
+                            "type": [
+                                "integer",
+                                "null"
+                            ],
+                            "format": "int32"
+                        },
+                        "Protocol": {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        },
+                        "ProxyAuthorization": {
+                            "oneOf": [
+                                {
+                                    "type": "null"
+                                },
+                                {
+                                    "$ref": "#/definitions/AuthenticationHeaderValue"
+                                }
+                            ]
+                        },
+                        "Range": {
+                            "oneOf": [
+                                {
+                                    "type": "null"
+                                },
+                                {
+                                    "$ref": "#/definitions/RangeHeaderValue"
+                                }
+                            ]
+                        },
+                        "Referrer": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "format": "uri"
+                        },
+                        "TE": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/TransferCodingWithQualityHeaderValue"
+                            }
+                        },
+                        "UserAgent": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ProductInfoHeaderValue"
+                            }
+                        },
+                        "Expect": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/NameValueWithParametersHeaderValue"
+                            }
+                        },
+                        "CacheControl": {
+                            "oneOf": [
+                                {
+                                    "type": "null"
+                                },
+                                {
+                                    "$ref": "#/definitions/CacheControlHeaderValue"
+                                }
+                            ]
+                        },
+                        "Connection": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "ConnectionClose": {
+                            "type": [
+                                "boolean",
+                                "null"
+                            ]
+                        },
+                        "Date": {
+                            "type": [
+                                "null",
+                                "string"
+                            ],
+                            "format": "date-time"
+                        },
+                        "Pragma": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/NameValueHeaderValue"
+                            }
+                        },
+                        "Trailer": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "TransferEncoding": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/TransferCodingHeaderValue"
+                            }
+                        },
+                        "TransferEncodingChunked": {
+                            "type": [
+                                "boolean",
+                                "null"
+                            ]
+                        },
+                        "Upgrade": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ProductHeaderValue"
+                            }
+                        },
+                        "Via": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ViaHeaderValue"
+                            }
+                        },
+                        "Warning": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/WarningHeaderValue"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "MediaTypeWithQualityHeaderValue": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MediaTypeHeaderValue"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "Quality": {
+                            "type": [
+                                "null",
+                                "number"
+                            ],
+                            "format": "double"
+                        }
+                    }
+                }
+            ]
+        },
+        "MediaTypeHeaderValue": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "CharSet": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "Parameters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/NameValueHeaderValue"
+                    }
+                },
+                "MediaType": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            }
+        },
+        "NameValueHeaderValue": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Name": {
+                    "type": "string"
+                },
+                "Value": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            }
+        },
+        "StringWithQualityHeaderValue": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Value": {
+                    "type": "string"
+                },
+                "Quality": {
+                    "type": [
+                        "null",
+                        "number"
+                    ],
+                    "format": "double"
+                }
+            }
+        },
+        "AuthenticationHeaderValue": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Scheme": {
+                    "type": "string"
+                },
+                "Parameter": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            }
+        },
+        "EntityTagHeaderValue": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Tag": {
+                    "type": "string"
+                },
+                "IsWeak": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "RangeConditionHeaderValue": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Date": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "format": "date-time"
+                },
+                "EntityTag": {
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/EntityTagHeaderValue"
+                        }
+                    ]
+                }
+            }
+        },
+        "RangeHeaderValue": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Unit": {
+                    "type": "string"
+                },
+                "Ranges": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RangeItemHeaderValue"
+                    }
+                }
+            }
+        },
+        "RangeItemHeaderValue": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "From": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "format": "int64"
+                },
+                "To": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "format": "int64"
+                }
+            }
+        },
+        "TransferCodingWithQualityHeaderValue": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TransferCodingHeaderValue"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "Quality": {
+                            "type": [
+                                "null",
+                                "number"
+                            ],
+                            "format": "double"
+                        }
+                    }
+                }
+            ]
+        },
+        "TransferCodingHeaderValue": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Value": {
+                    "type": "string"
+                },
+                "Parameters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/NameValueHeaderValue"
+                    }
+                }
+            }
+        },
+        "ProductInfoHeaderValue": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Product": {
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/ProductHeaderValue"
+                        }
+                    ]
+                },
+                "Comment": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            }
+        },
+        "ProductHeaderValue": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Name": {
+                    "type": "string"
+                },
+                "Version": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            }
+        },
+        "NameValueWithParametersHeaderValue": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/NameValueHeaderValue"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "Parameters": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/NameValueHeaderValue"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "CacheControlHeaderValue": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "NoCache": {
+                    "type": "boolean"
+                },
+                "NoCacheHeaders": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "NoStore": {
+                    "type": "boolean"
+                },
+                "MaxAge": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "format": "duration"
+                },
+                "SharedMaxAge": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "format": "duration"
+                },
+                "MaxStale": {
+                    "type": "boolean"
+                },
+                "MaxStaleLimit": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "format": "duration"
+                },
+                "MinFresh": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "format": "duration"
+                },
+                "NoTransform": {
+                    "type": "boolean"
+                },
+                "OnlyIfCached": {
+                    "type": "boolean"
+                },
+                "Public": {
+                    "type": "boolean"
+                },
+                "Private": {
+                    "type": "boolean"
+                },
+                "PrivateHeaders": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "MustRevalidate": {
+                    "type": "boolean"
+                },
+                "ProxyRevalidate": {
+                    "type": "boolean"
+                },
+                "Extensions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/NameValueHeaderValue"
+                    }
+                }
+            }
+        },
+        "ViaHeaderValue": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "ProtocolName": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "ProtocolVersion": {
+                    "type": "string"
+                },
+                "ReceivedBy": {
+                    "type": "string"
+                },
+                "Comment": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            }
+        },
+        "WarningHeaderValue": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "Agent": {
+                    "type": "string"
+                },
+                "Text": {
+                    "type": "string"
+                },
+                "Date": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "format": "date-time"
+                }
+            }
+        },
+        "KeyValuePairOfStringAndIEnumerableOfString": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Key": {
+                    "type": "string"
+                },
+                "Value": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "HttpVersionPolicy": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "RequestVersionOrLower",
+                "RequestVersionOrHigher",
+                "RequestVersionExact"
+            ],
+            "enum": [
+                0,
+                1,
+                2
+            ]
+        },
+        "HttpMessageInvoker": {
+            "type": "object",
+            "additionalProperties": false
+        },
+        "IDataProtectionProvider": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false
+        },
+        "AuthenticationSchemeOptions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "ClaimsIssuer": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "Events": {
+                    "oneOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "EventsType": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "ForwardDefault": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "ForwardAuthenticate": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "ForwardChallenge": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "ForwardForbid": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "ForwardSignIn": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "ForwardSignOut": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "ForwardDefaultSelector": {
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/FuncOfHttpContextAndString"
+                        }
+                    ]
+                },
+                "TimeProvider": {
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/TimeProvider"
+                        }
+                    ]
+                }
+            }
+        },
+        "FuncOfHttpContextAndString": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "TimeProvider": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "LocalTimeZone": {
+                    "$ref": "#/definitions/TimeZoneInfo"
+                },
+                "TimestampFrequency": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "TimeZoneInfo": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Id": {
+                    "type": "string"
+                },
+                "HasIanaId": {
+                    "type": "boolean"
+                },
+                "DisplayName": {
+                    "type": "string"
+                },
+                "StandardName": {
+                    "type": "string"
+                },
+                "DaylightName": {
+                    "type": "string"
+                },
+                "BaseUtcOffset": {
+                    "type": "string",
+                    "format": "duration"
+                },
+                "SupportsDaylightSavingTime": {
+                    "type": "boolean"
+                }
+            }
+        }
+    },
+    "allOf": [
+        {
+            "$ref": "#/definitions/OpenIdConnectOptions"
+        },
+        {
+            "type": "object",
+            "description": "Options for configuring authentication using Azure Active Directory. It has both AAD and B2C configuration attributes.",
+            "additionalProperties": false,
+            "properties": {
+                "Instance": {
+                    "type": "string",
+                    "description": "Gets or sets the Azure Active Directory instance, e.g. \"https://login.microsoftonline.com\"."
+                },
+                "TenantId": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets the tenant ID."
+                },
+                "Domain": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets the domain of the Azure Active Directory tenant, e.g. contoso.onmicrosoft.com."
+                },
+                "EditProfilePolicyId": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets the edit profile user flow name for B2C, e.g. b2c_1_edit_profile."
+                },
+                "SignUpSignInPolicyId": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets the sign up or sign in user flow name for B2C, e.g. b2c_1_susi."
+                },
+                "ResetPasswordPolicyId": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets the reset password user flow name for B2C, e.g. B2C_1_password_reset."
+                },
+                "DefaultUserFlow": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets the default user flow (which is signUpsignIn)."
+                },
+                "LegacyCacheCompatibilityEnabled": {
+                    "type": "boolean",
+                    "description": "Enables legacy ADAL cache serialization and deserialization.\nPerformance improvements when working with MSAL only apps.\nSet to true if you have a shared cache with ADAL apps."
+                },
+                "ClientCertificates": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Description of the certificates used to prove the identity of the web app or web API.",
+                    "x-example": "An example in the appsetting.json:\n           \n           \"ClientCertificates\": [\n             {\n               \"SourceType\": \"StoreWithDistinguishedName\",\n                \"CertificateStorePath\": \"CurrentUser/My\",\n                \"CertificateDistinguishedName\": \"CN=WebAppCallingWebApiCert\"\n               }\n              ]\n             \n             See also https://aka.ms/ms-id-web-certificates.\n             ",
+                    "items": {
+                        "$ref": "#/definitions/CertificateDescription"
+                    }
+                },
+                "TokenDecryptionCertificates": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Description of the certificates used to decrypt an encrypted token in a web API.",
+                    "x-example": "An example in the appsetting.json:\n           \n           \"TokenDecryptionCertificates\": [\n             {\n               \"SourceType\": \"StoreWithDistinguishedName\",\n                \"CertificateStorePath\": \"CurrentUser/My\",\n                \"CertificateDistinguishedName\": \"CN=WebAppCallingWebApiCert\"\n               }\n              ]\n             \n             See also https://aka.ms/ms-id-web-certificates.\n             ",
+                    "items": {
+                        "$ref": "#/definitions/CertificateDescription"
+                    }
+                },
+                "ClientCredentials": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "items": {
+                        "$ref": "#/definitions/CredentialDescription"
+                    }
+                },
+                "TokenDecryptionCredentials": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "items": {
+                        "$ref": "#/definitions/CredentialDescription"
+                    }
+                },
+                "SendX5C": {
+                    "type": "boolean",
+                    "description": "Specifies if the x5c claim (public key of the certificate) should be sent to the STS.\nSending the x5c enables application developers to achieve easy certificate rollover in Azure AD:\nthis method will send the public certificate to Azure AD along with the token request,\nso that Azure AD can use it to validate the subject name based on a trusted issuer policy.\nThis saves the application admin from the need to explicitly manage the certificate rollover\n(either via portal or PowerShell/CLI operation). For details see https://aka.ms/msal-net-sni."
+                },
+                "WithSpaAuthCode": {
+                    "type": "boolean",
+                    "description": "Requests an auth code for the frontend (SPA using MSAL.js for instance). \nSee https://aka.ms/msal-net/spa-auth-code for details."
+                },
+                "AllowWebApiToBeAuthorizedByACL": {
+                    "type": "boolean",
+                    "description": "Daemon applications can validate a token based on roles, or using the ACL-based authorization\npattern to control tokens without a roles claim. If using ACL-based authorization,\nMicrosoft Identity Web will not throw if roles or scopes are not in the Claims.\nFor details see https://aka.ms/ms-identity-web/daemon-ACL."
+                },
+                "UserAssignedManagedIdentityClientId": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Used, when deployed to Azure, to specify explicitly a user assigned managed identity.\nSee https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/how-to-manage-ua-identity-portal."
+                },
+                "ClientCredentialsUsingManagedIdentity": {
+                    "description": "Options for configuring certificateless",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/CertificatelessOptions"
+                        }
+                    ]
+                },
+                "ResetPasswordPath": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Sets the ResetPassword route path.\nDefaults to /MicrosoftIdentity/Account/ResetPassword,\nwhich is the value used by Microsoft.Identity.Web.UI."
+                },
+                "ErrorPath": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Sets the Error route path.\nDefaults to the value /MicrosoftIdentity/Account/Error,\nwhich is the value used by Microsoft.Identity.Web.UI."
+                },
+                "ExtraQueryParameters": {
+                    "type": [
+                        "null",
+                        "object"
+                    ],
+                    "description": "Sets query parameters for the query string in the HTTP request to the IdP.",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,1364 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "MicrosoftIdentityApplicationOptions",
+    "definitions": {
+        "IdentityApplicationOptions": {
+            "type": "object",
+            "description": "Options for configuring authentication in a web app, web API or daemon app.\n\nThis class contains configuration properties for any OAuth 2.0 identity provider.\nFor Azure AD specific options see the derived class: . This class\nand its derived class are usually used as options, that are deserialized from a configuration file like appsettings.json",
+            "additionalProperties": false,
+            "properties": {
+                "Authority": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets the authority to use when calling the identity provider. \nFor AzureAD or Azure AD B2C, rather use Instance\nand TenantId. For Microsoft Entra External IDs, use\nthe authority of the form https://subdomain.ciamlogin.com.",
+                    "x-example": "IdentityApplicationOptions options = new \n{\n Authority = \"https://subdomain.ciamlogin.com\"\n};"
+                },
+                "ClientId": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets the 'client_id' (application ID) as it appears in the \napplication registration. This is the string representation of a GUID."
+                },
+                "EnablePiiLogging": {
+                    "type": "boolean",
+                    "description": "Flag used to enable/disable logging of Personally Identifiable Information (PII).\nPII logs are never written to default outputs.\nDefault is set to false, which ensures that your application is compliant with GDPR. You can set\nit to true for advanced debugging requiring PII."
+                },
+                "ExtraQueryParameters": {
+                    "type": [
+                        "null",
+                        "object"
+                    ],
+                    "description": "Sets query parameters for the query string in the HTTP request to the IdP. This parameter is useful\nif you want to send the request to a specific test slice, or a particular dc.",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "ClientCredentials": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Description of the client credentials that the app provides to prove its identity to the IdP,\nSee CredentialSource for the list of supported credential types.",
+                    "x-example": "Here is an example of client credentials in the AzureAd section of the *appsetting.json*. The app will try to use\nworkload identity federation from Managed identity (when setup and deployed in Azure), and otherwise, will use a certificate\nfrom Key Vault, and otherwise, will use a client secret.\n```json\n \"ClientCredentials\": [\n  {\n   \"SourceType\": \"SignedAssertionFromManagedIdentity\",\n   \"ManagedIdentityClientId\": \"Optional GUID of user assigned Managed identity\"\n  },\n  {\n   \"SourceType\": \"KeyVault\",\n   \"KeyVaultUrl\": \"https://webappsapistests.vault.azure.net\",\n   \"KeyVaultCertificateName\": \"Self-Signed-5-5-22\"\n  },\n  {\n   \"SourceType\": \"ClientSecret\",\n   \"ClientSecret\": \"***\"\n  }\n ]\n```\n  See also https://aka.ms/ms-id-web-certificates.",
+                    "items": {
+                        "$ref": "#/definitions/CredentialDescription"
+                    }
+                },
+                "Audience": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "In a web API, audience of the tokens that will be accepted by the web API.\nIf your web API accepts several audiences, see ."
+                },
+                "Audiences": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "In a web API, accepted audiences for the tokens received by the web API.\nSee also .\nThe audience is the intended recipient of the token. You can usually assume that the ApplicationId of your web API\nis a valid audience. It can, in general be any of the App ID URIs (or resource identitfier) you defined for your application\nduring its registration in the Azure portal.",
+                    "x-example": "Here is an example of client credentials in the AzureAd section of the *appsetting.json*. The app will try to use\nworkload identity federation from Managed identity (when setup and deployed in Azure), and otherwise, will use a certificate\nfrom Key Vault, and otherwise, will use a client secret.\n```json\n \"Audiences\": [\n   \"api://a88bb933-319c-41b5-9f04-eff36d985612\",\n   \"a88bb933-319c-41b5-9f04-eff36d985612\",\n   \"https://mydomain.com/myapp\"\n ]\n```\n  See also https://aka.ms/ms-id-web-certificates.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "TokenDecryptionCredentials": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Description of the credentials (usually certificates) used to decrypt an encrypted \ntoken in a web API.",
+                    "x-example": "           \n           \n           Here is how to specify a decrypt certificate read from the certificate store:\n           \n           ```json\n           \"TokenDecryptionCredentials\": [\n             {\n               \"SourceType\": \"StoreWithDistinguishedName\",\n                \"CertificateStorePath\": \"CurrentUser/My\",\n                \"CertificateDistinguishedName\": \"CN=WebAppCallingWebApiCert\"\n               }\n              ]\n           ```   \n             See also https://aka.ms/ms-id-web-certificates.\n           \n           ",
+                    "items": {
+                        "$ref": "#/definitions/CredentialDescription"
+                    }
+                },
+                "AllowWebApiToBeAuthorizedByACL": {
+                    "type": "boolean",
+                    "description": "Web APIs called on behalf of a user can validate a token based on scopes (representing delegated permissions).\nWeb APIs called by daemon applications can validate a token based on roles (representing app permissions).\nBy default, the web API will validate the presence of roles and scopes. You can set this property to false to\nuse the ACL-based authorization pattern for the client (daemon) to the web API. If using ACL-based authorization,\nthe implementation will not throw if roles or scopes are not in the Claims.\nFor details see https://aka.ms/ms-identity-web/daemon-ACL."
+                }
+            }
+        },
+        "CredentialDescription": {
+            "type": "object",
+            "description": "Description of a credential. Credentials are used to prove the identity of the\napplication (See ClientCredentials), or\nto decrypt tokens (See TokenDecryptionCredentials). Credentials can be\nsecrets (client secrets), certificates, or signed assertions. They can be stored or provided in a variety of ways, \nand this class provides a way to describe them. The description is then used by Microsoft.Identity.Web to retrieve the credential.\n(See the DefaultCredentialProvider class)",
+            "additionalProperties": false,
+            "properties": {
+                "Id": {
+                    "type": "string",
+                    "description": "Gets a unique identifier for a CredentialDescription based on SourceType and ReferenceOrValue."
+                },
+                "SourceType": {
+                    "description": "Type of the source of the credential. This property is used to determine which other properties need\nto be provided to describe the credential.",
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/CredentialSource"
+                        }
+                    ]
+                },
+                "Container": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Container in which to find the credential. You will normally not use this property directly. It could be used\nby property editors in tools or IDEs. Instead, use the properties that are specific to the SourceType."
+                },
+                "KeyVaultUrl": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is KeyVault, use this property to specify the\nURL of the Key Vault containing the certificate, in conjunction with KeyVaultCertificateName.",
+                    "x-example": "The JSON fragment below describes a certificate stored in Key Vault used as a client credential in a confidential client application:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"keyvault_json\":::\n\nThe code below describes programmatically in C#, the same certificate stored in Key Vault.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"keyvault_csharp\":::"
+                },
+                "CertificateStorePath": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is StoreWithDistinguishedName or \nStoreWithThumbprint, specifies the certificate store from which to extract\nthe certificate. The format is the concatenation of a value of StoreLocation and a value of StoreName\nseparated by a slash. For instance, use CurrentUser/My for a user certificate, and LocalMachine/My for a computer certificate."
+                },
+                "CertificateDistinguishedName": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is StoreWithDistinguishedName, specifies the distinguished name of\nthe certificate in the store specified by CertificateStorePath.",
+                    "x-example": "The JSON fragment below describes a user certificate stored in the personal certificates folder (<b>CurrentUser/My</b>) and specified by its distinguised name, used as a client credential in a confidential client application:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"distinguishedname_json\":::\n\nThe code below describes programmatically in C#, a computer certificate in the personal certificates folder (<b>LocalMachine/My<b>).\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"distinguishedname_csharp\":::"
+                },
+                "KeyVaultCertificateName": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is KeyVault, use this property to specify the\nthe name of the certificate in Key Vault in conjunction with KeyVaultUrl.",
+                    "x-example": "The JSON fragment below describes a certificate stored in Key Vault used as a client credential in a confidential client application:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"keyvault_json\":::\n\nThe code below describes programmatically in C#, the same certificate stored in Key Vault.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"keyvault_csharp\":::"
+                },
+                "CertificateThumbprint": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is StoreWithThumbprint specifies the thumbprint of the certificate to extract from\nthe certificate store specified by CertificateStorePath.",
+                    "x-example": "The JSON fragment below describes a user certificate stored in the personal certificates folder (<b>CurrentUser/My</b>) and specified by its thumbprint, used as a client credential in a confidential client application:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"thumbprint_json\":::\n\nThe code below describes programmatically in C#, a computer certificate in the personal certificates folder (<b>LocalMachine/My<b>) accessed by its thumbprint.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"thumbprint_csharp\":::"
+                },
+                "CertificateDiskPath": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is Path, specifies the path to the certificate on disk. You can\nuse this property to specify the path to a PFX file containing the certificate and its private key. If a password is needed, \nuse CertificatePassword.",
+                    "x-example": "The JSON fragment below describes a certificate retrieved by its path and a password to be used as a client credential in a confidential client application:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"path_json\":::\n\nThe code below describes programmatically in C#, a the same certificate.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"path_csharp\":::"
+                },
+                "CertificatePassword": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is Path, specifies the password to use to access the certificate which\npath is specified by CertificateDiskPath. Only use this property if the certificate is protected by a password.",
+                    "x-example": "The JSON fragment below describes a certificate retrieved by its path and a password to be used as a client credential in a confidential client application:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"path_json\":::\n\nThe code below describes programmatically in C#, the same certificate.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"path_csharp\":::"
+                },
+                "Base64EncodedValue": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is Base64Encoded, specifies the base64 encoded value of the certificate.",
+                    "x-example": "The JSON fragment below describes a certificate by its base64 encoded value, to be used as a client credential in a confidential client application:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"base64_json\":::\n\nThe code below describes programmatically in C#, the same certificate.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"base64_csharp\":::"
+                },
+                "ClientSecret": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is ClientSecret, describes the client secret to use as a client credential in a confidential client application.\nThe client secret is a string known only to the application and the identity provider. It needs to match the value configured during the application registration.",
+                    "x-example": "The JSON fragment below describes a client secret used as a client credential in a confidential client application:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"secret_json\":::\n\nThe code below describes programmatically in C#, the same client secret.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"secret_csharp\":::"
+                },
+                "ManagedIdentityClientId": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is SignedAssertionFromManagedIdentity, specifies the client ID of the Azure user-assigned managed identity \nused to provide an signed assertion that will be used as a client credential for the application. This requires that the application is deployed on Azure, that the managed identity is configured, \nand that workload identity federation with the managed identity is declared in the application registration. For details, see https://learn.microsoft.com/azure/active-directory/workload-identities/workload-identity-federation.",
+                    "x-example": "The JSON fragment below describes a workload identity federation with a user assigned managed identity:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"msi_json\":::\n\nThe code below describes programmatically in C#, the same workload identity federation with a user assigned managed identity.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"msi_csharp\":::"
+                },
+                "SignedAssertionFileDiskPath": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "When SourceType is SignedAssertionFilePath, optionally specifies the path on disk of a file \ncontaining a signed assertion used as a client assertion for the confidential client application. \nThe signed assertion file is a file containing a signed JWT assertion that is used as a client credential. You will usually use this option when you want to integrate\nwith workload identity federation with Azure Kubernetes Service (AKS). \nFor details, see https://learn.microsoft.com/azure/active-directory/workload-identities/workload-identity-federation.",
+                    "x-example": "The JSON fragment below describes a signed assertion acquired with workload identity federation with Azure Kubernetes Services (AKS):\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"aks_json\":::\n\nThe code below describes programmatically in C#, the same workload identity federation with with Azure Kubernetes Services (AKS) signed assertion.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"aks_csharp\":::"
+                },
+                "DecryptKeysAuthenticationOptions": {
+                    "description": "When SourceType is AutoDecryptKeys, this property describes the authority to use\nto get a token for a web API to get the keys used to decrypt an encrypted token. The cloud instance will be the same as the application, but the application can be a multi-tenant\napplication (tenant = common or organizations), and in this case to get a token on behalf of itself, the\ncredential type needs to provide a tenant. More generally you might want to specify authentication options, including protocol, PopKey, etc ...\nThis credential description is only used for decrypt credentials, not for client credentials.",
+                    "x-example": "The JSON fragment below describes a decrypt credential to get the decrypt keys automatically:\n:::code language=\"json\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"autodecryp_json\":::\n\nThe code below describes the same, programmatically in C#.\n:::code language=\"csharp\" source=\"~/../abstractions-samples/test/Microsoft.Identity.Abstractions.Tests/CredentialDescriptionTest.cs\" id=\"autodecryp_csharp\":::",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/AuthorizationHeaderProviderOptions"
+                        }
+                    ]
+                },
+                "ReferenceOrValue": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Reference to the certificate or value. You will normally not use this property directly. It could be used\nby property editors in tools or IDEs. Instead, use the properties that are specific to the SourceType."
+                },
+                "Certificate": {
+                    "description": "When SourceType is Certificate, you will use this property to provide the certificate yourself. \nWhen SourceType is Base64Encoded or KeyVault\nor Path or StoreWithDistinguishedName or StoreWithThumbprint\nafter the certificate is retrieved by a ICredentialsLoader, it will be stored in this property and also in the CachedValue.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/X509Certificate2"
+                        }
+                    ]
+                },
+                "CachedValue": {
+                    "description": "When the credential is retrieved by a ICredentialsLoader, it will be stored in this property, where you can retrieve it. If the credential is a certificate,\nit will also be stored in the Certificate property.",
+                    "oneOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "Skip": {
+                    "type": "boolean",
+                    "description": "Skip this credential description. This is useful when, you specify a list of\ncredentials, some of which don't apply in a particular deployment.\nIt will also be used by the ICredentialsLoader if it cannot find or load the credential."
+                },
+                "CredentialType": {
+                    "description": "Describes the type of credentials, based on the SourceType.",
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/CredentialType"
+                        }
+                    ]
+                }
+            }
+        },
+        "CredentialSource": {
+            "type": "integer",
+            "description": "Source for a credential.\nCredentials are used to prove the identity of the\napplication (See ClientCredentials), or\nto decrypt tokens (See TokenDecryptionCredentials). Credentials can be\nsecrets (client secrets), certificates, or signed assertions. They can be stored or provided in a variety of ways, \nand this enumeration describes these ways. It's used in the SourceType property.",
+            "x-enumNames": [
+                "Certificate",
+                "KeyVault",
+                "Base64Encoded",
+                "Path",
+                "StoreWithThumbprint",
+                "StoreWithDistinguishedName",
+                "ClientSecret",
+                "SignedAssertionFromManagedIdentity",
+                "SignedAssertionFilePath",
+                "SignedAssertionFromVault",
+                "AutoDecryptKeys"
+            ],
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+            ]
+        },
+        "AuthorizationHeaderProviderOptions": {
+            "type": "object",
+            "description": "Options passed-in to call downstream web APIs. To call Microsoft Graph, see rather\nMicrosoftGraphOptions in the Microsoft.Identity.Web.MicrosoftGraph assembly.",
+            "additionalProperties": false,
+            "properties": {
+                "BaseUrl": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Base URL for the called downstream web API. For instance \"https://graph.microsoft.com/beta/\"."
+                },
+                "RelativePath": {
+                    "type": "string",
+                    "description": "Path relative to the BaseUrl (for instance \"me\")."
+                },
+                "HttpMethod": {
+                    "type": "string",
+                    "description": "HTTP method used to call this downstream web API (by default Get).",
+                    "default": "Get"
+                },
+                "CustomizeHttpRequestMessage": {
+                    "description": "Provides an opportunity for the caller app to customize the HttpRequestMessage. For example,\nto customize the headers. This is called after the message was formed, including\nthe Authorization header, and just before the message is sent.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/ActionOfHttpRequestMessage"
+                        }
+                    ]
+                },
+                "AcquireTokenOptions": {
+                    "description": "Options related to token acquisition.",
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/AcquireTokenOptions"
+                        }
+                    ]
+                },
+                "ProtocolScheme": {
+                    "type": "string",
+                    "description": "Name of the protocol scheme used to create the authorization header. By default: \"Bearer\".",
+                    "default": "Bearer"
+                },
+                "RequestAppToken": {
+                    "type": "boolean",
+                    "description": "Describes if the downstream API is called on behalf of the calling service itself\n(App token) or on behalf of a user processed by the service (user token).\nIf true, the token is requested on behalf of the app. Otherwise, it on-behalf of the user."
+                }
+            }
+        },
+        "ActionOfHttpRequestMessage": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "MulticastDelegate": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Delegate"
+                },
+                {
+                    "type": "object",
+                    "x-abstract": true,
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "Delegate": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "Target": {
+                    "oneOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "Method": {
+                    "$ref": "#/definitions/MethodInfo"
+                }
+            }
+        },
+        "MethodInfo": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MethodBase"
+                },
+                {
+                    "type": "object",
+                    "x-abstract": true,
+                    "additionalProperties": false,
+                    "properties": {
+                        "MemberType": {
+                            "$ref": "#/definitions/MemberTypes"
+                        },
+                        "ReturnParameter": {
+                            "$ref": "#/definitions/ParameterInfo"
+                        },
+                        "ReturnType": {
+                            "type": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "MemberTypes": {
+            "type": "integer",
+            "description": "",
+            "x-enumFlags": true,
+            "x-enumNames": [
+                "Constructor",
+                "Event",
+                "Field",
+                "Method",
+                "Property",
+                "TypeInfo",
+                "Custom",
+                "NestedType",
+                "All"
+            ],
+            "enum": [
+                1,
+                2,
+                4,
+                8,
+                16,
+                32,
+                64,
+                128,
+                191
+            ]
+        },
+        "ParameterInfo": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Attributes": {
+                    "$ref": "#/definitions/ParameterAttributes"
+                },
+                "Member": {
+                    "$ref": "#/definitions/MemberInfo"
+                },
+                "Name": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "ParameterType": {
+                    "type": "string"
+                },
+                "Position": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "IsIn": {
+                    "type": "boolean"
+                },
+                "IsLcid": {
+                    "type": "boolean"
+                },
+                "IsOptional": {
+                    "type": "boolean"
+                },
+                "IsOut": {
+                    "type": "boolean"
+                },
+                "IsRetval": {
+                    "type": "boolean"
+                },
+                "DefaultValue": {
+                    "oneOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "RawDefaultValue": {
+                    "oneOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "HasDefaultValue": {
+                    "type": "boolean"
+                },
+                "CustomAttributes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomAttributeData"
+                    }
+                },
+                "MetadataToken": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "ParameterAttributes": {
+            "type": "integer",
+            "description": "",
+            "x-enumFlags": true,
+            "x-enumNames": [
+                "None",
+                "In",
+                "Out",
+                "Lcid",
+                "Retval",
+                "Optional",
+                "HasDefault",
+                "HasFieldMarshal",
+                "Reserved3",
+                "Reserved4",
+                "ReservedMask"
+            ],
+            "enum": [
+                0,
+                1,
+                2,
+                4,
+                8,
+                16,
+                4096,
+                8192,
+                16384,
+                32768,
+                61440
+            ]
+        },
+        "MemberInfo": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "Module": {
+                    "$ref": "#/definitions/Module"
+                },
+                "CustomAttributes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomAttributeData"
+                    }
+                },
+                "IsCollectible": {
+                    "type": "boolean"
+                },
+                "MetadataToken": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "Module": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "Assembly": {
+                    "$ref": "#/definitions/Assembly"
+                },
+                "FullyQualifiedName": {
+                    "type": "string"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "MDStreamVersion": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "ModuleVersionId": {
+                    "type": "string",
+                    "format": "guid"
+                },
+                "ScopeName": {
+                    "type": "string"
+                },
+                "ModuleHandle": {
+                    "$ref": "#/definitions/ModuleHandle"
+                },
+                "CustomAttributes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomAttributeData"
+                    }
+                },
+                "MetadataToken": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "Assembly": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "DefinedTypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "ExportedTypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "CodeBase": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "x-deprecated": true,
+                    "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
+                },
+                "EntryPoint": {
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/MethodInfo"
+                        }
+                    ]
+                },
+                "FullName": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "ImageRuntimeVersion": {
+                    "type": "string"
+                },
+                "IsDynamic": {
+                    "type": "boolean"
+                },
+                "Location": {
+                    "type": "string"
+                },
+                "ReflectionOnly": {
+                    "type": "boolean"
+                },
+                "IsCollectible": {
+                    "type": "boolean"
+                },
+                "IsFullyTrusted": {
+                    "type": "boolean"
+                },
+                "CustomAttributes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomAttributeData"
+                    }
+                },
+                "EscapedCodeBase": {
+                    "type": "string",
+                    "x-deprecated": true,
+                    "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
+                },
+                "ManifestModule": {
+                    "$ref": "#/definitions/Module"
+                },
+                "Modules": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Module"
+                    }
+                },
+                "GlobalAssemblyCache": {
+                    "type": "boolean",
+                    "x-deprecated": true,
+                    "x-deprecatedMessage": "The Global Assembly Cache is not supported."
+                },
+                "HostContext": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "SecurityRuleSet": {
+                    "$ref": "#/definitions/SecurityRuleSet"
+                }
+            }
+        },
+        "CustomAttributeData": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "AttributeType": {
+                    "type": "string"
+                },
+                "Constructor": {
+                    "$ref": "#/definitions/ConstructorInfo"
+                },
+                "ConstructorArguments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomAttributeTypedArgument"
+                    }
+                },
+                "NamedArguments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomAttributeNamedArgument"
+                    }
+                }
+            }
+        },
+        "ConstructorInfo": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MethodBase"
+                },
+                {
+                    "type": "object",
+                    "x-abstract": true,
+                    "additionalProperties": false,
+                    "properties": {
+                        "MemberType": {
+                            "$ref": "#/definitions/MemberTypes"
+                        }
+                    }
+                }
+            ]
+        },
+        "MethodBase": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MemberInfo"
+                },
+                {
+                    "type": "object",
+                    "x-abstract": true,
+                    "additionalProperties": false,
+                    "properties": {
+                        "MethodImplementationFlags": {
+                            "$ref": "#/definitions/MethodImplAttributes"
+                        },
+                        "CallingConvention": {
+                            "$ref": "#/definitions/CallingConventions"
+                        },
+                        "IsAbstract": {
+                            "type": "boolean"
+                        },
+                        "IsConstructor": {
+                            "type": "boolean"
+                        },
+                        "IsFinal": {
+                            "type": "boolean"
+                        },
+                        "IsHideBySig": {
+                            "type": "boolean"
+                        },
+                        "IsSpecialName": {
+                            "type": "boolean"
+                        },
+                        "IsStatic": {
+                            "type": "boolean"
+                        },
+                        "IsVirtual": {
+                            "type": "boolean"
+                        },
+                        "IsAssembly": {
+                            "type": "boolean"
+                        },
+                        "IsFamily": {
+                            "type": "boolean"
+                        },
+                        "IsFamilyAndAssembly": {
+                            "type": "boolean"
+                        },
+                        "IsFamilyOrAssembly": {
+                            "type": "boolean"
+                        },
+                        "IsPrivate": {
+                            "type": "boolean"
+                        },
+                        "IsPublic": {
+                            "type": "boolean"
+                        },
+                        "IsConstructedGenericMethod": {
+                            "type": "boolean"
+                        },
+                        "IsGenericMethod": {
+                            "type": "boolean"
+                        },
+                        "IsGenericMethodDefinition": {
+                            "type": "boolean"
+                        },
+                        "ContainsGenericParameters": {
+                            "type": "boolean"
+                        },
+                        "IsSecurityCritical": {
+                            "type": "boolean"
+                        },
+                        "IsSecuritySafeCritical": {
+                            "type": "boolean"
+                        },
+                        "IsSecurityTransparent": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            ]
+        },
+        "MethodImplAttributes": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "IL",
+                "Managed",
+                "Native",
+                "OPTIL",
+                "CodeTypeMask",
+                "Runtime",
+                "ManagedMask",
+                "Unmanaged",
+                "NoInlining",
+                "ForwardRef",
+                "Synchronized",
+                "NoOptimization",
+                "PreserveSig",
+                "AggressiveInlining",
+                "AggressiveOptimization",
+                "InternalCall",
+                "MaxMethodImplVal"
+            ],
+            "enum": [
+                0,
+                0,
+                1,
+                2,
+                3,
+                3,
+                4,
+                4,
+                8,
+                16,
+                32,
+                64,
+                128,
+                256,
+                512,
+                4096,
+                65535
+            ]
+        },
+        "CallingConventions": {
+            "type": "integer",
+            "description": "",
+            "x-enumFlags": true,
+            "x-enumNames": [
+                "Standard",
+                "VarArgs",
+                "Any",
+                "HasThis",
+                "ExplicitThis"
+            ],
+            "enum": [
+                1,
+                2,
+                3,
+                32,
+                64
+            ]
+        },
+        "CustomAttributeTypedArgument": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "ArgumentType": {
+                    "type": "string"
+                },
+                "Value": {
+                    "oneOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            }
+        },
+        "CustomAttributeNamedArgument": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "MemberInfo": {
+                    "$ref": "#/definitions/MemberInfo"
+                },
+                "TypedValue": {
+                    "$ref": "#/definitions/CustomAttributeTypedArgument"
+                },
+                "MemberName": {
+                    "type": "string"
+                },
+                "IsField": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "SecurityRuleSet": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "None",
+                "Level1",
+                "Level2"
+            ],
+            "enum": [
+                0,
+                1,
+                2
+            ]
+        },
+        "ModuleHandle": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "MDStreamVersion": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "AcquireTokenOptions": {
+            "type": "object",
+            "description": "Options directing the token acquisition. These options are provided to the ITokenAcquirer methods, or\npart of the AuthorizationHeaderProviderOptions, or DownstreamApiOptions.",
+            "additionalProperties": false,
+            "properties": {
+                "AuthenticationOptionsName": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets the name of the options describing the confidential client application (ClientId,\nRegion, Authority, client credentials). In ASP.NET Core, the authenticatiopn options name \nis the same as the authentication scheme."
+                },
+                "CorrelationId": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Sets the correlation id to be used in the request to the STS \"/token\" endpoint.",
+                    "format": "guid"
+                },
+                "ExtraQueryParameters": {
+                    "type": [
+                        "null",
+                        "object"
+                    ],
+                    "description": "Sets query parameters for the query string in the HTTP request to the \n\"/token\" endpoint.",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "ExtraHeadersParameters": {
+                    "type": [
+                        "null",
+                        "object"
+                    ],
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "Claims": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "A string with one or multiple claims to request. It's a json blob (encoded or not)\nNormally used with Conditional Access. It receives the Claims member of the UiRequiredException.\nIt can also be used to request specific optional claims, and for \nCA Auth context "
+                },
+                "ForceRefresh": {
+                    "type": "boolean",
+                    "description": "Specifies if the token request will ignore the access token in the token cache\nand will attempt to acquire a new access token.\nIf true, the request will ignore the token cache. The default is false.\nUse this option with care and only when needed, for instance, if you know that conditional access policies have changed,\nfor it induces performance degradation, as the token cache is not utilized, and the STS might throttle the app."
+                },
+                "PopPublicKey": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Modifies the token acquisition request so that the acquired token is a Proof of Possession token (PoP),\nrather than a Bearer token.\nPoP tokens are similar to Bearer tokens, but are bound to the HTTP request and to a cryptographic key,\nwhich MSAL can manage. See https://aka.ms/msal-net-pop."
+                },
+                "PopClaim": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "In addition to the PopPublicKey, specify the PopClaim when needed in specific POP protocols. "
+                },
+                "LongRunningWebApiSessionKey": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Key used for long running web APIs that need to call downstream web\nAPIs on behalf of the user. Can be null, if you are not developing a long\nrunning web API, LongRunningWebApiSessionKeyAuto if you want\nthe token acquirer to allocate a session key for you, or your own string\nif you want to associate the session with some information you have externally\n(for instance a Microsoft Graph hook identifier)."
+                },
+                "Tenant": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "(Microsoft identity specific)\nEnables to override the tenant/account for which to get a token. \nThis is useful in multi-tenant apps in the cases where a given user account is a guest \nin other tenants, and you want to acquire tokens for a specific tenant."
+                },
+                "UserFlow": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "(Microsoft identity specific)\nIn the case of AzureAD B2C, uses a particular user flow."
+                }
+            }
+        },
+        "X509Certificate2": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/X509Certificate"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "Archived": {
+                            "type": "boolean"
+                        },
+                        "Extensions": {
+                            "type": "array",
+                            "items": {}
+                        },
+                        "FriendlyName": {
+                            "type": "string"
+                        },
+                        "HasPrivateKey": {
+                            "type": "boolean"
+                        },
+                        "PrivateKey": {
+                            "x-deprecated": true,
+                            "x-deprecatedMessage": "X509Certificate2.PrivateKey is obsolete. Use the appropriate method to get the private key, such as GetRSAPrivateKey, or use the CopyWithPrivateKey method to create a new instance with a private key.",
+                            "oneOf": [
+                                {
+                                    "type": "null"
+                                },
+                                {
+                                    "$ref": "#/definitions/AsymmetricAlgorithm"
+                                }
+                            ]
+                        },
+                        "IssuerName": {
+                            "$ref": "#/definitions/X500DistinguishedName"
+                        },
+                        "NotAfter": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "NotBefore": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "PublicKey": {
+                            "$ref": "#/definitions/PublicKey"
+                        },
+                        "RawData": {
+                            "type": "string",
+                            "format": "byte"
+                        },
+                        "RawDataMemory": {
+                            "$ref": "#/definitions/ReadOnlyMemoryOfByte"
+                        },
+                        "SerialNumber": {
+                            "type": "string"
+                        },
+                        "SignatureAlgorithm": {
+                            "$ref": "#/definitions/Oid"
+                        },
+                        "SubjectName": {
+                            "$ref": "#/definitions/X500DistinguishedName"
+                        },
+                        "Thumbprint": {
+                            "type": "string"
+                        },
+                        "Version": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                }
+            ]
+        },
+        "AsymmetricAlgorithm": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "KeySize": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "LegalKeySizes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/KeySizes"
+                    }
+                },
+                "SignatureAlgorithm": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "KeyExchangeAlgorithm": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            }
+        },
+        "KeySizes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "MinSize": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "MaxSize": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "SkipSize": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "X500DistinguishedName": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AsnEncodedData"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "Name": {
+                            "type": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "AsnEncodedData": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Oid": {
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/Oid"
+                        }
+                    ]
+                },
+                "RawData": {
+                    "type": "string",
+                    "format": "byte"
+                }
+            }
+        },
+        "Oid": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Value": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "FriendlyName": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            }
+        },
+        "PublicKey": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "EncodedKeyValue": {
+                    "$ref": "#/definitions/AsnEncodedData"
+                },
+                "EncodedParameters": {
+                    "$ref": "#/definitions/AsnEncodedData"
+                },
+                "Key": {
+                    "x-deprecated": true,
+                    "x-deprecatedMessage": "PublicKey.Key is obsolete. Use the appropriate method to get the public key, such as GetRSAPublicKey.",
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/AsymmetricAlgorithm"
+                        }
+                    ]
+                },
+                "Oid": {
+                    "$ref": "#/definitions/Oid"
+                }
+            }
+        },
+        "ReadOnlyMemoryOfByte": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Length": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "IsEmpty": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "X509Certificate": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Handle": {
+                    "$ref": "#/definitions/IntPtr"
+                },
+                "Issuer": {
+                    "type": "string"
+                },
+                "Subject": {
+                    "type": "string"
+                },
+                "SerialNumberBytes": {
+                    "$ref": "#/definitions/ReadOnlyMemoryOfByte"
+                }
+            }
+        },
+        "IntPtr": {
+            "type": "object",
+            "additionalProperties": false
+        },
+        "CredentialType": {
+            "type": "integer",
+            "description": "Credential type. This is used to specify the type of credential that is being loaded. This value\nis provided in the see CredentialType based on the type of\ncredential (which depends on the type of CredentialSource value of the SourceType).",
+            "x-enumNames": [
+                "Certificate",
+                "Secret",
+                "SignedAssertion",
+                "DecryptKeys"
+            ],
+            "enum": [
+                0,
+                1,
+                2,
+                3
+            ]
+        }
+    },
+    "allOf": [
+        {
+            "$ref": "#/definitions/IdentityApplicationOptions"
+        },
+        {
+            "type": "object",
+            "description": "Options for configuring authentication for a web app, web API, or daemon application, using Azure Active Directory. \nIt has both AAD and B2C configuration attributes.",
+            "additionalProperties": false,
+            "properties": {
+                "Instance": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets the Azure Active Directory instance, e.g. \"https://login.microsoftonline.com/\"."
+                },
+                "TenantId": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets the tenant ID. If your application is multi-tenant, you can also use \"common\" if it supports\nboth work and school, or personal accounts accounts, or \"organizations\" if your application supports only work \nand school accounts. If your application is single tenant, set this property to the tenant ID or domain name.\nIf your application works only for Microsoft personal accounts, use \"consumers\"."
+                },
+                "Authority": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets the Authority to use when making OpenIdConnect calls. By default the authority is computed\nfrom the Instance and TenantId properties, by concatenating them, and appending \"v2.0\".\nIf your authority is not an Azure AD authority, you can set it directly here."
+                },
+                "AzureRegion": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Specifies the Azure region. See https://aka.ms/azure-region. To have\nthe app attempt to detect the Azure region automatically,\nuse \"TryAutoDetect\"."
+                },
+                "ClientCapabilities": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "Specifies the capabilities of the client (for instance {\"cp1\", \"cp2\"}). This is\nuseful to express that the Client is capable of handling claims challenge. If your application\nis CAE capable, it needs to express \"cp1\".",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "SendX5C": {
+                    "type": "boolean",
+                    "description": "Specifies if the x5c claim (public key of the certificate) should be sent to the STS.\nSending the x5c enables application developers to achieve easy certificate rollover in Azure AD:\nthis method will send the public certificate to Azure AD along with the token request,\nso that Azure AD can use it to validate the subject name based on a trusted issuer policy.\nThis saves the application admin from the need to explicitly manage the certificate rollover\n(either via the app registration portal or using PowerShell/CLI). \nFor details see https://aka.ms/msal-net-sni."
+                },
+                "WithSpaAuthCode": {
+                    "type": "boolean",
+                    "description": "If set to true, when the user signs-in in a web app, the application requests an auth code \nfor the frontend (single page application using MSAL.js for instance). This will allow the front end\nJavaScript code to bypass going to the authoriize endpoint (which requires reloading the page), by \ndirectly redeeming the auth code to get access tokens to call APIs.\nSee https://aka.ms/msal-net/hybrid-spa-sample for details. Only works for AAD, not B2C."
+                },
+                "Domain": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets the domain of the Azure Active Directory tenant, e.g. contoso.onmicrosoft.com."
+                },
+                "EditProfilePolicyId": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets the edit profile user flow name for B2C, e.g. b2c_1_edit_profile."
+                },
+                "SignUpSignInPolicyId": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets the sign up or sign in user flow name for B2C, e.g. b2c_1_susi."
+                },
+                "ResetPasswordPolicyId": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets or sets the reset password user flow name for B2C, e.g. B2C_1_password_reset."
+                },
+                "DefaultUserFlow": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Gets the default user flow (which is signUpsignIn)."
+                },
+                "ResetPasswordPath": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Sets the ResetPassword route path (from the root of the web site).\nDefaults to /MicrosoftIdentity/Account/ResetPassword,\nwhich is the value used by Microsoft.Identity.Web.UI.\nIf you override it, you need to provide your own controller/actions."
+                },
+                "ErrorPath": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Sets the Error route path.\nDefaults to the value /MicrosoftIdentity/Account/Error,\nwhich is the value used by Microsoft.Identity.Web.UI."
+                }
+            }
+        }
+    ]
+}
