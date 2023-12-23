@@ -1,0 +1,38 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "$id": "https://jsonschema.xyz/downstreamapisconfiguration.schema",
+    "contentMediaType": "application/schema+json",
+    "type": "object",
+    "properties": {
+        "version": {
+            "type": "number"
+        },
+        "isRoot": {
+            "type": "boolean"
+        },
+        "DownstreamApis": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "object",
+                "properties": {
+                    "BaseUrl": {
+                        "type": "string",
+                        "description": "The base URL of the downstream API."
+                    },
+                    "Scopes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "The scopes to request from the downstream API."
+                        }
+                    }
+                },
+                "required": [
+                    "BaseUrl",
+                    "Scopes"
+                ],
+                "additionalProperties": true
+            }
+        }
+    }
+}
