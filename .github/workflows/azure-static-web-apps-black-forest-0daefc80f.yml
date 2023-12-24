@@ -22,6 +22,14 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
+      - name: Install Node Modules
+        shell: bash
+        run: npm install
+        working-directory: ts
+      - name: Compile TypeScript
+        shell: bash
+        run: tsc
+        working-directory: ts
       - name: Catalog Schemas
         shell: bash
         run: node catalogschemas.js
