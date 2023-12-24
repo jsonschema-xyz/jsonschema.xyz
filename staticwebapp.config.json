@@ -17,10 +17,10 @@
             "statusCode": 404
         }
     },
-    "routes": [
-        {
-            "route": "/*.schema",
-            "rewrite": "/schemas/"
-        }
-    ]
+    // "routes": [
+    //     {
+    //         "route": "/*.schema",
+    //         "rewrite": "/schemas"
+    //     }
+    // ]
 }
