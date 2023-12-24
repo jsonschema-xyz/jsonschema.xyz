@@ -8,30 +8,26 @@
     "allOf": [
         {
             "$ref": "#/definitions/VersionAndIsRoot"
+        },
+        {
+            "$ref": "#/definitions/DownstreamApis"
         }
     ],
-    "properties": {
-        "DownstreamApis": {
-            "type": "object",
-            "$ref": "#/definitions/DownstreamApis",
-            "additionalProperties": true,
-            "description": "The options for the downstream APIs."
-        },
-        "additionalProperties": true
-    },
     "definitions": {
         "DownstreamApis": {
             "type": "object",
-            "MicrosoftGraphOptions": {
-                "type": "object",
-                "$ref": "#/definitions/DownstreamApi",
-                "additionalProperties": true,
-                "description": "The options for the Microsoft Graph API."
-            },
-            "additionalProperties": {
-                "type": "object",
-                "$ref": "#/definitions/DownstreamApi",
-                "additionalProperties": true
+            "properties": {
+                "MicrosoftGraphOptions": {
+                    "type": "object",
+                    "$ref": "#/definitions/DownstreamApi",
+                    "additionalProperties": true,
+                    "description": "The options for the Microsoft Graph API."
+                },
+                "additionalProperties": {
+                    "type": "object",
+                    "$ref": "#/definitions/DownstreamApi",
+                    "additionalProperties": true
+                }
             }
         },
         "DownstreamApi": {
