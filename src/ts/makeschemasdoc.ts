@@ -1,7 +1,7 @@
 import * as schemas from "./schemas.json";
 import jquery from "jquery";
 
-const _schemas = schemas.filter(s => !/,/.test(s));
+const _schemas = schemas.filter(s => !/.*,.*/.test(s));
 
 jquery(document).ready(() => {
     const schemasPlaceholder = jquery("#schemas");
