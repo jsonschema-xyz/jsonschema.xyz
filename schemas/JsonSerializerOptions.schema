@@ -1,0 +1,245 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "https://jsonschema.xyz/schemas/JsonSerializerOptions.schema",
+    "title": "JsonSerializerOptions",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "Converters": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/JsonConverter"
+            }
+        },
+        "TypeInfoResolver": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/definitions/IJsonTypeInfoResolver"
+                }
+            ]
+        },
+        "TypeInfoResolverChain": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/IJsonTypeInfoResolver"
+            }
+        },
+        "AllowTrailingCommas": {
+            "type": "boolean"
+        },
+        "DefaultBufferSize": {
+            "type": "integer",
+            "format": "int32"
+        },
+        "Encoder": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/definitions/JavaScriptEncoder"
+                }
+            ]
+        },
+        "DictionaryKeyPolicy": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/definitions/JsonNamingPolicy"
+                }
+            ]
+        },
+        "IgnoreNullValues": {
+            "type": "boolean",
+            "x-deprecated": true,
+            "x-deprecatedMessage": "JsonSerializerOptions.IgnoreNullValues is obsolete. To ignore null values when serializing, set DefaultIgnoreCondition to JsonIgnoreCondition.WhenWritingNull."
+        },
+        "DefaultIgnoreCondition": {
+            "$ref": "#/definitions/JsonIgnoreCondition"
+        },
+        "NumberHandling": {
+            "$ref": "#/definitions/JsonNumberHandling"
+        },
+        "PreferredObjectCreationHandling": {
+            "$ref": "#/definitions/JsonObjectCreationHandling"
+        },
+        "IgnoreReadOnlyProperties": {
+            "type": "boolean"
+        },
+        "IgnoreReadOnlyFields": {
+            "type": "boolean"
+        },
+        "IncludeFields": {
+            "type": "boolean"
+        },
+        "MaxDepth": {
+            "type": "integer",
+            "format": "int32"
+        },
+        "PropertyNamingPolicy": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/definitions/JsonNamingPolicy"
+                }
+            ]
+        },
+        "PropertyNameCaseInsensitive": {
+            "type": "boolean"
+        },
+        "ReadCommentHandling": {
+            "$ref": "#/definitions/JsonCommentHandling"
+        },
+        "UnknownTypeHandling": {
+            "$ref": "#/definitions/JsonUnknownTypeHandling"
+        },
+        "UnmappedMemberHandling": {
+            "$ref": "#/definitions/JsonUnmappedMemberHandling"
+        },
+        "WriteIndented": {
+            "type": "boolean"
+        },
+        "ReferenceHandler": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/definitions/ReferenceHandler"
+                }
+            ]
+        },
+        "IsReadOnly": {
+            "type": "boolean"
+        }
+    },
+    "definitions": {
+        "JsonConverter": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false
+        },
+        "IJsonTypeInfoResolver": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false
+        },
+        "JavaScriptEncoder": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TextEncoder"
+                },
+                {
+                    "type": "object",
+                    "x-abstract": true,
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "TextEncoder": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false
+        },
+        "JsonNamingPolicy": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false
+        },
+        "JsonIgnoreCondition": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "Never",
+                "Always",
+                "WhenWritingDefault",
+                "WhenWritingNull"
+            ],
+            "enum": [
+                0,
+                1,
+                2,
+                3
+            ]
+        },
+        "JsonNumberHandling": {
+            "type": "integer",
+            "description": "",
+            "x-enumFlags": true,
+            "x-enumNames": [
+                "Strict",
+                "AllowReadingFromString",
+                "WriteAsString",
+                "AllowNamedFloatingPointLiterals"
+            ],
+            "enum": [
+                0,
+                1,
+                2,
+                4
+            ]
+        },
+        "JsonObjectCreationHandling": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "Replace",
+                "Populate"
+            ],
+            "enum": [
+                0,
+                1
+            ]
+        },
+        "JsonCommentHandling": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "Disallow",
+                "Skip",
+                "Allow"
+            ],
+            "enum": [
+                0,
+                1,
+                2
+            ]
+        },
+        "JsonUnknownTypeHandling": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "JsonElement",
+                "JsonNode"
+            ],
+            "enum": [
+                0,
+                1
+            ]
+        },
+        "JsonUnmappedMemberHandling": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "Skip",
+                "Disallow"
+            ],
+            "enum": [
+                0,
+                1
+            ]
+        },
+        "ReferenceHandler": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false
+        }
+    }
+}
