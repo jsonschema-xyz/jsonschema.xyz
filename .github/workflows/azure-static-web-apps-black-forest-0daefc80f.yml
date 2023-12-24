@@ -25,7 +25,7 @@ jobs:
       - name: Catalog Schemas
         shell: bash
         run: node catalogschemas.js
-        working-directory: ./js
+        working-directory: js
       - uses: actions/checkout@v3
         with:
           submodules: true
