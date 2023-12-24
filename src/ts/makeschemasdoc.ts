@@ -9,8 +9,8 @@ jquery(document).ready(() => {
             const schemaLi = jquery(document.createElement("li"));
             const schemaLink = jquery(document.createElement("a"));
             schemaLink.attr("href", "schemas/" + schemas[schema]);
-            schemaLi.add(schemaLink);
-            schemasPlaceholder.add(schemaLi);
+            schemaLi.append(schemaLink);
+            schemasPlaceholder.append(schemaLi);
         }
     }
 });
