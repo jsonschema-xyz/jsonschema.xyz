@@ -29,15 +29,19 @@ jobs:
       - name: Install Node Modules
         shell: bash
         run: npm install
-        working-directory: ts
+        working-directory: src/ts
       - name: Compile TypeScript
         shell: bash
         run: tsc
-        working-directory: ts
+        working-directory: src/ts
       - name: Catalog Schemas
         shell: bash
         run: node catalogschemas.js
-        working-directory: js
+        working-directory: src/js
+      - name: Webpack
+        shell: bash
+        run: webpack-cli
+        working-directory: src/js
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
