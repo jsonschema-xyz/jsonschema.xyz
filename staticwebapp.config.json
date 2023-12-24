@@ -8,7 +8,19 @@
     "globalHeaders": {
         "X-Author": "David G. Moore, Jr. <david@dgmjr.io>",
         "X-License": "MIT",
-        "X-Source": "https://github.com/jsonschema-xyz/jsonschema.xyz",
+        "X-Repository": "https://github.com/jsonschema-xyz/jsonschema.xyz",
         "X-Source-Branch": "main"
-    }
+    },
+    "responseOverrides": {
+        "404": {
+            "rewrite": "/404.html",
+            "statusCode": 404
+        }
+    },
+    "routes": [
+        {
+            "route": "/*.schema",
+            "rewrite": "/schemas/"
+        }
+    ]
 }
