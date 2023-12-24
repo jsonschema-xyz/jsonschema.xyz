@@ -1,7 +1,7 @@
 import * as schemas from "./schemas.json";
 import jquery from "jquery";
 
-var _schemas = new Array<string>();
+const _schemas = new Array<string>();
 schemas.forEach(s => { if(s.indexOf(',') < 0) _schemas.push(s); })
 
 jquery(document).ready(() => {
