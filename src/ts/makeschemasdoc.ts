@@ -1,7 +1,8 @@
 import * as schemas from "./schemas.json";
 import jquery from "jquery";
 
-const _schemas = schemas.filter(s => s.indexOf(',') < 0);
+var _schemas = new Array<string>();
+schemas.forEach(s => { if(s.indexOf(',') < 0) _schemas.push(s); })
 
 jquery(document).ready(() => {
     const schemasPlaceholder = jquery("#schemas");
