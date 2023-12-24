@@ -1,6 +1,7 @@
 {
     "name": "jsonschema.xyz",
     "type": "commonjs",
+    "version": "0.0.1",
     "dependencies": {
         "@types/jquery": "^3.5.29",
         "@types/node": "^20.10.5",

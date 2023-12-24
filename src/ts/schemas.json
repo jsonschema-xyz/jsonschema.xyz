@@ -1,9 +1,1 @@
-[
-    "dotnet-tools.json.schema",
-    "downstreamapisconfiguration.schema",
-    "global.json.schema",
-    "mcrosoftidentityoptions.schema",
-    "microsoftidentitywebapplicationoptions.schema",
-    "telegram.json.schema",
-    "verifiablecredentialdownstreamapiconfiguration.schema"
-]
+["DownstreamApisConfiguration.schema","JsonSerializerOptions.schema","MicrosoftIdentityOptions.schema","MicrosoftIdentityWebApplicationOptions.schema","OpenApiInfo.schema","OpenIdConnectOptions.schema","Telegram.json.schema","VerifiableCredentialsDownstreamApiConfiguration.schema","dotnet-tools.json.schema","global.json.schema"]
