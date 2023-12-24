@@ -1,6 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "$id": "https://jsonschema.xyz/microsoftidentityoptions.schema",
+    "$id": "https://jsonschema.xyz/schemas/MicrosoftIdentityOptions.schema",
+    "contentMediaType": "application/schema+json",
     "title": "MicrosoftIdentityOptions",
     "definitions": {
         "CertificateDescription": {

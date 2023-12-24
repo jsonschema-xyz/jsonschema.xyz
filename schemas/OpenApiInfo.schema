@@ -1,0 +1,157 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$if": "https://jsonschema.xyz/schemas/OpenApiInfo.schema",
+    "title": "OpenApiInfo",
+    "type": "object",
+    "description": "Open API Info Object, it provides the metadata about the Open API.",
+    "additionalProperties": false,
+    "properties": {
+        "Title": {
+            "type": [
+                "null",
+                "string"
+            ],
+            "description": "REQUIRED. The title of the application."
+        },
+        "Description": {
+            "type": [
+                "null",
+                "string"
+            ],
+            "description": "A short description of the application."
+        },
+        "Version": {
+            "type": [
+                "null",
+                "string"
+            ],
+            "description": "REQUIRED. The version of the OpenAPI document."
+        },
+        "TermsOfService": {
+            "type": [
+                "null",
+                "string"
+            ],
+            "description": "A URL to the Terms of Service for the API. MUST be in the format of a URL.",
+            "format": "uri"
+        },
+        "Contact": {
+            "description": "The contact information for the exposed API.",
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/definitions/OpenApiContact"
+                }
+            ]
+        },
+        "License": {
+            "description": "The license information for the exposed API.",
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/definitions/OpenApiLicense"
+                }
+            ]
+        },
+        "Extensions": {
+            "type": [
+                "null",
+                "object"
+            ],
+            "description": "This object MAY be extended with Specification Extensions.",
+            "additionalProperties": {
+                "$ref": "#/definitions/IOpenApiExtension"
+            }
+        }
+    },
+    "required": [
+        "Title",
+        "Version"
+    ],
+    "definitions": {
+        "OpenApiContact": {
+            "type": "object",
+            "description": "Contact Object.",
+            "additionalProperties": false,
+            "properties": {
+                "Name": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "The identifying name of the contact person/organization."
+                },
+                "Url": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "The URL pointing to the contact information. MUST be in the format of a URL.",
+                    "format": "uri"
+                },
+                "Email": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "The email address of the contact person/organization.\nMUST be in the format of an email address."
+                },
+                "Extensions": {
+                    "type": [
+                        "null",
+                        "object"
+                    ],
+                    "description": "This object MAY be extended with Specification Extensions.",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/IOpenApiExtension"
+                    }
+                }
+            }
+        },
+        "IOpenApiExtension": {
+            "type": "object",
+            "description": "Interface required for implementing any custom extension",
+            "x-abstract": true,
+            "additionalProperties": false
+        },
+        "OpenApiLicense": {
+            "type": "object",
+            "description": "License Object.",
+            "additionalProperties": false,
+            "properties": {
+                "Name": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "REQUIRED. The license name used for the API."
+                },
+                "Url": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "The URL pointing to the contact information. MUST be in the format of a URL.",
+                    "format": "uri"
+                },
+                "Extensions": {
+                    "type": [
+                        "null",
+                        "object"
+                    ],
+                    "description": "This object MAY be extended with Specification Extensions.",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/IOpenApiExtension"
+                    }
+                }
+            },
+            "required": [
+                "Name"
+            ]
+        }
+    }
+}

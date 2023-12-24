@@ -1,7 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id":"https://jsonschema.xyz/schemas/MicrosoftIdentityWebApplicationOptions.schema",
+    "contentMediaType": "application/schema+json",
     "title": "MicrosoftIdentityApplicationOptions",
-    "$id":"https://jsonschema.xyz/microsoftidentitywebapplicationoptions.schema",
     "definitions": {
         "IdentityApplicationOptions": {
             "type": "object",

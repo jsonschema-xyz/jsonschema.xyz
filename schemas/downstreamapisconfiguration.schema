@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft-07/schema#",
-    "$id": "https://jsonschema.xyz/downstreamapisconfiguration.schema",
+    "$id": "https://jsonschema.xyz/schemas/DownstreamApisConfiguration.schema",
     "contentMediaType": "application/schema+json",
     "title": "Downstream APIs Configuration",
     "description": "The configuration for downstream APIs.",
