@@ -1,0 +1,171 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "https://jsonschema.xyz/schemas/MvcOptions.schema",
+  "description": "Provides programmatic configuration for the MVC framework.",
+  "definitions": {
+    "ICompatibilitySwitch": {
+      "description": "Defines a compatibility switch. This is framework infrastructure and should not be used by application code.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or set the value associated with the compatibility switch.",
+          "type": "boolean"
+        },
+        "name": {
+          "description": "The name of the compatibility switch.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "isEnabled",
+        "switchName"
+      ]
+    },
+    "MvcOptions": {
+      "type": "object",
+      "properties": {
+        "AllowEmptyInputInBodyModelBinding": {
+          "type": "boolean",
+          "description": "Gets or sets the flag which decides whether body model binding (for example, on an action method parameter with FromBodyAttribute) should treat empty input as valid. false by default."
+        },
+        "CacheProfiles": {
+          "type": "object",
+          "description": "Gets a Dictionary of CacheProfile Names, CacheProfile which are pre-defined settings for response caching.",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "https://jsonschema.xyz/schemas/CacheProfile.schema"
+          }
+        },
+        "Conventions": {
+          "type": "array",
+          "description": "Gets a list of IApplicationModelConvention instances that will be applied to the ApplicationModel when discovering actions.",
+          "additionalItems": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "additionalProperties": true
+        },
+        "EnableActionInvokers": {
+          "type": "boolean",
+          "description": "Gets or sets the flag that determines if MVC should use action invoker extensibility. This will allow custom IActionInvokerFactory and IActionInvokerProvider execute during the request pipeline."
+        },
+        "EnableEndpointRouting": {
+          "type": "boolean",
+          "description": "Gets or sets a value that determines if routing should use endpoints internally, or if legacy routing logic should be used. Endpoint routing is used to match HTTP requests to MVC actions, and to generate URLs with IUrlHelper."
+        },
+        "Filters": {
+          "type": "array",
+          "description": "Gets a collection of IFilterMetadata which are used to construct filters that apply to all actions.",
+          "additionalItems": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "additionalProperties": true
+        },
+        "FormatterMappings": {
+          "type": "object",
+          "description": "Used to specify mapping between the URL Format and corresponding media type.",
+          "additionalProperties": true
+        },
+        "InputFormatters": {
+          "type": "array",
+          "description": "Gets a list of IInputFormatters that are used by this application.",
+          "items": {
+            "type": "object",
+            "$ref": "https://jsonschema.xyz/schemas/Formatter.schema"
+          }
+        },
+        "MaxIAsyncEnumerableBufferLimit": {
+          "type": "boolean",
+          "description": "Gets or sets the most number of entries of an IAsyncEnumerable<T> that that ObjectResultExecutor will buffer.\n\nWhen Value is an instance of IAsyncEnumerable<T>, ObjectResultExecutor will eagerly read the enumeration and add to a synchronous collection prior to invoking the selected formatter. This property determines the most number of entries that the executor is allowed to buffer."
+        },
+        "MaxModelBindingCollectionSize": {
+          "type": "boolean",
+          "description": "Gets or sets the maximum size of a complex collection to model bind. When this limit is reached, the model binding system will throw an InvalidOperationException."
+        },
+        "MaxModelBindingRecursionDepth": {
+          "type": "boolean",
+          "description": "Gets or sets the maximum recursion depth of the model binding system. The DefaultModelBindingContext will throw an InvalidOperationException if more than this number of IModelBinders are on the stack. That is, an attempt to recurse beyond this level will fail."
+        },
+        "MaxModelValidationErrors": {
+          "type": "boolean",
+          "description": "Gets or sets the maximum number of validation errors that are allowed by this application before further errors are ignored."
+        },
+        "MaxValidationDepth": {
+          "type": "boolean",
+          "description": "Gets or sets the maximum depth to constrain the validation visitor when validating. Set to null to disable this feature.\n\nValidationVisitor traverses the object graph of the model being validated. For models that are very deep or are infinitely recursive, validation may result in stack overflow.\n\nWhen not null, ValidationVisitor will throw if traversing an object exceeds the maximum allowed validation depth."
+        },
+        "ModelBinderProviders": {
+          "type": "boolean",
+          "description": "Gets a list of IModelBinderProviders used by this application."
+        },
+        "ModelBindingMessageProvider": {
+          "type": "boolean",
+          "description": "Gets the default ModelBindingMessageProvider. Changes here are copied to the ModelBindingMessageProvider property of all ModelMetadata instances unless overridden in a custom IBindingMetadataProvider."
+        },
+        "ModelMetadataDetailsProviders": {
+          "type": "boolean",
+          "description": "Gets a list of IMetadataDetailsProvider instances that will be used to create ModelMetadata instances."
+        },
+        "ModelValidatorProviders": {
+          "type": "boolean",
+          "description": "Gets a list of IModelValidatorProviders used by this application."
+        },
+        "OutputFormatters": {
+          "type": "array",
+          "description": "Gets a list of IOutputFormatters that are used by this application.",
+          "items": {
+            "type": "object",
+            "$ref": "https://jsonschema.xyz/schemas/Formatter.schema"
+          }
+        },
+        "RequireHttpsPermanent": {
+          "type": "boolean",
+          "description": "Gets or sets the default value for the Permanent property of RequireHttpsAttribute."
+        },
+        "RespectBrowserAcceptHeader": {
+          "type": "boolean",
+          "description": "Gets or sets the flag which causes content negotiation to ignore Accept header when it contains the media type /. false by default."
+        },
+        "ReturnHttpNotAcceptable": {
+          "type": "boolean",
+          "description": "Gets or sets the flag which decides whether an HTTP 406 Not Acceptable response will be returned if no formatter has been selected to format the response. false by default."
+        },
+        "SslPort": {
+          "type": "integer",
+          "description": "Gets or sets the SSL port that is used by this application when RequireHttpsAttribute is used. If not set the port won't be specified in the secured URL e.g. https://localhost/path."
+        },
+        "SuppressAsyncSuffixInActionNames": {
+          "type": "boolean",
+          "description": "Gets or sets a value that determines if MVC will remove the suffix \"Async\" applied to controller action names.\n\nActionName is used to construct the route to the action as well as in view lookup. When true, MVC will trim the suffix \"Async\" applied to action method names. For example, the action name for ProductsController.ListProductsAsync will be canonicalized as ListProducts.. Consequently, it will be routeable at /Products/ListProducts with views looked up at /Views/Products/ListProducts.cshtml.\n\nThis option does not affect values specified using ActionNameAttribute."
+        },
+        "SuppressImplicitRequiredAttributeForNonNullableReferenceTypes": {
+          "type": "boolean",
+          "description": "Gets or sets a value that determines if the inference of RequiredAttribute for properties and parameters of non-nullable reference types is suppressed. If false (the default), then all non-nullable reference types will behave as-if [Required] has been applied. If true, this behavior will be suppressed; nullable reference types and non-nullable reference types will behave the same for the purposes of validation."
+        },
+        "SuppressInputFormatterBuffering": {
+          "type": "boolean",
+          "description": "Gets or sets a value that determines if buffering is disabled for input formatters that synchronously read from the HTTP request body."
+        },
+        "SuppressOutputFormatterBuffering": {
+          "type": "boolean",
+          "description": "Gets or sets the flag that determines if buffering is disabled for output formatters that synchronously write to the HTTP response body."
+        },
+        "ValidateComplexTypesIfChildValidationFails": {
+          "type": "boolean",
+          "description": "Gets or sets a value that determines whether the validation visitor will perform validation of a complex type if validation fails for any of its children."
+        },
+        "ValueProviderFactories": {
+          "type": "array",
+          "description": "Gets a list of IValueProviderFactory used by this application."
+        }
+      }
+    }
+    // "title": "MvcOptions",
+    // "type": "array",
+    // "items": {
+    //   "type": "object",
+    //   ""
+    // }
+  }
+}

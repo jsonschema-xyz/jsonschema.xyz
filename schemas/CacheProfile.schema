@@ -1,0 +1,64 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "https://jsonschema.xyz/schemas/CacheProfile.schema",
+    "title": "CacheProfile",
+    "description": "Defines a set of settings which can be used for response caching.",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "Duration": {
+            "type": [
+                "integer",
+                "null"
+            ],
+            "format": "int32"
+        },
+        "Location": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/definitions/ResponseCacheLocation"
+                }
+            ]
+        },
+        "NoStore": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "VaryByHeader": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "VaryByQueryKeys": {
+            "type": [
+                "array",
+                "null"
+            ],
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "definitions": {
+        "ResponseCacheLocation": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "Any",
+                "Client",
+                "None"
+            ],
+            "enum": [
+                0,
+                1,
+                2
+            ]
+        }
+    }
+}

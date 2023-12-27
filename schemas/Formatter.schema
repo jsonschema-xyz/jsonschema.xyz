@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "https://jsonschema.xyz/schemas/Formatter.schema",
+    "title": "Input/Output Formatter",
+    "type": "object",
+    "x-abstract": true,
+    "additionalProperties": true,
+    "properties": {
+        "SupportedMediaTypes": {
+            "$ref": "#/definitions/MediaTypeCollection",
+            "additionalProperties": true
+        }
+    },
+    "definitions": {
+        "MediaTypeCollection": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    }
+}
