@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "$id": "https://jsonschema.xyz/schemas/EndPoints.schema",
-    "title": "End Points Schemas",
+    "title": "Networks Schemas",
     "contentMediaType": "application/schema+json",
     "definitions": {
         "EndPoint": {
