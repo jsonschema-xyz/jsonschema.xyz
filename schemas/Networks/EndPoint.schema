@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://jsonschema.xyz/schemas/Networks/EndPoint.schema",
+    "$comment": "The EndPoint class provides an abstract base class that represents a network resource or service. Descendant classes combine network connection information to form a connection point to a service.",
+    "description": "Identifies a network address. This is an abstract class.",
+    "definitions": {
+        "EndPoint": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "AddressFamily": {
+                    "$ref": "https://jsonschema.xyz/schemas/Networks/AddressFamily.schema"
+                }
+            }
+        }
+    }
+}

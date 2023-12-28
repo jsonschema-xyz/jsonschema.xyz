@@ -1,0 +1,95 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://jsonschema.xyz/schemas/Networks/AddressFamily.schema",
+    "contentMediaType": "application/schema+json",
+    "description": "Specifies the addressing scheme that an instance of the Socket class can use.",
+    "definitions": {
+        "x-enumNames": {
+            "type": "string",
+            "enum": [
+                "AppleTalk", // 16
+                "Atm", // 22
+                "Banyan", // 21
+                "Ccitt", // 10
+                "Chaos", // 5
+                "Cluster", // 24
+                "ControllerAreaNetwork", // 65537
+                "DataKit", // 9
+                "DataLink", // 13
+                "DecNet", // 12
+                "Ecma", // 8
+                "FireFox", // 19
+                "HyperChannel", // 15
+                "Ieee12844", // 25
+                "ImpLink", // 3
+                "InterNetwork", // 2
+                "InterNetworkV6", // 23
+                "Ipx", // 6
+                "Irda", // 26
+                "Iso", // 7
+                "Lat", // 14
+                "Max", // 29
+                "NetBios", // 17
+                "NetworkDesigners", // 28
+                "NS", // 6
+                "Osi", // 7
+                "Packet", // 65536
+                "Pup", // 4
+                "Sna", // 11
+                "Unix", // 1
+                "Unknown", // -1
+                "Unspecified", // 0
+                "VoiceView" // 18
+            ]
+        },
+        "x-enumValues": {
+            "type": "integer",
+            "enum": [
+                -1, // Unknown
+                0, // Unspecified
+                1, // Unix
+                10, // Ccitt
+                11, // Sna
+                12, // DecNet
+                13, // DataLink
+                14, // Lat
+                15, // HyperChannel
+                16, // AppleTalk
+                17, // NetBios
+                18, // VoiceView
+                19, // FireFox
+                2, // InterNetwork
+                21, // Banyan
+                22, // Atm
+                23, // InterNetworkV6
+                24, // Cluster
+                25, // Ieee12844
+                26, // Irda
+                28, // NetworkDesigners
+                29, // Max
+                3, // ImpLink
+                4, // Pup
+                5, // Chaos
+                6, // Ipx / NS
+                65536, // Packet
+                65537, // ControllerAreaNetwork
+                7, // Iso / Osi
+                8, // Ecma
+                9 // DataKit
+            ]
+        },
+        "AddressFamily": {
+            "type": "integer",
+            "oneOf": [
+                {
+                    "type": "integer",
+                    "$ref": "#/definitions/x-enumValues"
+                },
+                {
+                    "type": "string",
+                    "$ref": "#/definitions/x-enumNames"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,79 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "IP End Point",
+    "description": "Represents a network endpoint as an IP address and a port number.",
+    "definitions": {
+        // "AddressFamily": {
+        //     "$ref": "https://jsonschema.xyz/schemas/Networks/AddressFamily.schema"
+        // },
+        "IPAddress": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "AddressFamily": {
+                    "$ref": "#/definitions/AddressFamily",
+                    "description": "Gets the address family of the IP address."
+                },
+                "ScopeId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Gets or sets the IPv6 address scope identifier."
+                },
+                "IsIPv6Multicast": {
+                    "type": "boolean",
+                    "description": "Gets whether the address is an IPv6 multicast global address."
+                },
+                "IsIPv6LinkLocal": {
+                    "type": "boolean",
+                    "description": "Gets whether the address is an IPv6 link local address."
+                },
+                "IsIPv6SiteLocal": {
+                    "type": "boolean",
+                    "description": "Gets whether the address is an IPv6 site local address."
+                },
+                "IsIPv6Teredo": {
+                    "type": "boolean",
+                    "description": "Gets whether the address is an IPv6 Teredo address."
+                },
+                "IsIPv6UniqueLocal": {
+                    "type": "boolean",
+                    "description": "Gets whether the address is an IPv6 Unique Local address."
+                },
+                "IsIPv4MappedToIPv6": {
+                    "type": "boolean",
+                    "description": "Gets whether the IP address is an IPv4-mapped IPv6 address."
+                },
+                "Address": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "An Internet Protocol (IP) address.",
+                    "x-deprecated": true,
+                    "x-deprecatedMessage": "IPAddress.Address is address family dependent and has been deprecated. Use IPAddress.Equals to perform comparisons instead."
+                }
+            }
+        }
+    },
+    "allOf": [
+        {
+            "$ref": "https://jsonschema.xyz/schemas/Networks/EndPoint.schema"
+        },
+        {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "AddressFamily": {
+                    "$ref": "#/definitions/AddressFamily",
+                    "description": "Gets the Internet Protocol (IP) address family."
+                },
+                "Address": {
+                    "$ref": "#/definitions/IPAddress",
+                    "description": "Gets or sets the IP address of the endpoint."
+                },
+                "Port": {
+                    "$ref" : "https://jsonschema.xyz/schemas/Networks/TcpPort.schema",
+                    "description": "Gets or sets the port number of the endpoint."
+                }
+            }
+        }
+    ]
+}
