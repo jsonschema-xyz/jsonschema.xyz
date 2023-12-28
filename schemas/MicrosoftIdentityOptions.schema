@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/draft-04/schema#",
     "$id": "https://jsonschema.xyz/schemas/MicrosoftIdentityOptions.schema",
     "contentMediaType": "application/schema+json",
-    "title": "MicrosoftIdentityOptions",
+    "title": "Microsoft Identity Options",
     "definitions": {
         "CertificateDescription": {
             "allOf": [
@@ -1244,7 +1244,7 @@
             }
         },
         "CredentialType": {
-            "type": "integer",
+            "type": "string",
             "description": "Credential type. This is used to specify the type of credential that is being loaded. This value\nis provided in the see CredentialType based on the type of\ncredential (which depends on the type of CredentialSource value of the SourceType).",
             "x-enumNames": [
                 "Certificate",
@@ -1253,10 +1253,10 @@
                 "DecryptKeys"
             ],
             "enum": [
-                0,
-                1,
-                2,
-                3
+                "Certificate",
+                "Secret",
+                "SignedAssertion",
+                "DecryptKeys"
             ]
         },
         "CertificatelessOptions": {
@@ -2541,8 +2541,8 @@
                 "FormPost"
             ],
             "enum": [
-                0,
-                1
+                "RedirectGet",
+                "FormPost"
             ]
         },
         "ISecureDataFormatOfAuthenticationProperties": {
@@ -4321,6 +4321,7 @@
             }
         }
     },
+    "type":"object",
     "allOf": [
         {
             "$ref": "#/definitions/OpenIdConnectOptions"

@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "$id": "https://jsonschema.xyz/schemas/OpenIdConnectOptions.schema",
-    "title": "OpenIdConnectOptions",
+    "title": "Open ID Connect Options",
     "definitions": {
         "OpenIdConnectConfiguration": {
             "allOf": [

@@ -1,7 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "$id": "https://jsonschema.xyz/schemas/RedisCacheOptions.schema",
-    "title": "RedisCacheOptions",
+    "contentMediaType": "application/schema+json",
+    "title": "Redis Cache Options",
     "type": "object",
     "additionalProperties": false,
     "properties": {

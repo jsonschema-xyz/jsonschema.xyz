@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "$id": "https://jsonschema.xyz/schemas/CacheProfile.schema",
-    "title": "CacheProfile",
+    "title": "Cache Profile",
     "description": "Defines a set of settings which can be used for response caching.",
     "type": "object",
     "additionalProperties": false,

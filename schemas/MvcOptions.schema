@@ -1,6 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "$id": "https://jsonschema.xyz/schemas/MvcOptions.schema",
+  "contentMediaType": "application/schema+json",
+  "title": "MVC Options",
   "description": "Provides programmatic configuration for the MVC framework.",
   "definitions": {
     "ICompatibilitySwitch": {

@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "$if": "https://jsonschema.xyz/schemas/OpenApiInfo.schema",
-    "title": "OpenApiInfo",
+    "title": "Open API Info",
     "type": "object",
     "description": "Open API Info Object, it provides the metadata about the Open API.",
     "additionalProperties": false,
