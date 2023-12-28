@@ -58,6 +58,7 @@ jobs:
           skip_api_build: true
           ###### End of Repository/Build Configurations ######
       - name: Push Changes Back to the Git Repo
+        working-directory:  /home/runner/work/jsonschema.xyz/jsonschema.xyz
         run: |
           git add .
           git pull origin main
