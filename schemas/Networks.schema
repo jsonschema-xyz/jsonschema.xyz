@@ -98,7 +98,7 @@
                 "Unknown",
                 -1, // Unknown address family.
                 "Unspecified",
-                0 // Unspecified address family.
+                0, // Unspecified address family.
                 "VoiceView",
                 18 // VoiceView address.
             ],
