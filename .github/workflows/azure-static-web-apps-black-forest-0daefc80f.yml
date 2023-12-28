@@ -57,6 +57,12 @@ jobs:
           skip_app_build: true
           skip_api_build: true
           ###### End of Repository/Build Configurations ######
+      - name: Push Changes Back to the Git Repo
+        run: |
+          git add .
+          git pull origin main
+          git commit -m "Changes made during CI"
+          git push --set-upstream origin main
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
