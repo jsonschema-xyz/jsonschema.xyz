@@ -1119,10 +1119,10 @@
             }
         },
         "EndPoint": {
-            "$ref": "https://jsonchema.xyz/schemas/Networks.schema"
+            "$ref": "https://jsonchema.xyz/schemas/Networks/EndPoint.schema"
         },
         "AddressFamily": {
-            "$ref": "https://jsonschema.xyz/schemas/Networks.schema#/definitions/AddressFamily"
+            "$ref": "https://jsonschema.xyz/schemas/Networks/AddressFamily.schema"
         },
         "SocketManager": {
             "type": "object",
