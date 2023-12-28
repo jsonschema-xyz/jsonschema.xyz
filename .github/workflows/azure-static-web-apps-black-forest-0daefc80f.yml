@@ -57,28 +57,28 @@ jobs:
           skip_app_build: true
           skip_api_build: true
           ###### End of Repository/Build Configurations ######
-      - name: Push Changes Back to the Git Repo
-        # You may pin to the exact commit or the version.
-        uses: actions-x/commit@v6
-        with:
-          # The committer's email address
-          email: json@jsonschema.xyz 
-          # The committer's name
-          name: JSON Schema dot XYZ
-          # The commit message
-          message: Pushing the changes back to git that were made during CI build
-          # The branch to push the changes back to, defaults to the current branch
-          # branch: # default is ${{ github.ref }}
-          # The files to add separated by space, defaults to every file
-          # files: # default is .
-          # The repository to push the code to, defaults to origin (e.g. this repository)
-          # repository: # default is origin
-          # The token used to push the code, not needed if you push to the same repository
-          token: ${{ secrets.GITHUB_TOKEN }}
-          # Whether to perform force push
-          # force: # default is 0
-          # The working directory that will be used for git commands
-          # directory: # default is .
+      # - name: Push Changes Back to the Git Repo
+      #   # You may pin to the exact commit or the version.
+      #   uses: actions-x/commit@v6
+      #   with:
+      #     # The committer's email address
+      #     email: json@jsonschema.xyz 
+      #     # The committer's name
+      #     name: JSON Schema dot XYZ
+      #     # The commit message
+      #     message: Pushing the changes back to git that were made during CI build
+      #     # The branch to push the changes back to, defaults to the current branch
+      #     # branch: # default is ${{ github.ref }}
+      #     # The files to add separated by space, defaults to every file
+      #     # files: # default is .
+      #     # The repository to push the code to, defaults to origin (e.g. this repository)
+      #     # repository: # default is origin
+      #     # The token used to push the code, not needed if you push to the same repository
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     # Whether to perform force push
+      #     # force: # default is 0
+      #     # The working directory that will be used for git commands
+      #     # directory: # default is .
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
