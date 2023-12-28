@@ -1,0 +1,186 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "https://jsonschema.xyz/schemas/EndPoints.schema",
+    "title": "End Points Schemas",
+    "contentMediaType": "application/schema+json",
+    "definitions": {
+        "EndPoint": {
+            "type": "object",
+            "properties": {
+                "AddressFamily": {
+                    "$ref": "#/definitions/AddressFamily"
+                }
+            },
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/DnsEndPoint"
+                },
+                {
+                    "$ref": "#/definitions/IPEndPoint"
+                },
+                {
+                    "$ref": "#/definitions/UnixDomainSocketEndPoint"
+                }
+            ]
+        },
+        "TcpPort": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 65535,
+            "description": "An integer value in the range 0 to 0xffff indicating the port number of the endpoint."
+        },
+        "AddressFamily": {
+            "type": [
+                "string",
+                "integer"
+            ],
+            "enum": [
+                "AppleTalk",
+                16, // AppleTalk address.
+                "Atm",
+                22, // Native ATM services address.
+                "Banyan",
+                21, // Banyan address.
+                "Ccitt",
+                10, // Addresses for CCITT protocols, such as X.25.
+                "Chaos",
+                5, // Address for MIT CHAOS protocols.
+                "Cluster",
+                24, // Address for Microsoft cluster products.
+                "ControllerAreaNetwork",
+                65537, // Controller Area Network address.
+                "DataKit",
+                9, // Address for Datakit protocols.
+                "DataLink",
+                13, // Direct data-link interface address.
+                "DecNet",
+                12, // DECnet address.
+                "Ecma",
+                8, // European Computer Manufacturers Association (ECMA) address.
+                "FireFox",
+                19, // FireFox address.
+                "HyperChannel",
+                15, // NSC Hyperchannel address.
+                "Ieee12844",
+                25, // IEEE 1284.4 workgroup address.
+                "ImpLink",
+                3, // ARPANET IMP address.
+                "InterNetwork",
+                2, // Address for IP version 4.
+                "InterNetworkV6",
+                23, // Address for IP version 6.
+                "Ipx",
+                6, // IPX or SPX address.
+                "Irda",
+                26, // IrDA address.
+                "Iso",
+                7, // Address for ISO protocols.
+                "Lat",
+                14, // LAT address.
+                "Max",
+                29, // MAX address.
+                "NetBios",
+                17, // NetBios address.
+                "NetworkDesigners",
+                28, // Address for Network Designers OSI gateway-enabled protocols.
+                "NS",
+                6, // Address for Xerox NS protocols.
+                "Osi",
+                7, // Address for OSI protocols.
+                "Packet",
+                65536, // Low-level Packet address.
+                "Pup",
+                4, // Address for PUP protocols.
+                "Sna",
+                11, // IBM SNA address.
+                "Unix",
+                1, // Unix local to host address.
+                "Unknown",
+                -1, // Unknown address family.
+                "Unspecified",
+                0 // Unspecified address family.
+                "VoiceView",
+                18 // VoiceView address.
+            ],
+            "description": "Specifies the addressing scheme that an instance of the Socket class can use."
+        },
+        "DnsEndPoint": {
+            "type": "object",
+            "properties": {
+                "Host": {
+                    "type": "string"
+                },
+                "Port": {
+                    "$ref": "#/definitions/TcpPort"
+                }
+            }
+        },
+        "IPEndPoint": {
+            "type": "object",
+            "properties": {
+                "Address": {
+                    "$ref": "#/definitions/IpAddress"
+                },
+                "Port": {
+                    "$ref": "#/definitions/TcpPort"
+                }
+            }
+        },
+        "IPAddress": {
+            "type": "object",
+            "properties": {
+                "AddressFamily": {
+                    "$ref": "#/definitions/AddressFamily",
+                    "description": "Gets the address family of the IP address."
+                },
+                "Address": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Obsolete.  An Internet Protocol (IP) address."
+                },
+                "IsIPv4MappedToIPv6": {
+                    "type": "boolean",
+                    "description": "Gets whether the IP address is an IPv4-mapped IPv6 address."
+                },
+                "IsIPv6LinkLocal": {
+                    "type": "boolean",
+                    "description": "Gets whether the address is an IPv6 link local address."
+                },
+                "IsIPv6Multicast": {
+                    "type": "boolean",
+                    "description": "Gets whether the address is an IPv6 multicast global address."
+                },
+                "IsIPv6SiteLocal": {
+                    "type": "boolean",
+                    "description": "Gets whether the address is an IPv6 site local address."
+                },
+                "IsIPv6Teredo": {
+                    "type": "boolean",
+                    "description": "Gets whether the address is an IPv6 Teredo address."
+                },
+                "IsIPv6UniqueLocal": {
+                    "type": "boolean",
+                    "description": "Gets whether the address is an IPv6 Unique Local address."
+                },
+                "ScopeId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Gets or sets the IPv6 address scope identifier."
+                }
+            }
+        },
+        "UnixDomainSocketEndPoint": {
+            "type": "object",
+            "properties": {
+                "AddressFamily": {
+                    "$ref": "#/definitions/AddressFamily",
+                    "description": "Gets the address family to which the endpoint belongs."
+                }
+            }
+        }
+    },
+    "allOf": [
+        {
+            "$ref": "#/definitions/EndPoint"
+        }]
+}
