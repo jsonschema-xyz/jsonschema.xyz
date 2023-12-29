@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://jsonschema.xyz/schemas/Networks/AddressFamily.schema",
+    "$id": "https://jsonschema.xyz/schemas/Net/AddressFamily.schema",
     "contentMediaType": "application/schema+json",
     "description": "Specifies the addressing scheme that an instance of the Socket class can use.",
     "definitions": {

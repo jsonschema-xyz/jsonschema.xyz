@@ -842,10 +842,10 @@
             }
         },
         "EndPoint": {
-            "$ref": "https://jsonschema.xyz/schemas/Networks/EndPoint.schema"
+            "$ref": "https://jsonschema.xyz/schemas/Net/EndPoint.schema"
         },
         "AddressFamily": {
-            "$ref": "https://jsonschema.xyz/schemas/Networks/AddressFamily.schema"
+            "$ref": "https://jsonschema.xyz/schemas/Net/AddressFamily.schema"
         },
         "SocketManager": {
             "type": "object",

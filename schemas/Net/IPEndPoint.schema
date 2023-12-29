@@ -4,7 +4,7 @@
     "description": "Represents a network endpoint as an IP address and a port number.",
     "definitions": {
         // "AddressFamily": {
-        //     "$ref": "https://jsonschema.xyz/schemas/Networks/AddressFamily.schema"
+        //     "$ref": "https://jsonschema.xyz/schemas/Net/AddressFamily.schema"
         // },
         "IPAddress": {
             "type": "object",
@@ -55,7 +55,7 @@
     },
     "allOf": [
         {
-            "$ref": "https://jsonschema.xyz/schemas/Networks/EndPoint.schema"
+            "$ref": "https://jsonschema.xyz/schemas/Net/EndPoint.schema"
         },
         {
             "type": "object",
@@ -70,7 +70,7 @@
                     "description": "Gets or sets the IP address of the endpoint."
                 },
                 "Port": {
-                    "$ref" : "https://jsonschema.xyz/schemas/Networks/TcpPort.schema",
+                    "$ref" : "https://jsonschema.xyz/schemas/Net/TcpPort.schema",
                     "description": "Gets or sets the port number of the endpoint."
                 }
             }

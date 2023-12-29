@@ -3,7 +3,7 @@
     "title": "DnsEndPoint",
     "allOf": [
         {
-            "$ref": "https://jsonschema.xyz/schemas/Networks/EndPoint.schema"
+            "$ref": "https://jsonschema.xyz/schemas/Net/EndPoint.schema"
         },
         {
             "type": "object",
@@ -14,11 +14,11 @@
                     "description": "Gets the host name or string representation of the Internet Protocol (IP) address of the host."
                 },
                 "AddressFamily": {
-                    "$ref": "https://jsonschema.xyz/schemas/Networks/AddressFamily.schema",
+                    "$ref": "https://jsonschema.xyz/schemas/Net/AddressFamily.schema",
                     "description": "Gets the Internet Protocol (IP) address family."
                 },
                 "Port": {
-                    "$ref": "https://jsonschema.xyz/schemas/Networks/TcpPort.schema",
+                    "$ref": "https://jsonschema.xyz/schemas/Net/TcpPort.schema",
                     "description": "Gets the port number of the DnsEndPoint."
                 }
             }
