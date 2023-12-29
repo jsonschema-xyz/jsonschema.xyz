@@ -7,12 +7,13 @@
         "EndPoint": {
             "type": "object",
             "x-abstract": true,
-            "additionalProperties": false,
+            "additionalProperties": true,
             "properties": {
                 "AddressFamily": {
                     "$ref": "https://jsonschema.xyz/schemas/Networks/AddressFamily.schema"
                 }
             }
         }
-    }
+    },
+    "$ref": "#/definitions/EndPoint"
 }

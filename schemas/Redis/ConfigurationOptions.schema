@@ -1,1128 +1,1142 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "$id": "https://jsonschema.xyz/schemas/Redis/ConfigurationOptions.schema",
-    "title": "Redis Configuration Options",
-    "type": "object",
-    "description": "The options relevant to a set of redis connections.",
-    "additionalProperties": false,
-    "properties": {
-      "Defaults": {
-        "description": "The default (not explicitly configured) options for this connection, fetched based on our parsed endpoints.",
-        "oneOf": [
-          {
-            "$ref": "#/definitions/DefaultOptionsProvider"
-          }
-        ]
-      },
-      "BeforeSocketConnect": {
-        "description": "Allows modification of a Socket between creation and connection.\nPassed in is the endpoint we're connecting to, which type of connection it is, and the socket itself.\nFor example, a specific local IP endpoint could be bound, linger time altered, etc.",
-        "oneOf": [
-          {
-            "type": "null"
-          },
-          {
-            "$ref": "#/definitions/ActionOfEndPointAndConnectionTypeAndSocket"
-          }
-        ]
-      },
-      "AbortOnConnectFail": {
-        "type": "boolean",
-        "description": "Gets or sets whether connect/configuration timeouts should be explicitly notified via a TimeoutException."
-      },
-      "AllowAdmin": {
-        "type": "boolean",
-        "description": "Indicates whether admin operations should be allowed."
-      },
-      "AsyncTimeout": {
-        "type": "integer",
-        "description": "Specifies the time in milliseconds that the system should allow for asynchronous operations (defaults to SyncTimeout).",
-        "format": "int32"
-      },
-      "UseSsl": {
-        "type": "boolean",
-        "description": "Indicates whether the connection should be encrypted",
-        "x-deprecated": true,
-        "x-deprecatedMessage": "Please use .Ssl instead of .UseSsl, will be removed in 3.0."
-      },
-      "SetClientLibrary": {
-        "type": "boolean",
-        "description": "Gets or sets whether the library should identify itself by library-name/version when possible."
-      },
-      "LibraryName": {
-        "type": [
-          "null",
-          "string"
-        ],
-        "description": "Gets or sets the library name to use for CLIENT SETINFO lib-name calls to Redis during handshake.\nDefaults to \"SE.Redis\"."
-      },
-      "ChannelPrefix": {
-        "description": "Automatically encodes and decodes channels.",
-        "oneOf": [
-          {
-            "$ref": "#/definitions/RedisChannel"
-          }
-        ]
-      },
-      "CheckCertificateRevocation": {
-        "type": "boolean",
-        "description": "A Boolean value that specifies whether the certificate revocation list is checked during authentication."
-      },
-      "ClientName": {
-        "type": [
-          "null",
-          "string"
-        ],
-        "description": "The client name to use for all connections."
-      },
-      "ConnectRetry": {
-        "type": "integer",
-        "description": "The number of times to repeat the initial connect cycle if no servers respond promptly.",
-        "format": "int32"
-      },
-      "CommandMap": {
-        "description": "The command-map associated with this configuration.",
-        "oneOf": [
-          {
-            "$ref": "#/definitions/CommandMap"
-          }
-        ]
-      },
-      "ConfigurationChannel": {
-        "type": "string",
-        "description": "Channel to use for broadcasting and listening for configuration change notification."
-      },
-      "ConnectTimeout": {
-        "type": "integer",
-        "description": "Specifies the time in milliseconds that should be allowed for connection (defaults to 5 seconds unless SyncTimeout is higher).",
-        "format": "int32"
-      },
-      "DefaultDatabase": {
-        "type": [
-          "integer",
-          "null"
-        ],
-        "description": "Specifies the default database to be used when calling GetDatabase without any parameters.",
-        "format": "int32"
-      },
-      "DefaultVersion": {
-        "type": "string",
-        "description": "The server version to assume."
-      },
-      "EndPoints": {
-        "description": "The endpoints defined for this configuration.",
-        "oneOf": [
-          {
-            "$ref": "#/definitions/EndPointCollection"
-          }
-        ]
-      },
-      "HeartbeatInterval": {
-        "type": "string",
-        "description": "Controls how often the connection heartbeats. A heartbeat includes:\n- Evaluating if any messages have timed out\n- Evaluating connection status (checking for failures)\n- Sending a server message to keep the connection alive if needed",
-        "format": "duration"
-      },
-      "HighPrioritySocketThreads": {
-        "type": "boolean",
-        "description": "Use ThreadPriority.AboveNormal for SocketManager reader and writer threads (true by default).\nIf false, Normal will be used.",
-        "x-deprecated": true,
-        "x-deprecatedMessage": "This setting no longer has any effect, please use SocketManagerOptions.UseHighPrioritySocketThreads instead - this setting will be removed in 3.0."
-      },
-      "IncludeDetailInExceptions": {
-        "type": "boolean",
-        "description": "Should exceptions include identifiable details? (key names, additional .Data annotations)"
-      },
-      "IncludePerformanceCountersInExceptions": {
-        "type": "boolean",
-        "description": "Should exceptions include performance counter details?"
-      },
-      "KeepAlive": {
-        "type": "integer",
-        "description": "Specifies the time in seconds at which connections should be pinged to ensure validity.\n-1 Defaults to 60 Seconds",
-        "format": "int32"
-      },
-      "User": {
-        "type": [
-          "null",
-          "string"
-        ],
-        "description": "The username to use to authenticate with the server."
-      },
-      "Password": {
-        "type": [
-          "null",
-          "string"
-        ],
-        "description": "The password to use to authenticate with the server."
-      },
-      "PreserveAsyncOrder": {
-        "type": "boolean",
-        "description": "Specifies whether asynchronous operations should be invoked in a way that guarantees their original delivery order.",
-        "x-deprecated": true,
-        "x-deprecatedMessage": "Not supported; if you require ordered pub/sub, please see ChannelMessageQueue - this will be removed in 3.0."
-      },
-      "Proxy": {
-        "description": "Type of proxy to use (if any); for example Twemproxy.",
-        "oneOf": [
-          {
-            "$ref": "#/definitions/Proxy"
-          }
-        ]
-      },
-      "ReconnectRetryPolicy": {
-        "description": "The retry policy to be used for connection reconnects.",
-        "oneOf": [
-          {
-            "$ref": "#/definitions/IReconnectRetryPolicy"
-          }
-        ]
-      },
-      "BacklogPolicy": {
-        "description": "The backlog policy to be used for commands when a connection is unhealthy.",
-        "oneOf": [
-          {
-            "$ref": "#/definitions/BacklogPolicy"
-          }
-        ]
-      },
-      "ResolveDns": {
-        "type": "boolean",
-        "description": "Indicates whether endpoints should be resolved via DNS before connecting.\nIf enabled the ConnectionMultiplexer will not re-resolve DNS when attempting to re-connect after a connection failure."
-      },
-      "ResponseTimeout": {
-        "type": "integer",
-        "description": "Specifies the time in milliseconds that the system should allow for responses before concluding that the socket is unhealthy.",
-        "format": "int32",
-        "x-deprecated": true,
-        "x-deprecatedMessage": "This setting no longer has any effect, and should not be used - will be removed in 3.0."
-      },
-      "ServiceName": {
-        "type": [
-          "null",
-          "string"
-        ],
-        "description": "The service name used to resolve a service via sentinel."
-      },
-      "SocketManager": {
-        "description": "Gets or sets the SocketManager instance to be used with these options.\nIf this is null a shared cross-multiplexer SocketManager is used.",
-        "oneOf": [
-          {
-            "type": "null"
-          },
-          {
-            "$ref": "#/definitions/SocketManager"
-          }
-        ]
-      },
-      "SslClientAuthenticationOptions": {
-        "oneOf": [
-          {
-            "type": "null"
-          },
-          {
-            "$ref": "#/definitions/FuncOfStringAndSslClientAuthenticationOptions"
-          }
-        ]
-      },
-      "Ssl": {
-        "type": "boolean",
-        "description": "Indicates whether the connection should be encrypted."
-      },
-      "SslHost": {
-        "type": [
-          "null",
-          "string"
-        ],
-        "description": "The target-host to use when validating SSL certificate; setting a value here enables SSL mode."
-      },
-      "SslProtocols": {
-        "description": "Configures which SSL/TLS protocols should be allowed.  If not set, defaults are chosen by the .NET framework.",
-        "oneOf": [
-          {
-            "type": "null"
-          },
-          {
-            "$ref": "#/definitions/SslProtocols"
-          }
-        ]
-      },
-      "SyncTimeout": {
-        "type": "integer",
-        "description": "Specifies the time in milliseconds that the system should allow for synchronous operations (defaults to 5 seconds).",
-        "format": "int32"
-      },
-      "TieBreaker": {
-        "type": "string",
-        "description": "Tie-breaker used to choose between primaries (must match the endpoint exactly)."
-      },
-      "WriteBuffer": {
-        "type": "integer",
-        "description": "The size of the output buffer to use.",
-        "format": "int32",
-        "x-deprecated": true,
-        "x-deprecatedMessage": "This setting no longer has any effect, and should not be used - will be removed in 3.0."
-      },
-      "ConfigCheckSeconds": {
-        "type": "integer",
-        "description": "Check configuration every n seconds (every minute by default).",
-        "format": "int32"
-      },
-      "Tunnel": {
-        "description": "Allows custom transport implementations, such as http-tunneling via a proxy.",
-        "oneOf": [
-          {
-            "type": "null"
-          },
-          {
-            "$ref": "#/definitions/Tunnel"
-          }
-        ]
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "https://jsonschema.xyz/schemas/Redis/ConfigurationOptions.schema",
+  "title": "Redis Configuration Options",
+  "type": "object",
+  "description": "The options relevant to a set of redis connections.",
+  "additionalProperties": false,
+  "properties": {
+    "Defaults": {
+      "description": "The default (not explicitly configured) options for this connection, fetched based on our parsed endpoints.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/DefaultOptionsProvider"
+        }
+      ]
+    },
+    "BeforeSocketConnect": {
+      "description": "Allows modification of a Socket between creation and connection.\nPassed in is the endpoint we're connecting to, which type of connection it is, and the socket itself.\nFor example, a specific local IP endpoint could be bound, linger time altered, etc.",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/definitions/ActionOfEndPointAndConnectionTypeAndSocket"
+        }
+      ]
+    },
+    "AbortOnConnectFail": {
+      "type": "boolean",
+      "description": "Gets or sets whether connect/configuration timeouts should be explicitly notified via a TimeoutException."
+    },
+    "AllowAdmin": {
+      "type": "boolean",
+      "description": "Indicates whether admin operations should be allowed."
+    },
+    "AsyncTimeout": {
+      "type": "integer",
+      "description": "Specifies the time in milliseconds that the system should allow for asynchronous operations (defaults to SyncTimeout).",
+      "format": "int32"
+    },
+    "UseSsl": {
+      "type": "boolean",
+      "description": "Indicates whether the connection should be encrypted",
+      "x-deprecated": true,
+      "x-deprecatedMessage": "Please use .Ssl instead of .UseSsl, will be removed in 3.0."
+    },
+    "SetClientLibrary": {
+      "type": "boolean",
+      "description": "Gets or sets whether the library should identify itself by library-name/version when possible."
+    },
+    "LibraryName": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "description": "Gets or sets the library name to use for CLIENT SETINFO lib-name calls to Redis during handshake.\nDefaults to \"SE.Redis\"."
+    },
+    "ChannelPrefix": {
+      "description": "Automatically encodes and decodes channels.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/RedisChannel"
+        }
+      ]
+    },
+    "CheckCertificateRevocation": {
+      "type": "boolean",
+      "description": "A Boolean value that specifies whether the certificate revocation list is checked during authentication."
+    },
+    "ClientName": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "description": "The client name to use for all connections."
+    },
+    "ConnectRetry": {
+      "type": "integer",
+      "description": "The number of times to repeat the initial connect cycle if no servers respond promptly.",
+      "format": "int32"
+    },
+    "CommandMap": {
+      "description": "The command-map associated with this configuration.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/CommandMap"
+        }
+      ]
+    },
+    "ConfigurationChannel": {
+      "type": "string",
+      "description": "Channel to use for broadcasting and listening for configuration change notification."
+    },
+    "ConnectTimeout": {
+      "type": "integer",
+      "description": "Specifies the time in milliseconds that should be allowed for connection (defaults to 5 seconds unless SyncTimeout is higher).",
+      "format": "int32"
+    },
+    "DefaultDatabase": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "Specifies the default database to be used when calling GetDatabase without any parameters.",
+      "format": "int32"
+    },
+    "DefaultVersion": {
+      "type": "string",
+      "description": "The server version to assume."
+    },
+    "EndPoints": {
+      "description": "The endpoints defined for this configuration.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/EndPointCollection"
+        }
+      ]
+    },
+    "HeartbeatInterval": {
+      "type": "string",
+      "description": "Controls how often the connection heartbeats. A heartbeat includes:\n- Evaluating if any messages have timed out\n- Evaluating connection status (checking for failures)\n- Sending a server message to keep the connection alive if needed",
+      "format": "duration"
+    },
+    "HighPrioritySocketThreads": {
+      "type": "boolean",
+      "description": "Use ThreadPriority.AboveNormal for SocketManager reader and writer threads (true by default).\nIf false, Normal will be used.",
+      "x-deprecated": true,
+      "x-deprecatedMessage": "This setting no longer has any effect, please use SocketManagerOptions.UseHighPrioritySocketThreads instead - this setting will be removed in 3.0."
+    },
+    "IncludeDetailInExceptions": {
+      "type": "boolean",
+      "description": "Should exceptions include identifiable details? (key names, additional .Data annotations)"
+    },
+    "IncludePerformanceCountersInExceptions": {
+      "type": "boolean",
+      "description": "Should exceptions include performance counter details?"
+    },
+    "KeepAlive": {
+      "type": "integer",
+      "description": "Specifies the time in seconds at which connections should be pinged to ensure validity.\n-1 Defaults to 60 Seconds",
+      "format": "int32"
+    },
+    "User": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "description": "The username to use to authenticate with the server."
+    },
+    "Password": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "description": "The password to use to authenticate with the server."
+    },
+    "PreserveAsyncOrder": {
+      "type": "boolean",
+      "description": "Specifies whether asynchronous operations should be invoked in a way that guarantees their original delivery order.",
+      "x-deprecated": true,
+      "x-deprecatedMessage": "Not supported; if you require ordered pub/sub, please see ChannelMessageQueue - this will be removed in 3.0."
+    },
+    "Proxy": {
+      "description": "Type of proxy to use (if any); for example Twemproxy.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Proxy"
+        }
+      ]
+    },
+    "ReconnectRetryPolicy": {
+      "description": "The retry policy to be used for connection reconnects.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/IReconnectRetryPolicy"
+        }
+      ]
+    },
+    "BacklogPolicy": {
+      "description": "The backlog policy to be used for commands when a connection is unhealthy.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/BacklogPolicy"
+        }
+      ]
+    },
+    "ResolveDns": {
+      "type": "boolean",
+      "description": "Indicates whether endpoints should be resolved via DNS before connecting.\nIf enabled the ConnectionMultiplexer will not re-resolve DNS when attempting to re-connect after a connection failure."
+    },
+    "ResponseTimeout": {
+      "type": "integer",
+      "description": "Specifies the time in milliseconds that the system should allow for responses before concluding that the socket is unhealthy.",
+      "format": "int32",
+      "x-deprecated": true,
+      "x-deprecatedMessage": "This setting no longer has any effect, and should not be used - will be removed in 3.0."
+    },
+    "ServiceName": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "description": "The service name used to resolve a service via sentinel."
+    },
+    "SocketManager": {
+      "description": "Gets or sets the SocketManager instance to be used with these options.\nIf this is null a shared cross-multiplexer SocketManager is used.",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/definitions/SocketManager"
+        }
+      ]
+    },
+    "SslClientAuthenticationOptions": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/definitions/FuncOfStringAndSslClientAuthenticationOptions"
+        }
+      ]
+    },
+    "Ssl": {
+      "type": "boolean",
+      "description": "Indicates whether the connection should be encrypted."
+    },
+    "SslHost": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "description": "The target-host to use when validating SSL certificate; setting a value here enables SSL mode."
+    },
+    "SslProtocols": {
+      "description": "Configures which SSL/TLS protocols should be allowed.  If not set, defaults are chosen by the .NET framework.",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/definitions/SslProtocols"
+        }
+      ]
+    },
+    "SyncTimeout": {
+      "type": "integer",
+      "description": "Specifies the time in milliseconds that the system should allow for synchronous operations (defaults to 5 seconds).",
+      "format": "int32"
+    },
+    "TieBreaker": {
+      "type": "string",
+      "description": "Tie-breaker used to choose between primaries (must match the endpoint exactly)."
+    },
+    "WriteBuffer": {
+      "type": "integer",
+      "description": "The size of the output buffer to use.",
+      "format": "int32",
+      "x-deprecated": true,
+      "x-deprecatedMessage": "This setting no longer has any effect, and should not be used - will be removed in 3.0."
+    },
+    "ConfigCheckSeconds": {
+      "type": "integer",
+      "description": "Check configuration every n seconds (every minute by default).",
+      "format": "int32"
+    },
+    "Tunnel": {
+      "description": "Allows custom transport implementations, such as http-tunneling via a proxy.",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/definitions/Tunnel"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "DefaultOptionsProvider": {
+      "type": "object",
+      "description": "A defaults providers for ConfigurationOptions.\nThis providers defaults not explicitly specified and is present to be inherited by environments that want to provide\nbetter defaults for their use case, e.g. in a single wrapper library used many places.",
+      "additionalProperties": false,
+      "properties": {
+        "AbortOnConnectFail": {
+          "type": "boolean",
+          "description": "Gets or sets whether connect/configuration timeouts should be explicitly notified via a TimeoutException."
+        },
+        "AllowAdmin": {
+          "type": "boolean",
+          "description": "Indicates whether admin operations should be allowed."
+        },
+        "BacklogPolicy": {
+          "description": "The backlog policy to be used for commands when a connection is unhealthy.",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/BacklogPolicy"
+            }
+          ]
+        },
+        "CheckCertificateRevocation": {
+          "type": "boolean",
+          "description": "A Boolean value that specifies whether the certificate revocation list is checked during authentication."
+        },
+        "ConnectRetry": {
+          "type": "integer",
+          "description": "The number of times to repeat the initial connect cycle if no servers respond promptly.",
+          "format": "int32"
+        },
+        "ConnectTimeout": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "Specifies the time that should be allowed for connection.\nFalls back to Max(5000, SyncTimeout) if null.",
+          "format": "duration"
+        },
+        "CommandMap": {
+          "description": "The command-map associated with this configuration.",
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/CommandMap"
+            }
+          ]
+        },
+        "ConfigurationChannel": {
+          "type": "string",
+          "description": "Channel to use for broadcasting and listening for configuration change notification."
+        },
+        "DefaultVersion": {
+          "type": "string",
+          "description": "The server version to assume."
+        },
+        "HeartbeatInterval": {
+          "type": "string",
+          "description": "Controls how often the connection heartbeats. A heartbeat includes:\n- Evaluating if any messages have timed out\n- Evaluating connection status (checking for failures)\n- Sending a server message to keep the connection alive if needed",
+          "format": "duration"
+        },
+        "IncludeDetailInExceptions": {
+          "type": "boolean",
+          "description": "Should exceptions include identifiable details? (key names, additional .Data annotations)"
+        },
+        "IncludePerformanceCountersInExceptions": {
+          "type": "boolean",
+          "description": "Should exceptions include performance counter details?"
+        },
+        "KeepAliveInterval": {
+          "type": "string",
+          "description": "Specifies the time interval at which connections should be pinged to ensure validity.",
+          "format": "duration"
+        },
+        "Proxy": {
+          "description": "Type of proxy to use (if any); for example Twemproxy.",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Proxy"
+            }
+          ]
+        },
+        "ReconnectRetryPolicy": {
+          "description": "The retry policy to be used for connection reconnects.",
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/IReconnectRetryPolicy"
+            }
+          ]
+        },
+        "ResolveDns": {
+          "type": "boolean",
+          "description": "Indicates whether endpoints should be resolved via DNS before connecting.\nIf enabled the ConnectionMultiplexer will not re-resolve DNS when attempting to re-connect after a connection failure."
+        },
+        "SyncTimeout": {
+          "type": "string",
+          "description": "Specifies the time that the system should allow for synchronous operations.",
+          "format": "duration"
+        },
+        "TieBreaker": {
+          "type": "string",
+          "description": "Tie-breaker used to choose between primaries (must match the endpoint exactly)."
+        },
+        "ConfigCheckInterval": {
+          "type": "string",
+          "description": "Check configuration every n interval.",
+          "format": "duration"
+        },
+        "User": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "The username to use to authenticate with the server."
+        },
+        "Password": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "The password to use to authenticate with the server."
+        },
+        "ClientName": {
+          "type": "string",
+          "description": "The default client name for a connection, with the library version appended."
+        },
+        "LibraryName": {
+          "type": "string",
+          "description": "Gets the library name to use for CLIENT SETINFO lib-name calls to Redis during handshake.\nDefaults to \"SE.Redis\"."
+        },
+        "SetClientLibrary": {
+          "type": "boolean",
+          "description": "Whether to identify the client by library name/version when possible"
+        }
       }
     },
-    "definitions": {
-      "DefaultOptionsProvider": {
-        "type": "object",
-        "description": "A defaults providers for ConfigurationOptions.\nThis providers defaults not explicitly specified and is present to be inherited by environments that want to provide\nbetter defaults for their use case, e.g. in a single wrapper library used many places.",
-        "additionalProperties": false,
-        "properties": {
-          "AbortOnConnectFail": {
-            "type": "boolean",
-            "description": "Gets or sets whether connect/configuration timeouts should be explicitly notified via a TimeoutException."
-          },
-          "AllowAdmin": {
-            "type": "boolean",
-            "description": "Indicates whether admin operations should be allowed."
-          },
-          "BacklogPolicy": {
-            "description": "The backlog policy to be used for commands when a connection is unhealthy.",
-            "oneOf": [
-              {
-                "$ref": "#/definitions/BacklogPolicy"
-              }
-            ]
-          },
-          "CheckCertificateRevocation": {
-            "type": "boolean",
-            "description": "A Boolean value that specifies whether the certificate revocation list is checked during authentication."
-          },
-          "ConnectRetry": {
-            "type": "integer",
-            "description": "The number of times to repeat the initial connect cycle if no servers respond promptly.",
-            "format": "int32"
-          },
-          "ConnectTimeout": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "description": "Specifies the time that should be allowed for connection.\nFalls back to Max(5000, SyncTimeout) if null.",
-            "format": "duration"
-          },
-          "CommandMap": {
-            "description": "The command-map associated with this configuration.",
-            "oneOf": [
-              {
-                "type": "null"
-              },
-              {
-                "$ref": "#/definitions/CommandMap"
-              }
-            ]
-          },
-          "ConfigurationChannel": {
-            "type": "string",
-            "description": "Channel to use for broadcasting and listening for configuration change notification."
-          },
-          "DefaultVersion": {
-            "type": "string",
-            "description": "The server version to assume."
-          },
-          "HeartbeatInterval": {
-            "type": "string",
-            "description": "Controls how often the connection heartbeats. A heartbeat includes:\n- Evaluating if any messages have timed out\n- Evaluating connection status (checking for failures)\n- Sending a server message to keep the connection alive if needed",
-            "format": "duration"
-          },
-          "IncludeDetailInExceptions": {
-            "type": "boolean",
-            "description": "Should exceptions include identifiable details? (key names, additional .Data annotations)"
-          },
-          "IncludePerformanceCountersInExceptions": {
-            "type": "boolean",
-            "description": "Should exceptions include performance counter details?"
-          },
-          "KeepAliveInterval": {
-            "type": "string",
-            "description": "Specifies the time interval at which connections should be pinged to ensure validity.",
-            "format": "duration"
-          },
-          "Proxy": {
-            "description": "Type of proxy to use (if any); for example Twemproxy.",
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Proxy"
-              }
-            ]
-          },
-          "ReconnectRetryPolicy": {
-            "description": "The retry policy to be used for connection reconnects.",
-            "oneOf": [
-              {
-                "type": "null"
-              },
-              {
-                "$ref": "#/definitions/IReconnectRetryPolicy"
-              }
-            ]
-          },
-          "ResolveDns": {
-            "type": "boolean",
-            "description": "Indicates whether endpoints should be resolved via DNS before connecting.\nIf enabled the ConnectionMultiplexer will not re-resolve DNS when attempting to re-connect after a connection failure."
-          },
-          "SyncTimeout": {
-            "type": "string",
-            "description": "Specifies the time that the system should allow for synchronous operations.",
-            "format": "duration"
-          },
-          "TieBreaker": {
-            "type": "string",
-            "description": "Tie-breaker used to choose between primaries (must match the endpoint exactly)."
-          },
-          "ConfigCheckInterval": {
-            "type": "string",
-            "description": "Check configuration every n interval.",
-            "format": "duration"
-          },
-          "User": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "description": "The username to use to authenticate with the server."
-          },
-          "Password": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "description": "The password to use to authenticate with the server."
-          },
-          "ClientName": {
-            "type": "string",
-            "description": "The default client name for a connection, with the library version appended."
-          },
-          "LibraryName": {
-            "type": "string",
-            "description": "Gets the library name to use for CLIENT SETINFO lib-name calls to Redis during handshake.\nDefaults to \"SE.Redis\"."
-          },
-          "SetClientLibrary": {
-            "type": "boolean",
-            "description": "Whether to identify the client by library name/version when possible"
-          }
+    "BacklogPolicy": {
+      "type": "object",
+      "description": "The backlog policy to use for commands. This policy comes into effect when a connection is unhealthy or unavailable.\nThe policy can choose to backlog commands and wait to try them (within their timeout) against a connection when it comes up,\nor it could choose to fail fast and throw ASAP. Different apps desire different behaviors with backpressure and how to handle\nlarge amounts of load, so this is configurable to optimize the happy path but avoid spiral-of-death queue scenarios for others.",
+      "additionalProperties": false,
+      "properties": {
+        "QueueWhileDisconnected": {
+          "type": "boolean",
+          "description": "Whether to queue commands while disconnected.\nTrue means queue for attempts up until their timeout.\nfalse means to fail ASAP and queue nothing."
+        },
+        "AbortPendingOnConnectionFailure": {
+          "type": "boolean",
+          "description": "Whether to immediately abandon (with an exception) all pending commands when a connection goes unhealthy."
         }
-      },
-      "BacklogPolicy": {
-        "type": "object",
-        "description": "The backlog policy to use for commands. This policy comes into effect when a connection is unhealthy or unavailable.\nThe policy can choose to backlog commands and wait to try them (within their timeout) against a connection when it comes up,\nor it could choose to fail fast and throw ASAP. Different apps desire different behaviors with backpressure and how to handle\nlarge amounts of load, so this is configurable to optimize the happy path but avoid spiral-of-death queue scenarios for others.",
-        "additionalProperties": false,
-        "properties": {
-          "QueueWhileDisconnected": {
-            "type": "boolean",
-            "description": "Whether to queue commands while disconnected.\nTrue means queue for attempts up until their timeout.\nfalse means to fail ASAP and queue nothing."
-          },
-          "AbortPendingOnConnectionFailure": {
-            "type": "boolean",
-            "description": "Whether to immediately abandon (with an exception) all pending commands when a connection goes unhealthy."
-          }
-        }
-      },
-      "CommandMap": {
-        "type": "object",
-        "description": "Represents the commands mapped on a particular configuration.",
-        "additionalProperties": false
-      },
-      "Proxy": {
-        "type": "integer",
-        "description": "Specifies the proxy that is being used to communicate to redis.",
-        "x-enumNames": [
-          "None",
-          "Twemproxy",
-          "Envoyproxy"
-        ],
-        "enum": [
-          0,
-          1,
-          2
-        ]
-      },
-      "IReconnectRetryPolicy": {
-        "type": "object",
-        "description": "Describes retry policy functionality that can be provided to the multiplexer to be used for connection reconnects.",
-        "x-abstract": true,
-        "additionalProperties": false
-      },
-      "ActionOfEndPointAndConnectionTypeAndSocket": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/MulticastDelegate"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false
-          }
-        ]
-      },
-      "MulticastDelegate": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/Delegate"
-          },
-          {
-            "type": "object",
-            "x-abstract": true,
-            "additionalProperties": false
-          }
-        ]
-      },
-      "Delegate": {
-        "type": "object",
-        "x-abstract": true,
-        "additionalProperties": false,
-        "properties": {
-          "Target": {
-            "oneOf": [
-              {},
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "Method": {
-            "$ref": "#/definitions/MethodInfo"
-          }
-        }
-      },
-      "MethodInfo": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/MethodBase"
-          },
-          {
-            "type": "object",
-            "x-abstract": true,
-            "additionalProperties": false,
-            "properties": {
-              "MemberType": {
-                "$ref": "#/definitions/MemberTypes"
-              },
-              "ReturnParameter": {
-                "$ref": "#/definitions/ParameterInfo"
-              },
-              "ReturnType": {
-                "type": "string"
-              }
-            }
-          }
-        ]
-      },
-      "MemberTypes": {
-        "type": "integer",
-        "description": "",
-        "x-enumFlags": true,
-        "x-enumNames": [
-          "Constructor",
-          "Event",
-          "Field",
-          "Method",
-          "Property",
-          "TypeInfo",
-          "Custom",
-          "NestedType",
-          "All"
-        ],
-        "enum": [
-          1,
-          2,
-          4,
-          8,
-          16,
-          32,
-          64,
-          128,
-          191
-        ]
-      },
-      "ParameterInfo": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Attributes": {
-            "$ref": "#/definitions/ParameterAttributes"
-          },
-          "Member": {
-            "$ref": "#/definitions/MemberInfo"
-          },
-          "Name": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "ParameterType": {
-            "type": "string"
-          },
-          "Position": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "IsIn": {
-            "type": "boolean"
-          },
-          "IsLcid": {
-            "type": "boolean"
-          },
-          "IsOptional": {
-            "type": "boolean"
-          },
-          "IsOut": {
-            "type": "boolean"
-          },
-          "IsRetval": {
-            "type": "boolean"
-          },
-          "DefaultValue": {
-            "oneOf": [
-              {},
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "RawDefaultValue": {
-            "oneOf": [
-              {},
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "HasDefaultValue": {
-            "type": "boolean"
-          },
-          "CustomAttributes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/CustomAttributeData"
-            }
-          },
-          "MetadataToken": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "ParameterAttributes": {
-        "type": "integer",
-        "description": "",
-        "x-enumFlags": true,
-        "x-enumNames": [
-          "None",
-          "In",
-          "Out",
-          "Lcid",
-          "Retval",
-          "Optional",
-          "HasDefault",
-          "HasFieldMarshal",
-          "Reserved3",
-          "Reserved4",
-          "ReservedMask"
-        ],
-        "enum": [
-          0,
-          1,
-          2,
-          4,
-          8,
-          16,
-          4096,
-          8192,
-          16384,
-          32768,
-          61440
-        ]
-      },
-      "MemberInfo": {
-        "type": "object",
-        "x-abstract": true,
-        "additionalProperties": false,
-        "properties": {
-          "Module": {
-            "$ref": "#/definitions/Module"
-          },
-          "CustomAttributes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/CustomAttributeData"
-            }
-          },
-          "IsCollectible": {
-            "type": "boolean"
-          },
-          "MetadataToken": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "Module": {
-        "type": "object",
-        "x-abstract": true,
-        "additionalProperties": false,
-        "properties": {
-          "Assembly": {
-            "$ref": "#/definitions/Assembly"
-          },
-          "FullyQualifiedName": {
-            "type": "string"
-          },
-          "Name": {
-            "type": "string"
-          },
-          "MDStreamVersion": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "ModuleVersionId": {
-            "type": "string",
-            "format": "guid"
-          },
-          "ScopeName": {
-            "type": "string"
-          },
-          "ModuleHandle": {
-            "$ref": "#/definitions/ModuleHandle"
-          },
-          "CustomAttributes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/CustomAttributeData"
-            }
-          },
-          "MetadataToken": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "Assembly": {
-        "type": "object",
-        "x-abstract": true,
-        "additionalProperties": false,
-        "properties": {
-          "DefinedTypes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "ExportedTypes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "CodeBase": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "x-deprecated": true,
-            "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
-          },
-          "EntryPoint": {
-            "oneOf": [
-              {
-                "type": "null"
-              },
-              {
-                "$ref": "#/definitions/MethodInfo"
-              }
-            ]
-          },
-          "FullName": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "ImageRuntimeVersion": {
-            "type": "string"
-          },
-          "IsDynamic": {
-            "type": "boolean"
-          },
-          "Location": {
-            "type": "string"
-          },
-          "ReflectionOnly": {
-            "type": "boolean"
-          },
-          "IsCollectible": {
-            "type": "boolean"
-          },
-          "IsFullyTrusted": {
-            "type": "boolean"
-          },
-          "CustomAttributes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/CustomAttributeData"
-            }
-          },
-          "EscapedCodeBase": {
-            "type": "string",
-            "x-deprecated": true,
-            "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
-          },
-          "ManifestModule": {
-            "$ref": "#/definitions/Module"
-          },
-          "Modules": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Module"
-            }
-          },
-          "GlobalAssemblyCache": {
-            "type": "boolean",
-            "x-deprecated": true,
-            "x-deprecatedMessage": "The Global Assembly Cache is not supported."
-          },
-          "HostContext": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "SecurityRuleSet": {
-            "$ref": "#/definitions/SecurityRuleSet"
-          }
-        }
-      },
-      "CustomAttributeData": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "AttributeType": {
-            "type": "string"
-          },
-          "Constructor": {
-            "$ref": "#/definitions/ConstructorInfo"
-          },
-          "ConstructorArguments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/CustomAttributeTypedArgument"
-            }
-          },
-          "NamedArguments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/CustomAttributeNamedArgument"
-            }
-          }
-        }
-      },
-      "ConstructorInfo": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/MethodBase"
-          },
-          {
-            "type": "object",
-            "x-abstract": true,
-            "additionalProperties": false,
-            "properties": {
-              "MemberType": {
-                "$ref": "#/definitions/MemberTypes"
-              }
-            }
-          }
-        ]
-      },
-      "MethodBase": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/MemberInfo"
-          },
-          {
-            "type": "object",
-            "x-abstract": true,
-            "additionalProperties": false,
-            "properties": {
-              "MethodImplementationFlags": {
-                "$ref": "#/definitions/MethodImplAttributes"
-              },
-              "CallingConvention": {
-                "$ref": "#/definitions/CallingConventions"
-              },
-              "IsAbstract": {
-                "type": "boolean"
-              },
-              "IsConstructor": {
-                "type": "boolean"
-              },
-              "IsFinal": {
-                "type": "boolean"
-              },
-              "IsHideBySig": {
-                "type": "boolean"
-              },
-              "IsSpecialName": {
-                "type": "boolean"
-              },
-              "IsStatic": {
-                "type": "boolean"
-              },
-              "IsVirtual": {
-                "type": "boolean"
-              },
-              "IsAssembly": {
-                "type": "boolean"
-              },
-              "IsFamily": {
-                "type": "boolean"
-              },
-              "IsFamilyAndAssembly": {
-                "type": "boolean"
-              },
-              "IsFamilyOrAssembly": {
-                "type": "boolean"
-              },
-              "IsPrivate": {
-                "type": "boolean"
-              },
-              "IsPublic": {
-                "type": "boolean"
-              },
-              "IsConstructedGenericMethod": {
-                "type": "boolean"
-              },
-              "IsGenericMethod": {
-                "type": "boolean"
-              },
-              "IsGenericMethodDefinition": {
-                "type": "boolean"
-              },
-              "ContainsGenericParameters": {
-                "type": "boolean"
-              },
-              "IsSecurityCritical": {
-                "type": "boolean"
-              },
-              "IsSecuritySafeCritical": {
-                "type": "boolean"
-              },
-              "IsSecurityTransparent": {
-                "type": "boolean"
-              }
-            }
-          }
-        ]
-      },
-      "MethodImplAttributes": {
-        "type": "integer",
-        "description": "",
-        "x-enumNames": [
-          "IL",
-          "Managed",
-          "Native",
-          "OPTIL",
-          "CodeTypeMask",
-          "Runtime",
-          "ManagedMask",
-          "Unmanaged",
-          "NoInlining",
-          "ForwardRef",
-          "Synchronized",
-          "NoOptimization",
-          "PreserveSig",
-          "AggressiveInlining",
-          "AggressiveOptimization",
-          "InternalCall",
-          "MaxMethodImplVal"
-        ],
-        "enum": [
-          0,
-          0,
-          1,
-          2,
-          3,
-          3,
-          4,
-          4,
-          8,
-          16,
-          32,
-          64,
-          128,
-          256,
-          512,
-          4096,
-          65535
-        ]
-      },
-      "CallingConventions": {
-        "type": "integer",
-        "description": "",
-        "x-enumFlags": true,
-        "x-enumNames": [
-          "Standard",
-          "VarArgs",
-          "Any",
-          "HasThis",
-          "ExplicitThis"
-        ],
-        "enum": [
-          1,
-          2,
-          3,
-          32,
-          64
-        ]
-      },
-      "CustomAttributeTypedArgument": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "ArgumentType": {
-            "type": "string"
-          },
-          "Value": {
-            "oneOf": [
-              {},
-              {
-                "type": "null"
-              }
-            ]
-          }
-        }
-      },
-      "CustomAttributeNamedArgument": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "MemberInfo": {
-            "$ref": "#/definitions/MemberInfo"
-          },
-          "TypedValue": {
-            "$ref": "#/definitions/CustomAttributeTypedArgument"
-          },
-          "MemberName": {
-            "type": "string"
-          },
-          "IsField": {
-            "type": "boolean"
-          }
-        }
-      },
-      "SecurityRuleSet": {
-        "type": "integer",
-        "description": "",
-        "x-enumNames": [
-          "None",
-          "Level1",
-          "Level2"
-        ],
-        "enum": [
-          0,
-          1,
-          2
-        ]
-      },
-      "ModuleHandle": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "MDStreamVersion": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "RedisChannel": {
-        "type": "object",
-        "description": "Represents a pub/sub channel name.",
-        "additionalProperties": false,
-        "properties": {
-          "IsNullOrEmpty": {
-            "type": "boolean",
-            "description": "Indicates whether the channel-name is either null or a zero-length value."
-          },
-          "IsPattern": {
-            "type": "boolean",
-            "description": "Indicates whether this channel represents a wildcard pattern (see PSUBSCRIBE)"
-          }
-        }
-      },
-      "EndPointCollection": {
-        "type": "array",
-        "description": "A list of endpoints.",
-        "items": {
-          "$ref": "#/definitions/EndPoint"
-        }
-      },
-      "EndPoint": { "$ref": "https://jsonschema.xyz/schemas/Networks/EndPoint.schema" },
-      "AddressFamily": { "$ref": "https://jsonschema.xyz/schemas/Networks/AddressFamily.schema" },
-      "SocketManager": {
-        "type": "object",
-        "description": "A SocketManager monitors multiple sockets for availability of data; this is done using\nthe Socket.Select API and a dedicated reader-thread, which allows for fast responses\neven when the system is under ambient load.",
-        "additionalProperties": false,
-        "properties": {
-          "Name": {
-            "type": "string",
-            "description": "Gets the name of this SocketManager instance."
-          }
-        }
-      },
-      "FuncOfStringAndSslClientAuthenticationOptions": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/MulticastDelegate"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false
-          }
-        ]
-      },
-      "SslProtocols": {
-        "type": "integer",
-        "description": "",
-        "x-enumFlags": true,
-        "x-enumNames": [
-          "None",
-          "Ssl2",
-          "Ssl3",
-          "Tls",
-          "Default",
-          "Tls11",
-          "Tls12",
-          "Tls13"
-        ],
-        "enum": [
-          0,
-          12,
-          48,
-          192,
-          240,
-          768,
-          3072,
-          12288
-        ]
-      },
-      "Tunnel": {
-        "type": "object",
-        "description": "Allows interception of the transport used to communicate with Redis.",
-        "x-abstract": true,
-        "additionalProperties": false
       }
+    },
+    "CommandMap": {
+      "type": "object",
+      "description": "Represents the commands mapped on a particular configuration.",
+      "additionalProperties": false
+    },
+    "Proxy": {
+      "type": "integer",
+      "description": "Specifies the proxy that is being used to communicate to redis.",
+      "x-enumNames": [
+        "None",
+        "Twemproxy",
+        "Envoyproxy"
+      ],
+      "enum": [
+        0,
+        1,
+        2
+      ]
+    },
+    "IReconnectRetryPolicy": {
+      "type": "object",
+      "description": "Describes retry policy functionality that can be provided to the multiplexer to be used for connection reconnects.",
+      "x-abstract": true,
+      "additionalProperties": false
+    },
+    "ActionOfEndPointAndConnectionTypeAndSocket": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MulticastDelegate"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "MulticastDelegate": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Delegate"
+        },
+        {
+          "type": "object",
+          "x-abstract": true,
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Delegate": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false,
+      "properties": {
+        "Target": {
+          "oneOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "Method": {
+          "$ref": "#/definitions/MethodInfo"
+        }
+      }
+    },
+    "MethodInfo": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodBase"
+        },
+        {
+          "type": "object",
+          "x-abstract": true,
+          "additionalProperties": false,
+          "properties": {
+            "MemberType": {
+              "$ref": "#/definitions/MemberTypes"
+            },
+            "ReturnParameter": {
+              "$ref": "#/definitions/ParameterInfo"
+            },
+            "ReturnType": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "MemberTypes": {
+      "type": "integer",
+      "description": "",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "Constructor",
+        "Event",
+        "Field",
+        "Method",
+        "Property",
+        "TypeInfo",
+        "Custom",
+        "NestedType",
+        "All"
+      ],
+      "enum": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        191
+      ]
+    },
+    "ParameterInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Attributes": {
+          "$ref": "#/definitions/ParameterAttributes"
+        },
+        "Member": {
+          "$ref": "#/definitions/MemberInfo"
+        },
+        "Name": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "ParameterType": {
+          "type": "string"
+        },
+        "Position": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "IsIn": {
+          "type": "boolean"
+        },
+        "IsLcid": {
+          "type": "boolean"
+        },
+        "IsOptional": {
+          "type": "boolean"
+        },
+        "IsOut": {
+          "type": "boolean"
+        },
+        "IsRetval": {
+          "type": "boolean"
+        },
+        "DefaultValue": {
+          "oneOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "RawDefaultValue": {
+          "oneOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "HasDefaultValue": {
+          "type": "boolean"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "MetadataToken": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ParameterAttributes": {
+      "type": "integer",
+      "description": "",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "None",
+        "In",
+        "Out",
+        "Lcid",
+        "Retval",
+        "Optional",
+        "HasDefault",
+        "HasFieldMarshal",
+        "Reserved3",
+        "Reserved4",
+        "ReservedMask"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        4096,
+        8192,
+        16384,
+        32768,
+        61440
+      ]
+    },
+    "MemberInfo": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false,
+      "properties": {
+        "Module": {
+          "$ref": "#/definitions/Module"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "IsCollectible": {
+          "type": "boolean"
+        },
+        "MetadataToken": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Module": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false,
+      "properties": {
+        "Assembly": {
+          "$ref": "#/definitions/Assembly"
+        },
+        "FullyQualifiedName": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "MDStreamVersion": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ModuleVersionId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "ScopeName": {
+          "type": "string"
+        },
+        "ModuleHandle": {
+          "$ref": "#/definitions/ModuleHandle"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "MetadataToken": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Assembly": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false,
+      "properties": {
+        "DefinedTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExportedTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "CodeBase": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "x-deprecated": true,
+          "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
+        },
+        "EntryPoint": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/MethodInfo"
+            }
+          ]
+        },
+        "FullName": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "ImageRuntimeVersion": {
+          "type": "string"
+        },
+        "IsDynamic": {
+          "type": "boolean"
+        },
+        "Location": {
+          "type": "string"
+        },
+        "ReflectionOnly": {
+          "type": "boolean"
+        },
+        "IsCollectible": {
+          "type": "boolean"
+        },
+        "IsFullyTrusted": {
+          "type": "boolean"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "EscapedCodeBase": {
+          "type": "string",
+          "x-deprecated": true,
+          "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
+        },
+        "ManifestModule": {
+          "$ref": "#/definitions/Module"
+        },
+        "Modules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Module"
+          }
+        },
+        "GlobalAssemblyCache": {
+          "type": "boolean",
+          "x-deprecated": true,
+          "x-deprecatedMessage": "The Global Assembly Cache is not supported."
+        },
+        "HostContext": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "SecurityRuleSet": {
+          "$ref": "#/definitions/SecurityRuleSet"
+        }
+      }
+    },
+    "CustomAttributeData": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AttributeType": {
+          "type": "string"
+        },
+        "Constructor": {
+          "$ref": "#/definitions/ConstructorInfo"
+        },
+        "ConstructorArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeTypedArgument"
+          }
+        },
+        "NamedArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeNamedArgument"
+          }
+        }
+      }
+    },
+    "ConstructorInfo": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodBase"
+        },
+        {
+          "type": "object",
+          "x-abstract": true,
+          "additionalProperties": false,
+          "properties": {
+            "MemberType": {
+              "$ref": "#/definitions/MemberTypes"
+            }
+          }
+        }
+      ]
+    },
+    "MethodBase": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MemberInfo"
+        },
+        {
+          "type": "object",
+          "x-abstract": true,
+          "additionalProperties": false,
+          "properties": {
+            "MethodImplementationFlags": {
+              "$ref": "#/definitions/MethodImplAttributes"
+            },
+            "CallingConvention": {
+              "$ref": "#/definitions/CallingConventions"
+            },
+            "IsAbstract": {
+              "type": "boolean"
+            },
+            "IsConstructor": {
+              "type": "boolean"
+            },
+            "IsFinal": {
+              "type": "boolean"
+            },
+            "IsHideBySig": {
+              "type": "boolean"
+            },
+            "IsSpecialName": {
+              "type": "boolean"
+            },
+            "IsStatic": {
+              "type": "boolean"
+            },
+            "IsVirtual": {
+              "type": "boolean"
+            },
+            "IsAssembly": {
+              "type": "boolean"
+            },
+            "IsFamily": {
+              "type": "boolean"
+            },
+            "IsFamilyAndAssembly": {
+              "type": "boolean"
+            },
+            "IsFamilyOrAssembly": {
+              "type": "boolean"
+            },
+            "IsPrivate": {
+              "type": "boolean"
+            },
+            "IsPublic": {
+              "type": "boolean"
+            },
+            "IsConstructedGenericMethod": {
+              "type": "boolean"
+            },
+            "IsGenericMethod": {
+              "type": "boolean"
+            },
+            "IsGenericMethodDefinition": {
+              "type": "boolean"
+            },
+            "ContainsGenericParameters": {
+              "type": "boolean"
+            },
+            "IsSecurityCritical": {
+              "type": "boolean"
+            },
+            "IsSecuritySafeCritical": {
+              "type": "boolean"
+            },
+            "IsSecurityTransparent": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    },
+    "MethodImplAttributes": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "IL",
+        "Managed",
+        "Native",
+        "OPTIL",
+        "CodeTypeMask",
+        "Runtime",
+        "ManagedMask",
+        "Unmanaged",
+        "NoInlining",
+        "ForwardRef",
+        "Synchronized",
+        "NoOptimization",
+        "PreserveSig",
+        "AggressiveInlining",
+        "AggressiveOptimization",
+        "InternalCall",
+        "MaxMethodImplVal"
+      ],
+      "enum": [
+        0,
+        0,
+        1,
+        2,
+        3,
+        3,
+        4,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        4096,
+        65535
+      ]
+    },
+    "CallingConventions": {
+      "type": "integer",
+      "description": "",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "Standard",
+        "VarArgs",
+        "Any",
+        "HasThis",
+        "ExplicitThis"
+      ],
+      "enum": [
+        1,
+        2,
+        3,
+        32,
+        64
+      ]
+    },
+    "CustomAttributeTypedArgument": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ArgumentType": {
+          "type": "string"
+        },
+        "Value": {
+          "oneOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "CustomAttributeNamedArgument": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MemberInfo": {
+          "$ref": "#/definitions/MemberInfo"
+        },
+        "TypedValue": {
+          "$ref": "#/definitions/CustomAttributeTypedArgument"
+        },
+        "MemberName": {
+          "type": "string"
+        },
+        "IsField": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SecurityRuleSet": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "None",
+        "Level1",
+        "Level2"
+      ],
+      "enum": [
+        0,
+        1,
+        2
+      ]
+    },
+    "ModuleHandle": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MDStreamVersion": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "RedisChannel": {
+      "type": "object",
+      "description": "Represents a pub/sub channel name.",
+      "additionalProperties": false,
+      "properties": {
+        "IsNullOrEmpty": {
+          "type": "boolean",
+          "description": "Indicates whether the channel-name is either null or a zero-length value."
+        },
+        "IsPattern": {
+          "type": "boolean",
+          "description": "Indicates whether this channel represents a wildcard pattern (see PSUBSCRIBE)"
+        }
+      }
+    },
+    "EndPointCollection": {
+      "type": "array",
+      "description": "A list of endpoints.",
+      "items": {
+        "$ref": "#/definitions/EndPoint"
+      }
+    },
+    "EndPoint": {
+      "anyOf": [
+        {
+          "$ref": "https://jsonschema.xyz/schemas/Networks/DnsEndPoint.schema"
+        },
+        {
+          "$ref": "https://jsonschema.xyz/schemas/Networks/IPEndPoint.schema"
+        },
+        {
+          "$ref": "https://jsonschema.xyz/schemas/Networks/UnixDomainSocketEndPoint.schema"
+        }
+      ]
+    },
+    "AddressFamily": {
+      "$ref": "https://jsonschema.xyz/schemas/Networks/AddressFamily.schema"
+    },
+    "SocketManager": {
+      "type": "object",
+      "description": "A SocketManager monitors multiple sockets for availability of data; this is done using\nthe Socket.Select API and a dedicated reader-thread, which allows for fast responses\neven when the system is under ambient load.",
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "Gets the name of this SocketManager instance."
+        }
+      }
+    },
+    "FuncOfStringAndSslClientAuthenticationOptions": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MulticastDelegate"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SslProtocols": {
+      "type": "integer",
+      "description": "",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "None",
+        "Ssl2",
+        "Ssl3",
+        "Tls",
+        "Default",
+        "Tls11",
+        "Tls12",
+        "Tls13"
+      ],
+      "enum": [
+        0,
+        12,
+        48,
+        192,
+        240,
+        768,
+        3072,
+        12288
+      ]
+    },
+    "Tunnel": {
+      "type": "object",
+      "description": "Allows interception of the transport used to communicate with Redis.",
+      "x-abstract": true,
+      "additionalProperties": false
     }
   }
+}
