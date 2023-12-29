@@ -842,7 +842,7 @@
             }
         },
         "EndPoint": {
-            "$ref": "https://jsonchema.xyz/schemas/Networks/EndPoint.schema"
+            "$ref": "https://jsonschema.xyz/schemas/Networks/EndPoint.schema"
         },
         "AddressFamily": {
             "$ref": "https://jsonschema.xyz/schemas/Networks/AddressFamily.schema"
