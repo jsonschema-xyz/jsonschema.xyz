@@ -17,5 +17,15 @@
                 }
             }
         }
-    ]
+    ],
+    "not": {
+        "anyOf": [
+            {
+                "$ref": "https://jsonschema.xyz/schemas/Net/DnsEndPoint.schema"
+            },
+            {
+                "$ref": "https://jsonschema.xyz/schemas/Net/IPEndPoint.schema"
+            }
+        ]
+    }
 }

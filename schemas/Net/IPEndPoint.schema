@@ -53,6 +53,16 @@
             }
         }
     },
+    "not": {
+        "anyOf": [
+            {
+                "$ref": "https://jsonschema.xyz/schemas/Net/DnsEndPoint.schema"
+            },
+            {
+                "$ref": "https://jsonschema.xyz/schemas/Net/UnixDomainSocketEndPoint.schema"
+            }
+        ]
+    },
     "allOf": [
         {
             "$ref": "https://jsonschema.xyz/schemas/Net/EndPoint.schema"
@@ -70,7 +80,7 @@
                     "description": "Gets or sets the IP address of the endpoint."
                 },
                 "Port": {
-                    "$ref" : "https://jsonschema.xyz/schemas/Net/TcpPort.schema",
+                    "$ref": "https://jsonschema.xyz/schemas/Net/TcpPort.schema",
                     "description": "Gets or sets the port number of the endpoint."
                 }
             }

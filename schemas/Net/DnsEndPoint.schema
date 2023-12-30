@@ -23,5 +23,15 @@
                 }
             }
         }
-    ]
+    ],
+    "not": {
+        "anyOf": [
+            {
+                "$ref": "https://jsonschema.xyz/schemas/Net/IPEndPoint.schema"
+            },
+            {
+                "$ref": "https://jsonschema.xyz/schemas/Net/UnixDomainSocketEndPoint.schema"
+            }
+        ]
+    }
 }
