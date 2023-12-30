@@ -2,7 +2,6 @@
     "$schema": "https://json-schema.org/draft-2019-09/schema",
     "$id": "https://jsonschema.xyz/global.json.schema",
     "contentMediaType": "application/schema+json",
-    "title": "Global.json",
     "allOf": [
         {
             "$ref": "https://json.schemastore.org/global"

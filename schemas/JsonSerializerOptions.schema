@@ -9,7 +9,7 @@
         "Converters": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/JsonConverter"
+                "$ref": "#/$defs/JsonConverter"
             }
         },
         "TypeInfoResolver": {
@@ -18,14 +18,14 @@
                     "type": "null"
                 },
                 {
-                    "$ref": "#/definitions/IJsonTypeInfoResolver"
+                    "$ref": "#/$defs/IJsonTypeInfoResolver"
                 }
             ]
         },
         "TypeInfoResolverChain": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/IJsonTypeInfoResolver"
+                "$ref": "#/$defs/IJsonTypeInfoResolver"
             }
         },
         "AllowTrailingCommas": {
@@ -41,7 +41,7 @@
                     "type": "null"
                 },
                 {
-                    "$ref": "#/definitions/JavaScriptEncoder"
+                    "$ref": "#/$defs/JavaScriptEncoder"
                 }
             ]
         },
@@ -51,7 +51,7 @@
                     "type": "null"
                 },
                 {
-                    "$ref": "#/definitions/JsonNamingPolicy"
+                    "$ref": "#/$defs/JsonNamingPolicy"
                 }
             ]
         },
@@ -62,13 +62,13 @@
             "x-deprecatedMessage": "JsonSerializerOptions.IgnoreNullValues is obsolete. To ignore null values when serializing, set DefaultIgnoreCondition to JsonIgnoreCondition.WhenWritingNull."
         },
         "DefaultIgnoreCondition": {
-            "$ref": "#/definitions/JsonIgnoreCondition"
+            "$ref": "#/$defs/JsonIgnoreCondition"
         },
         "NumberHandling": {
-            "$ref": "#/definitions/JsonNumberHandling"
+            "$ref": "#/$defs/JsonNumberHandling"
         },
         "PreferredObjectCreationHandling": {
-            "$ref": "#/definitions/JsonObjectCreationHandling"
+            "$ref": "#/$defs/JsonObjectCreationHandling"
         },
         "IgnoreReadOnlyProperties": {
             "type": "boolean"
@@ -89,7 +89,7 @@
                     "type": "null"
                 },
                 {
-                    "$ref": "#/definitions/JsonNamingPolicy"
+                    "$ref": "#/$defs/JsonNamingPolicy"
                 }
             ]
         },
@@ -97,13 +97,13 @@
             "type": "boolean"
         },
         "ReadCommentHandling": {
-            "$ref": "#/definitions/JsonCommentHandling"
+            "$ref": "#/$defs/JsonCommentHandling"
         },
         "UnknownTypeHandling": {
-            "$ref": "#/definitions/JsonUnknownTypeHandling"
+            "$ref": "#/$defs/JsonUnknownTypeHandling"
         },
         "UnmappedMemberHandling": {
-            "$ref": "#/definitions/JsonUnmappedMemberHandling"
+            "$ref": "#/$defs/JsonUnmappedMemberHandling"
         },
         "WriteIndented": {
             "type": "boolean"
@@ -114,7 +114,7 @@
                     "type": "null"
                 },
                 {
-                    "$ref": "#/definitions/ReferenceHandler"
+                    "$ref": "#/$defs/ReferenceHandler"
                 }
             ]
         },
@@ -122,7 +122,7 @@
             "type": "boolean"
         }
     },
-    "definitions": {
+    "$defs": {
         "JsonConverter": {
             "type": "object",
             "x-abstract": true,
@@ -136,7 +136,7 @@
         "JavaScriptEncoder": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/TextEncoder"
+                    "$ref": "#/$defs/TextEncoder"
                 },
                 {
                     "type": "object",

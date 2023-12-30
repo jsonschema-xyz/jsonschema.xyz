@@ -12,7 +12,8 @@
             "properties": {
                 "Host": {
                     "type": "string",
-                    "description": "Gets the host name or string representation of the Internet Protocol (IP) address of the host."
+                    "description": "Gets the host name or string representation of the Internet Protocol (IP) address of the host.",
+                    "format": "hostname"
                 },
                 "AddressFamily": {
                     "$ref": "https://jsonschema.xyz/schemas/Net/AddressFamily.schema",

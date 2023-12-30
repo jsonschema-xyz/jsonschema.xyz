@@ -3,7 +3,7 @@
     "title": "IP End Point",
     "description": "Represents a network endpoint as an IP address and a port number.",
     "contentMediaType": "application/schema+json",
-    "definitions": {
+    "$defs": {
         // "AddressFamily": {
         //     "$ref": "https://jsonschema.xyz/schemas/Net/AddressFamily.schema"
         // },
@@ -12,7 +12,7 @@
             "additionalProperties": false,
             "properties": {
                 "AddressFamily": {
-                    "$ref": "#/definitions/AddressFamily",
+                    "$ref": "#/$defs/AddressFamily",
                     "description": "Gets the address family of the IP address."
                 },
                 "ScopeId": {
@@ -74,11 +74,11 @@
             "additionalProperties": false,
             "properties": {
                 "AddressFamily": {
-                    "$ref": "#/definitions/AddressFamily",
+                    "$ref": "#/$defs/AddressFamily",
                     "description": "Gets the Internet Protocol (IP) address family."
                 },
                 "Address": {
-                    "$ref": "#/definitions/IPAddress",
+                    "$ref": "#/$defs/IPAddress",
                     "description": "Gets or sets the IP address of the endpoint."
                 },
                 "Port": {

@@ -13,7 +13,7 @@
             "$ref": "#/definitions/DownstreamApis"
         }
     ],
-    "definitions": {
+    "$defs": {
         "DownstreamApis": {
             "type": "object",
             "properties": {

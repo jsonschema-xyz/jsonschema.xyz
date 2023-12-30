@@ -2,11 +2,11 @@
     "$schema": "http://json-schema.org/draft/2019-09/schema",
     "$id": "https://jsonschema.xyz/schemas/OpenIdConnectOptions.schema",
     "title": "Open ID Connect Options",
-    "definitions": {
+    "$defs": {
         "OpenIdConnectConfiguration": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/BaseConfiguration"
+                    "$ref": "#/$defs/BaseConfiguration"
                 },
                 {
                     "type": "object",
@@ -209,7 +209,7 @@
                                     "type": "null"
                                 },
                                 {
-                                    "$ref": "#/definitions/JsonWebKeySet"
+                                    "$ref": "#/$defs/JsonWebKeySet"
                                 }
                             ]
                         },
@@ -439,7 +439,7 @@
                     ],
                     "description": "Gets the IList`1.",
                     "items": {
-                        "$ref": "#/definitions/JsonWebKey"
+                        "$ref": "#/$defs/JsonWebKey"
                     }
                 },
                 "SkipUnresolvedJsonWebKeys": {
@@ -452,7 +452,7 @@
         "JsonWebKey": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/SecurityKey"
+                    "$ref": "#/$defs/SecurityKey"
                 },
                 {
                     "type": "object",
@@ -677,7 +677,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/CryptoProviderFactory"
+                            "$ref": "#/$defs/CryptoProviderFactory"
                         }
                     ]
                 }
@@ -695,7 +695,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/CryptoProviderCache"
+                            "$ref": "#/$defs/CryptoProviderCache"
                         }
                     ]
                 },
@@ -706,7 +706,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/ICryptoProvider"
+                            "$ref": "#/$defs/ICryptoProvider"
                         }
                     ]
                 },
@@ -754,7 +754,7 @@
                     ],
                     "description": "Gets the ICollection`1 that the IdentityProvider indicates are to be used in order to sign tokens.",
                     "items": {
-                        "$ref": "#/definitions/SecurityKey"
+                        "$ref": "#/$defs/SecurityKey"
                     }
                 },
                 "TokenEndpoint": {
@@ -778,7 +778,7 @@
                     ],
                     "description": "Gets the ICollection`1 that the IdentityProvider indicates are to be used in order to decrypt tokens.",
                     "items": {
-                        "$ref": "#/definitions/SecurityKey"
+                        "$ref": "#/$defs/SecurityKey"
                     }
                 }
             }
@@ -805,41 +805,41 @@
         "OpenIdConnectEvents": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/RemoteAuthenticationEvents"
+                    "$ref": "#/$defs/RemoteAuthenticationEvents"
                 },
                 {
                     "type": "object",
                     "additionalProperties": false,
                     "properties": {
                         "OnAuthenticationFailed": {
-                            "$ref": "#/definitions/FuncOfAuthenticationFailedContextAndTask"
+                            "$ref": "#/$defs/FuncOfAuthenticationFailedContextAndTask"
                         },
                         "OnAuthorizationCodeReceived": {
-                            "$ref": "#/definitions/FuncOfAuthorizationCodeReceivedContextAndTask"
+                            "$ref": "#/$defs/FuncOfAuthorizationCodeReceivedContextAndTask"
                         },
                         "OnMessageReceived": {
-                            "$ref": "#/definitions/FuncOfMessageReceivedContextAndTask"
+                            "$ref": "#/$defs/FuncOfMessageReceivedContextAndTask"
                         },
                         "OnRedirectToIdentityProvider": {
-                            "$ref": "#/definitions/FuncOfRedirectContextAndTask"
+                            "$ref": "#/$defs/FuncOfRedirectContextAndTask"
                         },
                         "OnRedirectToIdentityProviderForSignOut": {
-                            "$ref": "#/definitions/FuncOfRedirectContextAndTask"
+                            "$ref": "#/$defs/FuncOfRedirectContextAndTask"
                         },
                         "OnSignedOutCallbackRedirect": {
-                            "$ref": "#/definitions/FuncOfRemoteSignOutContextAndTask"
+                            "$ref": "#/$defs/FuncOfRemoteSignOutContextAndTask"
                         },
                         "OnRemoteSignOut": {
-                            "$ref": "#/definitions/FuncOfRemoteSignOutContextAndTask"
+                            "$ref": "#/$defs/FuncOfRemoteSignOutContextAndTask"
                         },
                         "OnTokenResponseReceived": {
-                            "$ref": "#/definitions/FuncOfTokenResponseReceivedContextAndTask"
+                            "$ref": "#/$defs/FuncOfTokenResponseReceivedContextAndTask"
                         },
                         "OnTokenValidated": {
-                            "$ref": "#/definitions/FuncOfTokenValidatedContextAndTask"
+                            "$ref": "#/$defs/FuncOfTokenValidatedContextAndTask"
                         },
                         "OnUserInformationReceived": {
-                            "$ref": "#/definitions/FuncOfUserInformationReceivedContextAndTask"
+                            "$ref": "#/$defs/FuncOfUserInformationReceivedContextAndTask"
                         }
                     }
                 }
@@ -848,7 +848,7 @@
         "FuncOfAuthenticationFailedContextAndTask": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -859,7 +859,7 @@
         "MulticastDelegate": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/Delegate"
+                    "$ref": "#/$defs/Delegate"
                 },
                 {
                     "type": "object",
@@ -882,14 +882,14 @@
                     ]
                 },
                 "Method": {
-                    "$ref": "#/definitions/MethodInfo"
+                    "$ref": "#/$defs/MethodInfo"
                 }
             }
         },
         "MethodInfo": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MethodBase"
+                    "$ref": "#/$defs/MethodBase"
                 },
                 {
                     "type": "object",
@@ -897,10 +897,10 @@
                     "additionalProperties": false,
                     "properties": {
                         "MemberType": {
-                            "$ref": "#/definitions/MemberTypes"
+                            "$ref": "#/$defs/MemberTypes"
                         },
                         "ReturnParameter": {
-                            "$ref": "#/definitions/ParameterInfo"
+                            "$ref": "#/$defs/ParameterInfo"
                         },
                         "ReturnType": {
                             "type": "string"
@@ -941,10 +941,10 @@
             "additionalProperties": false,
             "properties": {
                 "Attributes": {
-                    "$ref": "#/definitions/ParameterAttributes"
+                    "$ref": "#/$defs/ParameterAttributes"
                 },
                 "Member": {
-                    "$ref": "#/definitions/MemberInfo"
+                    "$ref": "#/$defs/MemberInfo"
                 },
                 "Name": {
                     "type": [
@@ -996,7 +996,7 @@
                 "CustomAttributes": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CustomAttributeData"
+                        "$ref": "#/$defs/CustomAttributeData"
                     }
                 },
                 "MetadataToken": {
@@ -1042,12 +1042,12 @@
             "additionalProperties": false,
             "properties": {
                 "Module": {
-                    "$ref": "#/definitions/Module"
+                    "$ref": "#/$defs/Module"
                 },
                 "CustomAttributes": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CustomAttributeData"
+                        "$ref": "#/$defs/CustomAttributeData"
                     }
                 },
                 "IsCollectible": {
@@ -1065,7 +1065,7 @@
             "additionalProperties": false,
             "properties": {
                 "Assembly": {
-                    "$ref": "#/definitions/Assembly"
+                    "$ref": "#/$defs/Assembly"
                 },
                 "FullyQualifiedName": {
                     "type": "string"
@@ -1085,12 +1085,12 @@
                     "type": "string"
                 },
                 "ModuleHandle": {
-                    "$ref": "#/definitions/ModuleHandle"
+                    "$ref": "#/$defs/ModuleHandle"
                 },
                 "CustomAttributes": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CustomAttributeData"
+                        "$ref": "#/$defs/CustomAttributeData"
                     }
                 },
                 "MetadataToken": {
@@ -1131,7 +1131,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/MethodInfo"
+                            "$ref": "#/$defs/MethodInfo"
                         }
                     ]
                 },
@@ -1162,7 +1162,7 @@
                 "CustomAttributes": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CustomAttributeData"
+                        "$ref": "#/$defs/CustomAttributeData"
                     }
                 },
                 "EscapedCodeBase": {
@@ -1172,12 +1172,12 @@
                     "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
                 },
                 "ManifestModule": {
-                    "$ref": "#/definitions/Module"
+                    "$ref": "#/$defs/Module"
                 },
                 "Modules": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/Module"
+                        "$ref": "#/$defs/Module"
                     }
                 },
                 "GlobalAssemblyCache": {
@@ -1191,7 +1191,7 @@
                     "format": "int64"
                 },
                 "SecurityRuleSet": {
-                    "$ref": "#/definitions/SecurityRuleSet"
+                    "$ref": "#/$defs/SecurityRuleSet"
                 }
             }
         },
@@ -1203,18 +1203,18 @@
                     "type": "string"
                 },
                 "Constructor": {
-                    "$ref": "#/definitions/ConstructorInfo"
+                    "$ref": "#/$defs/ConstructorInfo"
                 },
                 "ConstructorArguments": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CustomAttributeTypedArgument"
+                        "$ref": "#/$defs/CustomAttributeTypedArgument"
                     }
                 },
                 "NamedArguments": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CustomAttributeNamedArgument"
+                        "$ref": "#/$defs/CustomAttributeNamedArgument"
                     }
                 }
             }
@@ -1222,7 +1222,7 @@
         "ConstructorInfo": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MethodBase"
+                    "$ref": "#/$defs/MethodBase"
                 },
                 {
                     "type": "object",
@@ -1230,7 +1230,7 @@
                     "additionalProperties": false,
                     "properties": {
                         "MemberType": {
-                            "$ref": "#/definitions/MemberTypes"
+                            "$ref": "#/$defs/MemberTypes"
                         }
                     }
                 }
@@ -1239,7 +1239,7 @@
         "MethodBase": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MemberInfo"
+                    "$ref": "#/$defs/MemberInfo"
                 },
                 {
                     "type": "object",
@@ -1247,10 +1247,10 @@
                     "additionalProperties": false,
                     "properties": {
                         "MethodImplementationFlags": {
-                            "$ref": "#/definitions/MethodImplAttributes"
+                            "$ref": "#/$defs/MethodImplAttributes"
                         },
                         "CallingConvention": {
-                            "$ref": "#/definitions/CallingConventions"
+                            "$ref": "#/$defs/CallingConventions"
                         },
                         "IsAbstract": {
                             "type": "boolean"
@@ -1399,10 +1399,10 @@
             "additionalProperties": false,
             "properties": {
                 "MemberInfo": {
-                    "$ref": "#/definitions/MemberInfo"
+                    "$ref": "#/$defs/MemberInfo"
                 },
                 "TypedValue": {
-                    "$ref": "#/definitions/CustomAttributeTypedArgument"
+                    "$ref": "#/$defs/CustomAttributeTypedArgument"
                 },
                 "MemberName": {
                     "type": "string"
@@ -1439,7 +1439,7 @@
         "FuncOfAuthorizationCodeReceivedContextAndTask": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -1450,7 +1450,7 @@
         "FuncOfMessageReceivedContextAndTask": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -1461,7 +1461,7 @@
         "FuncOfRedirectContextAndTask": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -1472,7 +1472,7 @@
         "FuncOfRemoteSignOutContextAndTask": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -1483,7 +1483,7 @@
         "FuncOfTokenResponseReceivedContextAndTask": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -1494,7 +1494,7 @@
         "FuncOfTokenValidatedContextAndTask": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -1505,7 +1505,7 @@
         "FuncOfUserInformationReceivedContextAndTask": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -1518,20 +1518,20 @@
             "additionalProperties": false,
             "properties": {
                 "OnAccessDenied": {
-                    "$ref": "#/definitions/FuncOfAccessDeniedContextAndTask"
+                    "$ref": "#/$defs/FuncOfAccessDeniedContextAndTask"
                 },
                 "OnRemoteFailure": {
-                    "$ref": "#/definitions/FuncOfRemoteFailureContextAndTask"
+                    "$ref": "#/$defs/FuncOfRemoteFailureContextAndTask"
                 },
                 "OnTicketReceived": {
-                    "$ref": "#/definitions/FuncOfTicketReceivedContextAndTask"
+                    "$ref": "#/$defs/FuncOfTicketReceivedContextAndTask"
                 }
             }
         },
         "FuncOfAccessDeniedContextAndTask": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -1542,7 +1542,7 @@
         "FuncOfRemoteFailureContextAndTask": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -1553,7 +1553,7 @@
         "FuncOfTicketReceivedContextAndTask": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -1633,7 +1633,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/IdTokenValidator"
+                            "$ref": "#/$defs/IdTokenValidator"
                         }
                     ]
                 },
@@ -1644,7 +1644,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/CryptoProviderFactory"
+                            "$ref": "#/$defs/CryptoProviderFactory"
                         }
                     ]
                 }
@@ -1653,7 +1653,7 @@
         "IdTokenValidator": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -1736,7 +1736,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/TokenValidationParameters"
+                            "$ref": "#/$defs/TokenValidationParameters"
                         }
                     ]
                 },
@@ -1747,7 +1747,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/AlgorithmValidator"
+                            "$ref": "#/$defs/AlgorithmValidator"
                         }
                     ]
                 },
@@ -1758,7 +1758,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/AudienceValidator"
+                            "$ref": "#/$defs/AudienceValidator"
                         }
                     ]
                 },
@@ -1782,7 +1782,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/BaseConfigurationManager"
+                            "$ref": "#/$defs/BaseConfigurationManager"
                         }
                     ]
                 },
@@ -1793,7 +1793,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/CryptoProviderFactory"
+                            "$ref": "#/$defs/CryptoProviderFactory"
                         }
                     ]
                 },
@@ -1820,7 +1820,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/IssuerSigningKeyValidator"
+                            "$ref": "#/$defs/IssuerSigningKeyValidator"
                         }
                     ]
                 },
@@ -1831,7 +1831,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/IssuerSigningKeyValidatorUsingConfiguration"
+                            "$ref": "#/$defs/IssuerSigningKeyValidatorUsingConfiguration"
                         }
                     ]
                 },
@@ -1854,7 +1854,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/SecurityKey"
+                            "$ref": "#/$defs/SecurityKey"
                         }
                     ]
                 },
@@ -1865,7 +1865,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/IssuerSigningKeyResolver"
+                            "$ref": "#/$defs/IssuerSigningKeyResolver"
                         }
                     ]
                 },
@@ -1876,7 +1876,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/IssuerSigningKeyResolverUsingConfiguration"
+                            "$ref": "#/$defs/IssuerSigningKeyResolverUsingConfiguration"
                         }
                     ]
                 },
@@ -1887,7 +1887,7 @@
                     ],
                     "description": "Gets or sets an IEnumerable`1 used for signature validation.",
                     "items": {
-                        "$ref": "#/definitions/SecurityKey"
+                        "$ref": "#/$defs/SecurityKey"
                     }
                 },
                 "IssuerValidator": {
@@ -1897,7 +1897,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/IssuerValidator"
+                            "$ref": "#/$defs/IssuerValidator"
                         }
                     ]
                 },
@@ -1908,7 +1908,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/IssuerValidatorUsingConfiguration"
+                            "$ref": "#/$defs/IssuerValidatorUsingConfiguration"
                         }
                     ]
                 },
@@ -1919,7 +1919,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/TransformBeforeSignatureValidation"
+                            "$ref": "#/$defs/TransformBeforeSignatureValidation"
                         }
                     ]
                 },
@@ -1930,7 +1930,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/LifetimeValidator"
+                            "$ref": "#/$defs/LifetimeValidator"
                         }
                     ]
                 },
@@ -1958,7 +1958,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/FuncOfSecurityTokenAndStringAndString"
+                            "$ref": "#/$defs/FuncOfSecurityTokenAndStringAndString"
                         }
                     ]
                 },
@@ -2004,7 +2004,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/FuncOfSecurityTokenAndStringAndString"
+                            "$ref": "#/$defs/FuncOfSecurityTokenAndStringAndString"
                         }
                     ]
                 },
@@ -2020,7 +2020,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/SignatureValidator"
+                            "$ref": "#/$defs/SignatureValidator"
                         }
                     ]
                 },
@@ -2031,7 +2031,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/SignatureValidatorUsingConfiguration"
+                            "$ref": "#/$defs/SignatureValidatorUsingConfiguration"
                         }
                     ]
                 },
@@ -2042,7 +2042,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/SecurityKey"
+                            "$ref": "#/$defs/SecurityKey"
                         }
                     ]
                 },
@@ -2053,7 +2053,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/TokenDecryptionKeyResolver"
+                            "$ref": "#/$defs/TokenDecryptionKeyResolver"
                         }
                     ]
                 },
@@ -2064,7 +2064,7 @@
                     ],
                     "description": "Gets or sets the IEnumerable`1 that is to be used for decrypting inbound tokens.",
                     "items": {
-                        "$ref": "#/definitions/SecurityKey"
+                        "$ref": "#/$defs/SecurityKey"
                     }
                 },
                 "TokenReader": {
@@ -2074,7 +2074,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/TokenReader"
+                            "$ref": "#/$defs/TokenReader"
                         }
                     ]
                 },
@@ -2085,7 +2085,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/ITokenReplayCache"
+                            "$ref": "#/$defs/ITokenReplayCache"
                         }
                     ]
                 },
@@ -2096,7 +2096,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/TokenReplayValidator"
+                            "$ref": "#/$defs/TokenReplayValidator"
                         }
                     ]
                 },
@@ -2112,7 +2112,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/TypeValidator"
+                            "$ref": "#/$defs/TypeValidator"
                         }
                     ]
                 },
@@ -2215,7 +2215,7 @@
         "AlgorithmValidator": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -2227,7 +2227,7 @@
         "AudienceValidator": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -2254,7 +2254,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/BaseConfiguration"
+                            "$ref": "#/$defs/BaseConfiguration"
                         }
                     ]
                 },
@@ -2288,7 +2288,7 @@
         "IssuerSigningKeyValidator": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -2300,7 +2300,7 @@
         "IssuerSigningKeyValidatorUsingConfiguration": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -2312,7 +2312,7 @@
         "IssuerSigningKeyResolver": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -2324,7 +2324,7 @@
         "IssuerSigningKeyResolverUsingConfiguration": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -2336,7 +2336,7 @@
         "IssuerValidator": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -2348,7 +2348,7 @@
         "IssuerValidatorUsingConfiguration": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -2360,7 +2360,7 @@
         "TransformBeforeSignatureValidation": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -2372,7 +2372,7 @@
         "LifetimeValidator": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -2384,7 +2384,7 @@
         "FuncOfSecurityTokenAndStringAndString": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -2395,7 +2395,7 @@
         "SignatureValidator": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -2407,7 +2407,7 @@
         "SignatureValidatorUsingConfiguration": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -2419,7 +2419,7 @@
         "TokenDecryptionKeyResolver": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -2431,7 +2431,7 @@
         "TokenReader": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -2449,7 +2449,7 @@
         "TokenReplayValidator": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -2461,7 +2461,7 @@
         "TypeValidator": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -2496,10 +2496,10 @@
                     "type": "boolean"
                 },
                 "SameSite": {
-                    "$ref": "#/definitions/SameSiteMode"
+                    "$ref": "#/$defs/SameSiteMode"
                 },
                 "SecurePolicy": {
-                    "$ref": "#/definitions/CookieSecurePolicy"
+                    "$ref": "#/$defs/CookieSecurePolicy"
                 },
                 "Expiration": {
                     "type": [
@@ -2559,7 +2559,7 @@
         "RemoteAuthenticationOptions": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/AuthenticationSchemeOptions"
+                    "$ref": "#/$defs/AuthenticationSchemeOptions"
                 },
                 {
                     "type": "object",
@@ -2575,12 +2575,12 @@
                                     "type": "null"
                                 },
                                 {
-                                    "$ref": "#/definitions/HttpMessageHandler"
+                                    "$ref": "#/$defs/HttpMessageHandler"
                                 }
                             ]
                         },
                         "Backchannel": {
-                            "$ref": "#/definitions/HttpClient"
+                            "$ref": "#/$defs/HttpClient"
                         },
                         "DataProtectionProvider": {
                             "oneOf": [
@@ -2588,7 +2588,7 @@
                                     "type": "null"
                                 },
                                 {
-                                    "$ref": "#/definitions/IDataProtectionProvider"
+                                    "$ref": "#/$defs/IDataProtectionProvider"
                                 }
                             ]
                         },
@@ -2612,13 +2612,13 @@
                             "format": "duration"
                         },
                         "Events": {
-                            "$ref": "#/definitions/RemoteAuthenticationEvents"
+                            "$ref": "#/$defs/RemoteAuthenticationEvents"
                         },
                         "SaveTokens": {
                             "type": "boolean"
                         },
                         "CorrelationCookie": {
-                            "$ref": "#/definitions/CookieBuilder"
+                            "$ref": "#/$defs/CookieBuilder"
                         }
                     }
                 }
@@ -2632,20 +2632,20 @@
         "HttpClient": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/HttpMessageInvoker"
+                    "$ref": "#/$defs/HttpMessageInvoker"
                 },
                 {
                     "type": "object",
                     "additionalProperties": false,
                     "properties": {
                         "DefaultRequestHeaders": {
-                            "$ref": "#/definitions/HttpRequestHeaders"
+                            "$ref": "#/$defs/HttpRequestHeaders"
                         },
                         "DefaultRequestVersion": {
                             "type": "string"
                         },
                         "DefaultVersionPolicy": {
-                            "$ref": "#/definitions/HttpVersionPolicy"
+                            "$ref": "#/$defs/HttpVersionPolicy"
                         },
                         "BaseAddress": {
                             "type": [
@@ -2671,7 +2671,7 @@
                 {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/KeyValuePairOfStringAndIEnumerableOfString"
+                        "$ref": "#/$defs/KeyValuePairOfStringAndIEnumerableOfString"
                     }
                 },
                 {
@@ -2681,25 +2681,25 @@
                         "Accept": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/MediaTypeWithQualityHeaderValue"
+                                "$ref": "#/$defs/MediaTypeWithQualityHeaderValue"
                             }
                         },
                         "AcceptCharset": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/StringWithQualityHeaderValue"
+                                "$ref": "#/$defs/StringWithQualityHeaderValue"
                             }
                         },
                         "AcceptEncoding": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/StringWithQualityHeaderValue"
+                                "$ref": "#/$defs/StringWithQualityHeaderValue"
                             }
                         },
                         "AcceptLanguage": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/StringWithQualityHeaderValue"
+                                "$ref": "#/$defs/StringWithQualityHeaderValue"
                             }
                         },
                         "Authorization": {
@@ -2708,7 +2708,7 @@
                                     "type": "null"
                                 },
                                 {
-                                    "$ref": "#/definitions/AuthenticationHeaderValue"
+                                    "$ref": "#/$defs/AuthenticationHeaderValue"
                                 }
                             ]
                         },
@@ -2733,7 +2733,7 @@
                         "IfMatch": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/EntityTagHeaderValue"
+                                "$ref": "#/$defs/EntityTagHeaderValue"
                             }
                         },
                         "IfModifiedSince": {
@@ -2746,7 +2746,7 @@
                         "IfNoneMatch": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/EntityTagHeaderValue"
+                                "$ref": "#/$defs/EntityTagHeaderValue"
                             }
                         },
                         "IfRange": {
@@ -2755,7 +2755,7 @@
                                     "type": "null"
                                 },
                                 {
-                                    "$ref": "#/definitions/RangeConditionHeaderValue"
+                                    "$ref": "#/$defs/RangeConditionHeaderValue"
                                 }
                             ]
                         },
@@ -2785,7 +2785,7 @@
                                     "type": "null"
                                 },
                                 {
-                                    "$ref": "#/definitions/AuthenticationHeaderValue"
+                                    "$ref": "#/$defs/AuthenticationHeaderValue"
                                 }
                             ]
                         },
@@ -2795,7 +2795,7 @@
                                     "type": "null"
                                 },
                                 {
-                                    "$ref": "#/definitions/RangeHeaderValue"
+                                    "$ref": "#/$defs/RangeHeaderValue"
                                 }
                             ]
                         },
@@ -2809,19 +2809,19 @@
                         "TE": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/TransferCodingWithQualityHeaderValue"
+                                "$ref": "#/$defs/TransferCodingWithQualityHeaderValue"
                             }
                         },
                         "UserAgent": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/ProductInfoHeaderValue"
+                                "$ref": "#/$defs/ProductInfoHeaderValue"
                             }
                         },
                         "Expect": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/NameValueWithParametersHeaderValue"
+                                "$ref": "#/$defs/NameValueWithParametersHeaderValue"
                             }
                         },
                         "CacheControl": {
@@ -2830,7 +2830,7 @@
                                     "type": "null"
                                 },
                                 {
-                                    "$ref": "#/definitions/CacheControlHeaderValue"
+                                    "$ref": "#/$defs/CacheControlHeaderValue"
                                 }
                             ]
                         },
@@ -2856,7 +2856,7 @@
                         "Pragma": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/NameValueHeaderValue"
+                                "$ref": "#/$defs/NameValueHeaderValue"
                             }
                         },
                         "Trailer": {
@@ -2868,7 +2868,7 @@
                         "TransferEncoding": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/TransferCodingHeaderValue"
+                                "$ref": "#/$defs/TransferCodingHeaderValue"
                             }
                         },
                         "TransferEncodingChunked": {
@@ -2880,19 +2880,19 @@
                         "Upgrade": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/ProductHeaderValue"
+                                "$ref": "#/$defs/ProductHeaderValue"
                             }
                         },
                         "Via": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/ViaHeaderValue"
+                                "$ref": "#/$defs/ViaHeaderValue"
                             }
                         },
                         "Warning": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/WarningHeaderValue"
+                                "$ref": "#/$defs/WarningHeaderValue"
                             }
                         }
                     }
@@ -2902,7 +2902,7 @@
         "MediaTypeWithQualityHeaderValue": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MediaTypeHeaderValue"
+                    "$ref": "#/$defs/MediaTypeHeaderValue"
                 },
                 {
                     "type": "object",
@@ -2932,7 +2932,7 @@
                 "Parameters": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/NameValueHeaderValue"
+                        "$ref": "#/$defs/NameValueHeaderValue"
                     }
                 },
                 "MediaType": {
@@ -3018,7 +3018,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/EntityTagHeaderValue"
+                            "$ref": "#/$defs/EntityTagHeaderValue"
                         }
                     ]
                 }
@@ -3034,7 +3034,7 @@
                 "Ranges": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/RangeItemHeaderValue"
+                        "$ref": "#/$defs/RangeItemHeaderValue"
                     }
                 }
             }
@@ -3062,7 +3062,7 @@
         "TransferCodingWithQualityHeaderValue": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/TransferCodingHeaderValue"
+                    "$ref": "#/$defs/TransferCodingHeaderValue"
                 },
                 {
                     "type": "object",
@@ -3089,7 +3089,7 @@
                 "Parameters": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/NameValueHeaderValue"
+                        "$ref": "#/$defs/NameValueHeaderValue"
                     }
                 }
             }
@@ -3104,7 +3104,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/ProductHeaderValue"
+                            "$ref": "#/$defs/ProductHeaderValue"
                         }
                     ]
                 },
@@ -3134,7 +3134,7 @@
         "NameValueWithParametersHeaderValue": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/NameValueHeaderValue"
+                    "$ref": "#/$defs/NameValueHeaderValue"
                 },
                 {
                     "type": "object",
@@ -3143,7 +3143,7 @@
                         "Parameters": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/NameValueHeaderValue"
+                                "$ref": "#/$defs/NameValueHeaderValue"
                             }
                         }
                     }
@@ -3224,7 +3224,7 @@
                 "Extensions": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/NameValueHeaderValue"
+                        "$ref": "#/$defs/NameValueHeaderValue"
                     }
                 }
             }
@@ -3380,7 +3380,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/FuncOfHttpContextAndString"
+                            "$ref": "#/$defs/FuncOfHttpContextAndString"
                         }
                     ]
                 },
@@ -3390,7 +3390,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/TimeProvider"
+                            "$ref": "#/$defs/TimeProvider"
                         }
                     ]
                 }
@@ -3399,7 +3399,7 @@
         "FuncOfHttpContextAndString": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -3413,7 +3413,7 @@
             "additionalProperties": false,
             "properties": {
                 "LocalTimeZone": {
-                    "$ref": "#/definitions/TimeZoneInfo"
+                    "$ref": "#/$defs/TimeZoneInfo"
                 },
                 "TimestampFrequency": {
                     "type": "integer",
@@ -3452,7 +3452,7 @@
     },
     "allOf": [
         {
-            "$ref": "#/definitions/RemoteAuthenticationOptions"
+            "$ref": "#/$defs/RemoteAuthenticationOptions"
         },
         {
             "type": "object",
@@ -3482,7 +3482,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/OpenIdConnectConfiguration"
+                            "$ref": "#/$defs/OpenIdConnectConfiguration"
                         }
                     ]
                 },
@@ -3492,7 +3492,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/IConfigurationManagerOfOpenIdConnectConfiguration"
+                            "$ref": "#/$defs/IConfigurationManagerOfOpenIdConnectConfiguration"
                         }
                     ]
                 },
@@ -3502,7 +3502,7 @@
                 "ClaimActions": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/ClaimAction"
+                        "$ref": "#/$defs/ClaimAction"
                     }
                 },
                 "RequireHttpsMetadata": {
@@ -3515,7 +3515,7 @@
                     ]
                 },
                 "Events": {
-                    "$ref": "#/definitions/OpenIdConnectEvents"
+                    "$ref": "#/$defs/OpenIdConnectEvents"
                 },
                 "MaxAge": {
                     "type": [
@@ -3525,7 +3525,7 @@
                     "format": "duration"
                 },
                 "ProtocolValidator": {
-                    "$ref": "#/definitions/OpenIdConnectProtocolValidator"
+                    "$ref": "#/$defs/OpenIdConnectProtocolValidator"
                 },
                 "SignedOutCallbackPath": {
                     "type": "string"
@@ -3537,7 +3537,7 @@
                     "type": "boolean"
                 },
                 "AuthenticationMethod": {
-                    "$ref": "#/definitions/OpenIdConnectRedirectBehavior"
+                    "$ref": "#/$defs/OpenIdConnectRedirectBehavior"
                 },
                 "Resource": {
                     "type": [
@@ -3573,10 +3573,10 @@
                     ]
                 },
                 "StateDataFormat": {
-                    "$ref": "#/definitions/ISecureDataFormatOfAuthenticationProperties"
+                    "$ref": "#/$defs/ISecureDataFormatOfAuthenticationProperties"
                 },
                 "StringDataFormat": {
-                    "$ref": "#/definitions/ISecureDataFormatOfString"
+                    "$ref": "#/$defs/ISecureDataFormatOfString"
                 },
                 "SecurityTokenValidator": {
                     "deprecated": true,
@@ -3584,15 +3584,15 @@
                     "x-deprecatedMessage": "SecurityTokenValidator is no longer used by default. Use TokenHandler instead. To continue using SecurityTokenValidator, set UseSecurityTokenValidator to true. See https://aka.ms/aspnetcore8/security-token-changes",
                     "oneOf": [
                         {
-                            "$ref": "#/definitions/ISecurityTokenValidator"
+                            "$ref": "#/$defs/ISecurityTokenValidator"
                         }
                     ]
                 },
                 "TokenHandler": {
-                    "$ref": "#/definitions/TokenHandler"
+                    "$ref": "#/$defs/TokenHandler"
                 },
                 "TokenValidationParameters": {
-                    "$ref": "#/definitions/TokenValidationParameters"
+                    "$ref": "#/$defs/TokenValidationParameters"
                 },
                 "UseTokenLifetime": {
                     "type": "boolean"
@@ -3604,7 +3604,7 @@
                     "type": "boolean"
                 },
                 "NonceCookie": {
-                    "$ref": "#/definitions/CookieBuilder"
+                    "$ref": "#/$defs/CookieBuilder"
                 },
                 "UsePkce": {
                     "type": "boolean"
