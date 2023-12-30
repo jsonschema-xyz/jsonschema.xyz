@@ -1,7 +1,8 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
     "title": "IP End Point",
     "description": "Represents a network endpoint as an IP address and a port number.",
+    "contentMediaType": "application/schema+json",
     "definitions": {
         // "AddressFamily": {
         //     "$ref": "https://jsonschema.xyz/schemas/Net/AddressFamily.schema"
@@ -47,6 +48,7 @@
                     "type": "integer",
                     "format": "int64",
                     "description": "An Internet Protocol (IP) address.",
+                    "deprecated": true,
                     "x-deprecated": true,
                     "x-deprecatedMessage": "IPAddress.Address is address family dependent and has been deprecated. Use IPAddress.Equals to perform comparisons instead."
                 }

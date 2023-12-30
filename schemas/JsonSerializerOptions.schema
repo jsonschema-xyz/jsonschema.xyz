@@ -1,5 +1,5 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft/2019-09/schema#",
     "$id": "https://jsonschema.xyz/schemas/JsonSerializerOptions.schema",
     "contentMediaType": "application/schema+json",
     "title": "JSON Serializer Options",
@@ -57,7 +57,8 @@
         },
         "IgnoreNullValues": {
             "type": "boolean",
-            "x-deprecated": true,
+                    "deprecated": true,
+                    "x-deprecated": true,
             "x-deprecatedMessage": "JsonSerializerOptions.IgnoreNullValues is obsolete. To ignore null values when serializing, set DefaultIgnoreCondition to JsonIgnoreCondition.WhenWritingNull."
         },
         "DefaultIgnoreCondition": {

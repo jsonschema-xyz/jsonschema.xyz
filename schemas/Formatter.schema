@@ -1,5 +1,5 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft/2019-09/schema",
     "$id": "https://jsonschema.xyz/schemas/Formatter.schema",
     "contentMediaType": "application/schema+json",
     "title": "Input/Output Formatter",

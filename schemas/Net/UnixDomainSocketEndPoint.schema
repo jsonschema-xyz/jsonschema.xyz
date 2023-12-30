@@ -1,5 +1,5 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
     "$id": "https://jsonschema.xyz/schemas/Net/UnixDomainSocketEndpoint.schema",
     "title": "UNIX Domain Socket End Point",
     "description": "Represents a Unix Domain Socket endpoint as a path.",

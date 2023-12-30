@@ -1,5 +1,5 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft/2019-09/schema",
     "$id": "https://jsonschema.xyz/schemas/OpenIdConnectOptions.schema",
     "title": "Open ID Connect Options",
     "definitions": {
@@ -1121,6 +1121,7 @@
                         "null",
                         "string"
                     ],
+                    "deprecated": true,
                     "x-deprecated": true,
                     "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
                 },
@@ -1166,6 +1167,7 @@
                 },
                 "EscapedCodeBase": {
                     "type": "string",
+                    "deprecated": true,
                     "x-deprecated": true,
                     "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
                 },
@@ -1180,6 +1182,7 @@
                 },
                 "GlobalAssemblyCache": {
                     "type": "boolean",
+                    "deprecated": true,
                     "x-deprecated": true,
                     "x-deprecatedMessage": "The Global Assembly Cache is not supported."
                 },
@@ -3576,6 +3579,7 @@
                     "$ref": "#/definitions/ISecureDataFormatOfString"
                 },
                 "SecurityTokenValidator": {
+                    "deprecated": true,
                     "x-deprecated": true,
                     "x-deprecatedMessage": "SecurityTokenValidator is no longer used by default. Use TokenHandler instead. To continue using SecurityTokenValidator, set UseSecurityTokenValidator to true. See https://aka.ms/aspnetcore8/security-token-changes",
                     "oneOf": [

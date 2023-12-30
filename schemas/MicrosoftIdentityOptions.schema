@@ -1,5 +1,5 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft/2019-09/schema",
     "$id": "https://jsonschema.xyz/schemas/MicrosoftIdentityOptions.schema",
     "contentMediaType": "application/schema+json",
     "title": "Microsoft Identity Options",
@@ -91,6 +91,7 @@
                             "type": "boolean"
                         },
                         "PrivateKey": {
+                            "deprecated": true,
                             "x-deprecated": true,
                             "x-deprecatedMessage": "X509Certificate2.PrivateKey is obsolete. Use the appropriate method to get the private key, such as GetRSAPrivateKey, or use the CopyWithPrivateKey method to create a new instance with a private key.",
                             "oneOf": [
@@ -255,6 +256,7 @@
                     "$ref": "#/definitions/AsnEncodedData"
                 },
                 "Key": {
+                    "deprecated": true,
                     "x-deprecated": true,
                     "x-deprecatedMessage": "PublicKey.Key is obsolete. Use the appropriate method to get the public key, such as GetRSAPublicKey.",
                     "oneOf": [
@@ -844,6 +846,7 @@
                         "null",
                         "string"
                     ],
+                    "deprecated": true,
                     "x-deprecated": true,
                     "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
                 },
@@ -889,6 +892,7 @@
                 },
                 "EscapedCodeBase": {
                     "type": "string",
+                    "deprecated": true,
                     "x-deprecated": true,
                     "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
                 },
@@ -903,6 +907,7 @@
                 },
                 "GlobalAssemblyCache": {
                     "type": "boolean",
+                    "deprecated": true,
                     "x-deprecated": true,
                     "x-deprecatedMessage": "The Global Assembly Cache is not supported."
                 },
@@ -1407,6 +1412,7 @@
                             "$ref": "#/definitions/ISecureDataFormatOfString"
                         },
                         "SecurityTokenValidator": {
+                            "deprecated": true,
                             "x-deprecated": true,
                             "x-deprecatedMessage": "SecurityTokenValidator is no longer used by default. Use TokenHandler instead. To continue using SecurityTokenValidator, set UseSecurityTokenValidator to true. See https://aka.ms/aspnetcore8/security-token-changes",
                             "oneOf": [
@@ -4321,7 +4327,7 @@
             }
         }
     },
-    "type":"object",
+    "type": "object",
     "allOf": [
         {
             "$ref": "#/definitions/OpenIdConnectOptions"
