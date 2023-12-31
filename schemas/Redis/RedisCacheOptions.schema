@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft/2019-09/schema",
-    "$id": "https://jsonschema.xyz/schemas/Redis/CacheOptions.schema",
+    "$id": "https://jsonschema.xyz/schemas/Redis/RedisCacheOptions.schema",
     "contentMediaType": "application/schema+json",
     "title": "Redis Cache Options",
     "type": "object",
@@ -8,7 +8,7 @@
     "properties": {
         "$schema": {
             "type": "string",
-            "default": "https://jsonschema.xyz/schemas/Redis/CacheOptions.schema"
+            "default": "https://jsonschema.xyz/schemas/Redis/RedisCacheOptions.schema"
         },
         "Configuration": {
             "type": [
