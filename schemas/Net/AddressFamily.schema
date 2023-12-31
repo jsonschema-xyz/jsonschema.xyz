@@ -79,7 +79,7 @@
             ]
         },
         "AddressFamily": {
-            "type": "integer",
+            "type": ["integer","string"],
             "oneOf": [
                 {
                     "type": "integer",

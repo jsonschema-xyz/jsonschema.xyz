@@ -11,6 +11,10 @@
             "additionalProperties": true,
             "properties": {
                 "AddressFamily": {
+                    "$schema": {
+                        "type": "string",
+                        "default": "https://jsonschema.xyz/schemas/Net/EndPoint.schem"
+                    },
                     "$ref": "https://jsonschema.xyz/schemas/Net/AddressFamily.schema"
                 }
             }

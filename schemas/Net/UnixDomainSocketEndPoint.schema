@@ -11,6 +11,10 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
+                "$schema": {
+                    "type": "string",
+                    "default": "https://jsonschema.xyz/schemas/Net/UnixDomainSocketEndPoint.schema"
+                },
                 "AddressFamily": {
                     "$ref": "https://jsonschema.xyz/schemas/Net/AddressFamily.schema",
                     "description": "Gets the address family to which the endpoint belongs."

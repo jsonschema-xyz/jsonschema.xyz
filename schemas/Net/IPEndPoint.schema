@@ -1,5 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "https://jsonschema.xyz/schemas/Net/IPEndPoint.schema",
     "title": "IP End Point",
     "description": "Represents a network endpoint as an IP address and a port number.",
     "contentMediaType": "application/schema+json",
@@ -11,6 +12,10 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
+                "$schema": {
+                    "type": "string",
+                    "default": "https://jsonschema.xyz/schemas/Net/IPEndPoint.schema"
+                },
                 "AddressFamily": {
                     "$ref": "#/$defs/AddressFamily",
                     "description": "Gets the address family of the IP address."
