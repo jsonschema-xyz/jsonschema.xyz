@@ -6,6 +6,10 @@
     "type": "object",
     "additionalProperties": false,
     "properties": {
+        "$schema": {
+            "type": "string",
+            "default": "https://jsonschema.xyz/schemas/CacheProfile.schema"
+        },
         "Duration": {
             "type": [
                 "integer",
@@ -19,7 +23,7 @@
                     "type": "null"
                 },
                 {
-                    "$ref": "#/definitions/ResponseCacheLocation"
+                    "$ref": "#/$defs/ResponseCacheLocation"
                 }
             ]
         },
@@ -45,19 +49,37 @@
             }
         }
     },
-    "definitions": {
-        "ResponseCacheLocation": {
-            "type": "integer",
+    "$defs": {
+        "ResponseCacheLocationNames": {
+            "type": "string",
             "description": "",
-            "x-enumNames": [
+            "enum": [
                 "Any",
                 "Client",
                 "None"
-            ],
+            ]
+        },
+        "ResponseCacheLocationInts": {
+            "type": "integer",
+            "description": "",
             "enum": [
                 0,
                 1,
                 2
+            ]
+        },
+        "ResponseCacheLocation": {
+            "type": [
+                "integer",
+                "string"
+            ],
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/ResponseCacheLocationNames"
+                },
+                {
+                    "$ref": "#/$defs/ResponseCacheLocationInts"
+                }
             ]
         }
     }

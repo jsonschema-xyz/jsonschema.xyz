@@ -7,10 +7,10 @@
     "type": "object",
     "allOf": [
         {
-            "$ref": "#/definitions/VersionAndIsRoot"
+            "$ref": "#/$defs/VersionAndIsRoot"
         },
         {
-            "$ref": "#/definitions/DownstreamApis"
+            "$ref": "#/$defs/DownstreamApis"
         }
     ],
     "$defs": {
@@ -19,13 +19,13 @@
             "properties": {
                 "MicrosoftGraphOptions": {
                     "type": "object",
-                    "$ref": "#/definitions/DownstreamApi",
+                    "$ref": "#/$defs/DownstreamApi",
                     "additionalProperties": true,
                     "description": "The options for the Microsoft Graph API."
                 },
                 "additionalProperties": {
                     "type": "object",
-                    "$ref": "#/definitions/DownstreamApi",
+                    "$ref": "#/$defs/DownstreamApi",
                     "additionalProperties": true
                 }
             }

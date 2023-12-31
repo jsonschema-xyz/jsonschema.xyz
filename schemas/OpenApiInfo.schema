@@ -42,7 +42,7 @@
                     "type": "null"
                 },
                 {
-                    "$ref": "#/definitions/OpenApiContact"
+                    "$ref": "#/$defs/OpenApiContact"
                 }
             ]
         },
@@ -53,7 +53,7 @@
                     "type": "null"
                 },
                 {
-                    "$ref": "#/definitions/OpenApiLicense"
+                    "$ref": "#/$defs/OpenApiLicense"
                 }
             ]
         },
@@ -64,7 +64,7 @@
             ],
             "description": "This object MAY be extended with Specification Extensions.",
             "additionalProperties": {
-                "$ref": "#/definitions/IOpenApiExtension"
+                "$ref": "#/$defs/IOpenApiExtension"
             }
         }
     },
@@ -72,7 +72,7 @@
         "Title",
         "Version"
     ],
-    "definitions": {
+    "$defs": {
         "OpenApiContact": {
             "type": "object",
             "description": "Contact Object.",
@@ -107,7 +107,7 @@
                     ],
                     "description": "This object MAY be extended with Specification Extensions.",
                     "additionalProperties": {
-                        "$ref": "#/definitions/IOpenApiExtension"
+                        "$ref": "#/$defs/IOpenApiExtension"
                     }
                 }
             }
@@ -145,7 +145,7 @@
                     ],
                     "description": "This object MAY be extended with Specification Extensions.",
                     "additionalProperties": {
-                        "$ref": "#/definitions/IOpenApiExtension"
+                        "$ref": "#/$defs/IOpenApiExtension"
                     }
                 }
             },

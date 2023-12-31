@@ -22,7 +22,7 @@
                     "type": "null"
                 },
                 {
-                    "$ref": "#/definitions/ConfigurationOptions"
+                    "$ref": "#/$defs/ConfigurationOptions"
                 }
             ]
         },
@@ -32,7 +32,7 @@
                     "type": "null"
                 },
                 {
-                    "$ref": "#/definitions/FuncOfTaskOfIConnectionMultiplexer"
+                    "$ref": "#/$defs/FuncOfTaskOfIConnectionMultiplexer"
                 }
             ]
         },
@@ -48,12 +48,12 @@
                     "type": "null"
                 },
                 {
-                    "$ref": "#/definitions/FuncOfProfilingSession"
+                    "$ref": "#/$defs/FuncOfProfilingSession"
                 }
             ]
         }
     },
-    "definitions": {
+    "$defs": {
         "ConfigurationOptions": { "$ref": "https://jsonschema.xyz/schemas/Redis/ConfigurationOptions.schema" },
         "DefaultOptionsProvider": {
             "type": "object",
@@ -72,7 +72,7 @@
                     "description": "The backlog policy to be used for commands when a connection is unhealthy.",
                     "oneOf": [
                         {
-                            "$ref": "#/definitions/BacklogPolicy"
+                            "$ref": "#/$defs/BacklogPolicy"
                         }
                     ]
                 },
@@ -100,7 +100,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/CommandMap"
+                            "$ref": "#/$defs/CommandMap"
                         }
                     ]
                 },
@@ -134,7 +134,7 @@
                     "description": "Type of proxy to use (if any); for example Twemproxy.",
                     "oneOf": [
                         {
-                            "$ref": "#/definitions/Proxy"
+                            "$ref": "#/$defs/Proxy"
                         }
                     ]
                 },
@@ -145,7 +145,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/IReconnectRetryPolicy"
+                            "$ref": "#/$defs/IReconnectRetryPolicy"
                         }
                     ]
                 },
@@ -238,7 +238,7 @@
         "ActionOfEndPointAndConnectionTypeAndSocket": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -249,7 +249,7 @@
         "MulticastDelegate": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/Delegate"
+                    "$ref": "#/$defs/Delegate"
                 },
                 {
                     "type": "object",
@@ -272,14 +272,14 @@
                     ]
                 },
                 "Method": {
-                    "$ref": "#/definitions/MethodInfo"
+                    "$ref": "#/$defs/MethodInfo"
                 }
             }
         },
         "MethodInfo": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MethodBase"
+                    "$ref": "#/$defs/MethodBase"
                 },
                 {
                     "type": "object",
@@ -287,10 +287,10 @@
                     "additionalProperties": false,
                     "properties": {
                         "MemberType": {
-                            "$ref": "#/definitions/MemberTypes"
+                            "$ref": "#/$defs/MemberTypes"
                         },
                         "ReturnParameter": {
-                            "$ref": "#/definitions/ParameterInfo"
+                            "$ref": "#/$defs/ParameterInfo"
                         },
                         "ReturnType": {
                             "type": "string"
@@ -331,10 +331,10 @@
             "additionalProperties": false,
             "properties": {
                 "Attributes": {
-                    "$ref": "#/definitions/ParameterAttributes"
+                    "$ref": "#/$defs/ParameterAttributes"
                 },
                 "Member": {
-                    "$ref": "#/definitions/MemberInfo"
+                    "$ref": "#/$defs/MemberInfo"
                 },
                 "Name": {
                     "type": [
@@ -386,7 +386,7 @@
                 "CustomAttributes": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CustomAttributeData"
+                        "$ref": "#/$defs/CustomAttributeData"
                     }
                 },
                 "MetadataToken": {
@@ -432,12 +432,12 @@
             "additionalProperties": false,
             "properties": {
                 "Module": {
-                    "$ref": "#/definitions/Module"
+                    "$ref": "#/$defs/Module"
                 },
                 "CustomAttributes": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CustomAttributeData"
+                        "$ref": "#/$defs/CustomAttributeData"
                     }
                 },
                 "IsCollectible": {
@@ -455,7 +455,7 @@
             "additionalProperties": false,
             "properties": {
                 "Assembly": {
-                    "$ref": "#/definitions/Assembly"
+                    "$ref": "#/$defs/Assembly"
                 },
                 "FullyQualifiedName": {
                     "type": "string"
@@ -475,12 +475,12 @@
                     "type": "string"
                 },
                 "ModuleHandle": {
-                    "$ref": "#/definitions/ModuleHandle"
+                    "$ref": "#/$defs/ModuleHandle"
                 },
                 "CustomAttributes": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CustomAttributeData"
+                        "$ref": "#/$defs/CustomAttributeData"
                     }
                 },
                 "MetadataToken": {
@@ -520,7 +520,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/MethodInfo"
+                            "$ref": "#/$defs/MethodInfo"
                         }
                     ]
                 },
@@ -551,7 +551,7 @@
                 "CustomAttributes": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CustomAttributeData"
+                        "$ref": "#/$defs/CustomAttributeData"
                     }
                 },
                 "EscapedCodeBase": {
@@ -560,12 +560,12 @@
                     "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
                 },
                 "ManifestModule": {
-                    "$ref": "#/definitions/Module"
+                    "$ref": "#/$defs/Module"
                 },
                 "Modules": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/Module"
+                        "$ref": "#/$defs/Module"
                     }
                 },
                 "GlobalAssemblyCache": {
@@ -578,7 +578,7 @@
                     "format": "int64"
                 },
                 "SecurityRuleSet": {
-                    "$ref": "#/definitions/SecurityRuleSet"
+                    "$ref": "#/$defs/SecurityRuleSet"
                 }
             }
         },
@@ -590,18 +590,18 @@
                     "type": "string"
                 },
                 "Constructor": {
-                    "$ref": "#/definitions/ConstructorInfo"
+                    "$ref": "#/$defs/ConstructorInfo"
                 },
                 "ConstructorArguments": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CustomAttributeTypedArgument"
+                        "$ref": "#/$defs/CustomAttributeTypedArgument"
                     }
                 },
                 "NamedArguments": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CustomAttributeNamedArgument"
+                        "$ref": "#/$defs/CustomAttributeNamedArgument"
                     }
                 }
             }
@@ -609,7 +609,7 @@
         "ConstructorInfo": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MethodBase"
+                    "$ref": "#/$defs/MethodBase"
                 },
                 {
                     "type": "object",
@@ -617,7 +617,7 @@
                     "additionalProperties": false,
                     "properties": {
                         "MemberType": {
-                            "$ref": "#/definitions/MemberTypes"
+                            "$ref": "#/$defs/MemberTypes"
                         }
                     }
                 }
@@ -626,7 +626,7 @@
         "MethodBase": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MemberInfo"
+                    "$ref": "#/$defs/MemberInfo"
                 },
                 {
                     "type": "object",
@@ -634,10 +634,10 @@
                     "additionalProperties": false,
                     "properties": {
                         "MethodImplementationFlags": {
-                            "$ref": "#/definitions/MethodImplAttributes"
+                            "$ref": "#/$defs/MethodImplAttributes"
                         },
                         "CallingConvention": {
-                            "$ref": "#/definitions/CallingConventions"
+                            "$ref": "#/$defs/CallingConventions"
                         },
                         "IsAbstract": {
                             "type": "boolean"
@@ -786,10 +786,10 @@
             "additionalProperties": false,
             "properties": {
                 "MemberInfo": {
-                    "$ref": "#/definitions/MemberInfo"
+                    "$ref": "#/$defs/MemberInfo"
                 },
                 "TypedValue": {
-                    "$ref": "#/definitions/CustomAttributeTypedArgument"
+                    "$ref": "#/$defs/CustomAttributeTypedArgument"
                 },
                 "MemberName": {
                     "type": "string"
@@ -842,7 +842,7 @@
             "type": "array",
             "description": "A list of endpoints.",
             "items": {
-                "$ref": "#/definitions/EndPoint"
+                "$ref": "#/$defs/EndPoint"
             }
         },
         "EndPoint": {
@@ -865,7 +865,7 @@
         "FuncOfStringAndSslClientAuthenticationOptions": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -907,7 +907,7 @@
         "FuncOfTaskOfIConnectionMultiplexer": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -918,7 +918,7 @@
         "FuncOfProfilingSession": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",

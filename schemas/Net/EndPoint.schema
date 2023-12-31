@@ -4,7 +4,7 @@
     "$comment": "The EndPoint class provides an abstract base class that represents a network resource or service. Descendant classes combine network connection information to form a connection point to a service.",
     "contentMediaType": "application/schema+json",
     "description": "Identifies a network address. This is an abstract class.",
-    "definitions": {
+    "$defs": {
         "EndPoint": {
             "type": "object",
             "x-abstract": true,
@@ -20,5 +20,5 @@
             }
         }
     },
-    "$ref": "#/definitions/EndPoint"
+    "$ref": "#/$defs/EndPoint"
 }

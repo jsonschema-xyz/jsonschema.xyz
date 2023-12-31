@@ -3,7 +3,7 @@
     "$id": "https://jsonschema.xyz/schemas/MicrosoftIdentityWebApplicationOptions.schema",
     "contentMediaType": "application/schema+json",
     "title": "Microsoft Identity Application Options",
-    "definitions": {
+    "$defs": {
         "IdentityApplicationOptions": {
             "type": "object",
             "description": "Options for configuring authentication in a web app, web API or daemon app.\n\nThis class contains configuration properties for any OAuth 2.0 identity provider.\nFor Azure AD specific options see the derived class: . This class\nand its derived class are usually used as options, that are deserialized from a configuration file like appsettings.json",
@@ -46,7 +46,7 @@
                     "description": "Description of the client credentials that the app provides to prove its identity to the IdP,\nSee CredentialSource for the list of supported credential types.",
                     "x-example": "Here is an example of client credentials in the AzureAd section of the *appsetting.json*. The app will try to use\nworkload identity federation from Managed identity (when setup and deployed in Azure), and otherwise, will use a certificate\nfrom Key Vault, and otherwise, will use a client secret.\n```json\n \"ClientCredentials\": [\n  {\n   \"SourceType\": \"SignedAssertionFromManagedIdentity\",\n   \"ManagedIdentityClientId\": \"Optional GUID of user assigned Managed identity\"\n  },\n  {\n   \"SourceType\": \"KeyVault\",\n   \"KeyVaultUrl\": \"https://webappsapistests.vault.azure.net\",\n   \"KeyVaultCertificateName\": \"Self-Signed-5-5-22\"\n  },\n  {\n   \"SourceType\": \"ClientSecret\",\n   \"ClientSecret\": \"***\"\n  }\n ]\n```\n  See also https://aka.ms/ms-id-web-certificates.",
                     "items": {
-                        "$ref": "#/definitions/CredentialDescription"
+                        "$ref": "#/$defs/CredentialDescription"
                     }
                 },
                 "Audience": {
@@ -75,7 +75,7 @@
                     "description": "Description of the credentials (usually certificates) used to decrypt an encrypted \ntoken in a web API.",
                     "x-example": "           \n           \n           Here is how to specify a decrypt certificate read from the certificate store:\n           \n           ```json\n           \"TokenDecryptionCredentials\": [\n             {\n               \"SourceType\": \"StoreWithDistinguishedName\",\n                \"CertificateStorePath\": \"CurrentUser/My\",\n                \"CertificateDistinguishedName\": \"CN=WebAppCallingWebApiCert\"\n               }\n              ]\n           ```   \n             See also https://aka.ms/ms-id-web-certificates.\n           \n           ",
                     "items": {
-                        "$ref": "#/definitions/CredentialDescription"
+                        "$ref": "#/$defs/CredentialDescription"
                     }
                 },
                 "AllowWebApiToBeAuthorizedByACL": {
@@ -97,7 +97,7 @@
                     "description": "Type of the source of the credential. This property is used to determine which other properties need\nto be provided to describe the credential.",
                     "oneOf": [
                         {
-                            "$ref": "#/definitions/CredentialSource"
+                            "$ref": "#/$defs/CredentialSource"
                         }
                     ]
                 },
@@ -203,7 +203,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/AuthorizationHeaderProviderOptions"
+                            "$ref": "#/$defs/AuthorizationHeaderProviderOptions"
                         }
                     ]
                 },
@@ -221,7 +221,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/X509Certificate2"
+                            "$ref": "#/$defs/X509Certificate2"
                         }
                     ]
                 },
@@ -242,7 +242,7 @@
                     "description": "Describes the type of credentials, based on the SourceType.",
                     "oneOf": [
                         {
-                            "$ref": "#/definitions/CredentialType"
+                            "$ref": "#/$defs/CredentialType"
                         }
                     ]
                 }
@@ -306,7 +306,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/ActionOfHttpRequestMessage"
+                            "$ref": "#/$defs/ActionOfHttpRequestMessage"
                         }
                     ]
                 },
@@ -314,7 +314,7 @@
                     "description": "Options related to token acquisition.",
                     "oneOf": [
                         {
-                            "$ref": "#/definitions/AcquireTokenOptions"
+                            "$ref": "#/$defs/AcquireTokenOptions"
                         }
                     ]
                 },
@@ -332,7 +332,7 @@
         "ActionOfHttpRequestMessage": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MulticastDelegate"
+                    "$ref": "#/$defs/MulticastDelegate"
                 },
                 {
                     "type": "object",
@@ -343,7 +343,7 @@
         "MulticastDelegate": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/Delegate"
+                    "$ref": "#/$defs/Delegate"
                 },
                 {
                     "type": "object",
@@ -366,14 +366,14 @@
                     ]
                 },
                 "Method": {
-                    "$ref": "#/definitions/MethodInfo"
+                    "$ref": "#/$defs/MethodInfo"
                 }
             }
         },
         "MethodInfo": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MethodBase"
+                    "$ref": "#/$defs/MethodBase"
                 },
                 {
                     "type": "object",
@@ -381,10 +381,10 @@
                     "additionalProperties": false,
                     "properties": {
                         "MemberType": {
-                            "$ref": "#/definitions/MemberTypes"
+                            "$ref": "#/$defs/MemberTypes"
                         },
                         "ReturnParameter": {
-                            "$ref": "#/definitions/ParameterInfo"
+                            "$ref": "#/$defs/ParameterInfo"
                         },
                         "ReturnType": {
                             "type": "string"
@@ -425,10 +425,10 @@
             "additionalProperties": false,
             "properties": {
                 "Attributes": {
-                    "$ref": "#/definitions/ParameterAttributes"
+                    "$ref": "#/$defs/ParameterAttributes"
                 },
                 "Member": {
-                    "$ref": "#/definitions/MemberInfo"
+                    "$ref": "#/$defs/MemberInfo"
                 },
                 "Name": {
                     "type": [
@@ -480,7 +480,7 @@
                 "CustomAttributes": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CustomAttributeData"
+                        "$ref": "#/$defs/CustomAttributeData"
                     }
                 },
                 "MetadataToken": {
@@ -526,12 +526,12 @@
             "additionalProperties": false,
             "properties": {
                 "Module": {
-                    "$ref": "#/definitions/Module"
+                    "$ref": "#/$defs/Module"
                 },
                 "CustomAttributes": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CustomAttributeData"
+                        "$ref": "#/$defs/CustomAttributeData"
                     }
                 },
                 "IsCollectible": {
@@ -549,7 +549,7 @@
             "additionalProperties": false,
             "properties": {
                 "Assembly": {
-                    "$ref": "#/definitions/Assembly"
+                    "$ref": "#/$defs/Assembly"
                 },
                 "FullyQualifiedName": {
                     "type": "string"
@@ -569,12 +569,12 @@
                     "type": "string"
                 },
                 "ModuleHandle": {
-                    "$ref": "#/definitions/ModuleHandle"
+                    "$ref": "#/$defs/ModuleHandle"
                 },
                 "CustomAttributes": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CustomAttributeData"
+                        "$ref": "#/$defs/CustomAttributeData"
                     }
                 },
                 "MetadataToken": {
@@ -615,7 +615,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/MethodInfo"
+                            "$ref": "#/$defs/MethodInfo"
                         }
                     ]
                 },
@@ -646,7 +646,7 @@
                 "CustomAttributes": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CustomAttributeData"
+                        "$ref": "#/$defs/CustomAttributeData"
                     }
                 },
                 "EscapedCodeBase": {
@@ -656,12 +656,12 @@
                     "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
                 },
                 "ManifestModule": {
-                    "$ref": "#/definitions/Module"
+                    "$ref": "#/$defs/Module"
                 },
                 "Modules": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/Module"
+                        "$ref": "#/$defs/Module"
                     }
                 },
                 "GlobalAssemblyCache": {
@@ -675,7 +675,7 @@
                     "format": "int64"
                 },
                 "SecurityRuleSet": {
-                    "$ref": "#/definitions/SecurityRuleSet"
+                    "$ref": "#/$defs/SecurityRuleSet"
                 }
             }
         },
@@ -687,18 +687,18 @@
                     "type": "string"
                 },
                 "Constructor": {
-                    "$ref": "#/definitions/ConstructorInfo"
+                    "$ref": "#/$defs/ConstructorInfo"
                 },
                 "ConstructorArguments": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CustomAttributeTypedArgument"
+                        "$ref": "#/$defs/CustomAttributeTypedArgument"
                     }
                 },
                 "NamedArguments": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CustomAttributeNamedArgument"
+                        "$ref": "#/$defs/CustomAttributeNamedArgument"
                     }
                 }
             }
@@ -706,7 +706,7 @@
         "ConstructorInfo": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MethodBase"
+                    "$ref": "#/$defs/MethodBase"
                 },
                 {
                     "type": "object",
@@ -714,7 +714,7 @@
                     "additionalProperties": false,
                     "properties": {
                         "MemberType": {
-                            "$ref": "#/definitions/MemberTypes"
+                            "$ref": "#/$defs/MemberTypes"
                         }
                     }
                 }
@@ -723,7 +723,7 @@
         "MethodBase": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/MemberInfo"
+                    "$ref": "#/$defs/MemberInfo"
                 },
                 {
                     "type": "object",
@@ -731,10 +731,10 @@
                     "additionalProperties": false,
                     "properties": {
                         "MethodImplementationFlags": {
-                            "$ref": "#/definitions/MethodImplAttributes"
+                            "$ref": "#/$defs/MethodImplAttributes"
                         },
                         "CallingConvention": {
-                            "$ref": "#/definitions/CallingConventions"
+                            "$ref": "#/$defs/CallingConventions"
                         },
                         "IsAbstract": {
                             "type": "boolean"
@@ -883,10 +883,10 @@
             "additionalProperties": false,
             "properties": {
                 "MemberInfo": {
-                    "$ref": "#/definitions/MemberInfo"
+                    "$ref": "#/$defs/MemberInfo"
                 },
                 "TypedValue": {
-                    "$ref": "#/definitions/CustomAttributeTypedArgument"
+                    "$ref": "#/$defs/CustomAttributeTypedArgument"
                 },
                 "MemberName": {
                     "type": "string"
@@ -1010,7 +1010,7 @@
         "X509Certificate2": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/X509Certificate"
+                    "$ref": "#/$defs/X509Certificate"
                 },
                 {
                     "type": "object",
@@ -1038,12 +1038,12 @@
                                     "type": "null"
                                 },
                                 {
-                                    "$ref": "#/definitions/AsymmetricAlgorithm"
+                                    "$ref": "#/$defs/AsymmetricAlgorithm"
                                 }
                             ]
                         },
                         "IssuerName": {
-                            "$ref": "#/definitions/X500DistinguishedName"
+                            "$ref": "#/$defs/X500DistinguishedName"
                         },
                         "NotAfter": {
                             "type": "string",
@@ -1054,23 +1054,23 @@
                             "format": "date-time"
                         },
                         "PublicKey": {
-                            "$ref": "#/definitions/PublicKey"
+                            "$ref": "#/$defs/PublicKey"
                         },
                         "RawData": {
                             "type": "string",
                             "format": "byte"
                         },
                         "RawDataMemory": {
-                            "$ref": "#/definitions/ReadOnlyMemoryOfByte"
+                            "$ref": "#/$defs/ReadOnlyMemoryOfByte"
                         },
                         "SerialNumber": {
                             "type": "string"
                         },
                         "SignatureAlgorithm": {
-                            "$ref": "#/definitions/Oid"
+                            "$ref": "#/$defs/Oid"
                         },
                         "SubjectName": {
-                            "$ref": "#/definitions/X500DistinguishedName"
+                            "$ref": "#/$defs/X500DistinguishedName"
                         },
                         "Thumbprint": {
                             "type": "string"
@@ -1095,7 +1095,7 @@
                 "LegalKeySizes": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/KeySizes"
+                        "$ref": "#/$defs/KeySizes"
                     }
                 },
                 "SignatureAlgorithm": {
@@ -1133,7 +1133,7 @@
         "X500DistinguishedName": {
             "allOf": [
                 {
-                    "$ref": "#/definitions/AsnEncodedData"
+                    "$ref": "#/$defs/AsnEncodedData"
                 },
                 {
                     "type": "object",
@@ -1156,7 +1156,7 @@
                             "type": "null"
                         },
                         {
-                            "$ref": "#/definitions/Oid"
+                            "$ref": "#/$defs/Oid"
                         }
                     ]
                 },
@@ -1189,10 +1189,10 @@
             "additionalProperties": false,
             "properties": {
                 "EncodedKeyValue": {
-                    "$ref": "#/definitions/AsnEncodedData"
+                    "$ref": "#/$defs/AsnEncodedData"
                 },
                 "EncodedParameters": {
-                    "$ref": "#/definitions/AsnEncodedData"
+                    "$ref": "#/$defs/AsnEncodedData"
                 },
                 "Key": {
                     "deprecated": true,
@@ -1200,12 +1200,12 @@
                     "x-deprecatedMessage": "PublicKey.Key is obsolete. Use the appropriate method to get the public key, such as GetRSAPublicKey.",
                     "oneOf": [
                         {
-                            "$ref": "#/definitions/AsymmetricAlgorithm"
+                            "$ref": "#/$defs/AsymmetricAlgorithm"
                         }
                     ]
                 },
                 "Oid": {
-                    "$ref": "#/definitions/Oid"
+                    "$ref": "#/$defs/Oid"
                 }
             }
         },
@@ -1227,7 +1227,7 @@
             "additionalProperties": false,
             "properties": {
                 "Handle": {
-                    "$ref": "#/definitions/IntPtr"
+                    "$ref": "#/$defs/IntPtr"
                 },
                 "Issuer": {
                     "type": "string"
@@ -1236,7 +1236,7 @@
                     "type": "string"
                 },
                 "SerialNumberBytes": {
-                    "$ref": "#/definitions/ReadOnlyMemoryOfByte"
+                    "$ref": "#/$defs/ReadOnlyMemoryOfByte"
                 }
             }
         },
@@ -1263,7 +1263,7 @@
     },
     "allOf": [
         {
-            "$ref": "#/definitions/IdentityApplicationOptions"
+            "$ref": "#/$defs/IdentityApplicationOptions"
         },
         {
             "type": "object",

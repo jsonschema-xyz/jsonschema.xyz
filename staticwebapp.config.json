@@ -19,6 +19,12 @@
     },
     // "routes": [
     //     {
+    //         "route": "/schemas/*",
+    //         "rewrite": "/example.html"
+    //     }
+    // ]
+    // "routes": [
+    //     {
     //         "route": "/*.schema",
     //         "rewrite": "/schemas"
     //     }

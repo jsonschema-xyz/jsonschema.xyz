@@ -8,11 +8,11 @@
     "additionalProperties": true,
     "properties": {
         "SupportedMediaTypes": {
-            "$ref": "#/definitions/MediaTypeCollection",
+            "$ref": "#/$defs/MediaTypeCollection",
             "additionalProperties": true
         }
     },
-    "definitions": {
+    "$defs": {
         "MediaTypeCollection": {
             "type": "array",
             "items": {

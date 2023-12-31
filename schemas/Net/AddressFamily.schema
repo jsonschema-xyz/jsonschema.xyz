@@ -3,7 +3,7 @@
     "$id": "https://jsonschema.xyz/schemas/Net/AddressFamily.schema",
     "contentMediaType": "application/schema+json",
     "description": "Specifies the addressing scheme that an instance of the Socket class can use.",
-    "definitions": {
+    "$defs": {
         "x-enumNames": {
             "type": "string",
             "enum": [
@@ -83,11 +83,11 @@
             "oneOf": [
                 {
                     "type": "integer",
-                    "$ref": "#/definitions/x-enumValues"
+                    "$ref": "#/$defs/x-enumValues"
                 },
                 {
                     "type": "string",
-                    "$ref": "#/definitions/x-enumNames"
+                    "$ref": "#/$defs/x-enumNames"
                 }
             ]
         }
