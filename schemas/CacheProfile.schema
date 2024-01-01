@@ -1,6 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft/2019-09/schema",
     "$id": "https://jsonschema.xyz/schemas/CacheProfile.schema",
+    "lastModified": "2023-12-31T19:08:00.0000+05:00Z",
     "title": "Cache Profile",
     "description": "Defines a set of settings which can be used for response caching.",
     "type": "object",

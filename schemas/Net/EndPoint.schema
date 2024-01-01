@@ -3,6 +3,7 @@
     "$id": "https://jsonschema.xyz/schemas/Net/EndPoint.schema",
     "$comment": "The EndPoint class provides an abstract base class that represents a network resource or service. Descendant classes combine network connection information to form a connection point to a service.",
     "contentMediaType": "application/schema+json",
+    "lastModified": "2023-12-31T19:08:00.0000+05:00Z",
     "description": "Identifies a network address. This is an abstract class.",
     "$defs": {
         "EndPoint": {

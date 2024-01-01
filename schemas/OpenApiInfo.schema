@@ -1,6 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft/2019-09/schema",
-    "$if": "https://jsonschema.xyz/schemas/OpenApiInfo.schema",
+    "$id": "https://jsonschema.xyz/schemas/OpenApiInfo.schema",
+    "contentMediaType": "application/schema+json",
+    "lastModified": "2023-12-31T19:08:00.0000+05:00Z",
     "title": "Open API Info",
     "type": "object",
     "description": "Open API Info Object, it provides the metadata about the Open API.",
