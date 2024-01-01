@@ -4338,6 +4338,10 @@
             "description": "Options for configuring authentication using Azure Active Directory. It has both AAD and B2C configuration attributes.",
             "additionalProperties": false,
             "properties": {
+                "$schema": {
+                    "type": "string",
+                    "default": "https://jsonschema.xyz/schemas/MicrosoftIdentityOptions.schema"
+                },
                 "Instance": {
                     "type": "string",
                     "description": "Gets or sets the Azure Active Directory instance, e.g. \"https://login.microsoftonline.com\"."
