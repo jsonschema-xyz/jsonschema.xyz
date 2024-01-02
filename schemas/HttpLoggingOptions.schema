@@ -42,7 +42,10 @@
     },
     "$defs": {
         "HttpLoggingFields": {
-            "type": ["string", "integer"],
+            "type": [
+                "string",
+                "integer"
+            ],
             "x-flags": true,
             "oneOf": [
                 {
@@ -56,71 +59,51 @@
         "HttpLoggingFields_Integers": {
             "type": "integer",
             "enum": [
-                7421,	// Flag for logging both the HTTP Request and Response. Includes Request, Response, and Duration. Logging the request and response body has performance implications, as it requires buffering the entire request and response body up to the RequestBodyLogLimit and ResponseBodyLogLimit.
-                4096,	// Flag for logging how long it took to process the request and response in milliseconds.
-                0,	// No logging.
-                1117,	// Flag for logging the entire HTTP Request. Includes RequestPropertiesAndHeaders and RequestBody. Logging the request body has performance implications, as it requires buffering the entire request body up to RequestBodyLogLimit.
-                1024,	// Flag for logging the HTTP Request Body. Logging the request body has performance implications, as it requires buffering the entire request body up to RequestBodyLogLimit.
-                64,	// Flag for logging the HTTP Request Headers. Request Headers are logged as soon as the middleware is invoked. Headers are redacted by default with the character '[Redacted]' unless specified in the RequestHeaders.
-                // For example: Connection: keep-alive My-Custom-Request-Header: [Redacted]"
-                8,	// Flag for logging the HTTP Request Method.
-                // For example: Method: GET"
-                1,	// Flag for logging the HTTP Request Path, which includes both the Path and PathBase.
-                // For example: Path: /index PathBase: /app"
-                29,	// Flag for logging a collection of HTTP Request properties, including RequestPath, RequestProtocol, RequestMethod, and RequestScheme.
-                93,	// Flag for logging HTTP Request properties and headers. Includes RequestProperties and RequestHeaders
-                4,	// Flag for logging the HTTP Request Protocol.
-                // For example: Protocol: HTTP/1.1"
-                2,	// Flag for logging the HTTP Request QueryString.
-                // For example: Query: ?index=1
-                // RequestQuery contents can contain private information which may have regulatory concerns under GDPR and other laws. RequestQuery should not be logged unless logs are secure and access controlled and the privacy impact assessed."
-                16,	// Flag for logging the HTTP Request Scheme.
-                // For example: Scheme: https"
-                256,	// Flag for logging the HTTP Request Trailers. Request Trailers are currently not logged.
-                2208,	// Flag for logging the entire HTTP Response. Includes ResponsePropertiesAndHeaders and ResponseBody. Logging the response body has performance implications, as it requires buffering the entire response body up to ResponseBodyLogLimit.
-                2048,	// Flag for logging the HTTP Response Body. Logging the response body has performance implications, as it requires buffering the entire response body up to ResponseBodyLogLimit.
-                128,	// Flag for logging the HTTP Response Headers. Response Headers are logged when the Body is written to or when StartAsync(CancellationToken) is called.
-                // Headers are redacted by default with the character '[Redacted]' unless specified in the ResponseHeaders.
-                // For example: Content-Length: 16 My-Custom-Response-Header: [Redacted]"
-                160,	// Flag for logging HTTP Response properties and headers. Includes ResponseStatusCode and ResponseHeaders.
-                32,	// Flag for logging the HTTP Response StatusCode.
-                // For example: StatusCode: 200"
-                512,	// Flag for logging the HTTP Response Trailers. Response Trailers are currently not logged.
+                7421, // Flag for logging both the HTTP Request and Response. Includes Request, Response, and Duration. Logging the request and response body has performance implications, as it requires buffering the entire request and response body up to the RequestBodyLogLimit and ResponseBodyLogLimit.
+                4096, // Flag for logging how long it took to process the request and response in milliseconds.
+                0, // No logging.
+                1117, // Flag for logging the entire HTTP Request. Includes RequestPropertiesAndHeaders and RequestBody. Logging the request body has performance implications, as it requires buffering the entire request body up to RequestBodyLogLimit.
+                1024, // Flag for logging the HTTP Request Body. Logging the request body has performance implications, as it requires buffering the entire request body up to RequestBodyLogLimit.
+                64, // Flag for logging the HTTP Request Headers. Request Headers are logged as soon as the middleware is invoked. Headers are redacted by default with the character '[Redacted]' unless specified in the RequestHeaders. For example: Connection: keep-alive My-Custom-Request-Header: [Redacted]"
+                8, // Flag for logging the HTTP Request Method. For example: Method: GET"
+                1, // Flag for logging the HTTP Request Path, which includes both the Path and PathBase. For example: Path: /index PathBase: /app"
+                29, // Flag for logging a collection of HTTP Request properties, including RequestPath, RequestProtocol, RequestMethod, and RequestScheme.
+                93, // Flag for logging HTTP Request properties and headers. Includes RequestProperties and RequestHeaders
+                4, // Flag for logging the HTTP Request Protocol. For example: Protocol: HTTP/1.1"
+                2, // Flag for logging the HTTP Request QueryString. For example: Query: ?index=1 RequestQuery contents can contain private information which may have regulatory concerns under GDPR and other laws. RequestQuery should not be logged unless logs are secure and access controlled and the privacy impact assessed."
+                16, // Flag for logging the HTTP Request Scheme. For example: Scheme: https"
+                256, // Flag for logging the HTTP Request Trailers. Request Trailers are currently not logged.
+                2208, // Flag for logging the entire HTTP Response. Includes ResponsePropertiesAndHeaders and ResponseBody. Logging the response body has performance implications, as it requires buffering the entire response body up to ResponseBodyLogLimit.
+                2048, // Flag for logging the HTTP Response Body. Logging the response body has performance implications, as it requires buffering the entire response body up to ResponseBodyLogLimit.
+                128, // Flag for logging the HTTP Response Headers. Response Headers are logged when the Body is written to or when StartAsync(CancellationToken) is called. Headers are redacted by default with the character '[Redacted]' unless specified in the ResponseHeaders. For example: Content-Length: 16 My-Custom-Response-Header: [Redacted]"
+                160, // Flag for logging HTTP Response properties and headers. Includes ResponseStatusCode and ResponseHeaders.
+                32, // Flag for logging the HTTP Response StatusCode. For example: StatusCode: 200"
+                512 // Flag for logging the HTTP Response Trailers. Response Trailers are currently not logged.
             ]
         },
         "HttpLoggingFields_Strings": {
             "type": "string",
             "enum": [
-                "All",	// Flag for logging both the HTTP Request and Response. Includes Request, Response, and Duration. Logging the request and response body has performance implications, as it requires buffering the entire request and response body up to the RequestBodyLogLimit and ResponseBodyLogLimit.
-                "Duration",	// Flag for logging how long it took to process the request and response in milliseconds.
-                "None",	// No logging.
-                "Request",	// Flag for logging the entire HTTP Request. Includes RequestPropertiesAndHeaders and RequestBody. Logging the request body has performance implications, as it requires buffering the entire request body up to RequestBodyLogLimit.
-                "RequestBody",	// Flag for logging the HTTP Request Body. Logging the request body has performance implications, as it requires buffering the entire request body up to RequestBodyLogLimit.
-                "RequestHeaders",	// Flag for logging the HTTP Request Headers. Request Headers are logged as soon as the middleware is invoked. Headers are redacted by default with the character '[Redacted]' unless specified in the RequestHeaders.
-                // For example: Connection: keep-alive My-Custom-Request-Header: [Redacted]"
-                "RequestMethod",	// Flag for logging the HTTP Request Method.
-                // For example: Method: GET"
-                "RequestPath",	// Flag for logging the HTTP Request Path, which includes both the Path and PathBase.
-                // For example: Path: /index PathBase: /app"
-                "RequestProperties",	// Flag for logging a collection of HTTP Request properties, including RequestPath, RequestProtocol, RequestMethod, and RequestScheme.
-                "RequestPropertiesAndHeaders",	// Flag for logging HTTP Request properties and headers. Includes RequestProperties and RequestHeaders
-                "RequestProtocol",	// Flag for logging the HTTP Request Protocol.
-                // For example: Protocol: HTTP/1.1"
-                "RequestQuery",	// Flag for logging the HTTP Request QueryString.
-                // For example: Query: ?index=1
-                // RequestQuery contents can contain private information which may have regulatory concerns under GDPR and other laws. RequestQuery should not be logged unless logs are secure and access controlled and the privacy impact assessed."
-                "RequestScheme",	// Flag for logging the HTTP Request Scheme.
-                // For example: Scheme: https"
-                "RequestTrailers",	// Flag for logging the HTTP Request Trailers. Request Trailers are currently not logged.
-                "Response",	// Flag for logging the entire HTTP Response. Includes ResponsePropertiesAndHeaders and ResponseBody. Logging the response body has performance implications, as it requires buffering the entire response body up to ResponseBodyLogLimit.
-                "ResponseBody",	// Flag for logging the HTTP Response Body. Logging the response body has performance implications, as it requires buffering the entire response body up to ResponseBodyLogLimit.
-                "ResponseHeaders",	// Flag for logging the HTTP Response Headers. Response Headers are logged when the Body is written to or when StartAsync(CancellationToken) is called.
-                // Headers are redacted by default with the character '[Redacted]' unless specified in the ResponseHeaders.
-                // For example: Content-Length: 16 My-Custom-Response-Header: [Redacted]"
-                "ResponsePropertiesAndHeaders",	// Flag for logging HTTP Response properties and headers. Includes ResponseStatusCode and ResponseHeaders.
-                "ResponseStatusCode",	// Flag for logging the HTTP Response StatusCode.
-                // For example: StatusCode: 200"
-                "ResponseTrailers",	// Flag for logging the HTTP Response Trailers. Response Trailers are currently not logged.
+                "All", // Flag for logging both the HTTP Request and Response. Includes Request, Response, and Duration. Logging the request and response body has performance implications, as it requires buffering the entire request and response body up to the RequestBodyLogLimit and ResponseBodyLogLimit.
+                "Duration", // Flag for logging how long it took to process the request and response in milliseconds.
+                "None", // No logging.
+                "Request", // Flag for logging the entire HTTP Request. Includes RequestPropertiesAndHeaders and RequestBody. Logging the request body has performance implications, as it requires buffering the entire request body up to RequestBodyLogLimit.
+                "RequestBody", // Flag for logging the HTTP Request Body. Logging the request body has performance implications, as it requires buffering the entire request body up to RequestBodyLogLimit.
+                "RequestHeaders", // Flag for logging the HTTP Request Headers. Request Headers are logged as soon as the middleware is invoked. Headers are redacted by default with the character '[Redacted]' unless specified in the RequestHeaders. For example: Connection: keep-alive My-Custom-Request-Header: [Redacted]"
+                "RequestMethod", // Flag for logging the HTTP Request Method. For example: Method: GET"
+                "RequestPath", // Flag for logging the HTTP Request Path, which includes both the Path and PathBase. For example: Path: /index PathBase: /app"
+                "RequestProperties", // Flag for logging a collection of HTTP Request properties, including RequestPath, RequestProtocol, RequestMethod, and RequestScheme.
+                "RequestPropertiesAndHeaders", // Flag for logging HTTP Request properties and headers. Includes RequestProperties and RequestHeaders
+                "RequestProtocol", // Flag for logging the HTTP Request Protocol. For example: Protocol: HTTP/1.1"
+                "RequestQuery", // Flag for logging the HTTP Request QueryString. For example: Query: ?index=1 RequestQuery contents can contain private information which may have regulatory concerns under GDPR and other laws. RequestQuery should not be logged unless logs are secure and access controlled and the privacy impact assessed."
+                "RequestScheme", // Flag for logging the HTTP Request Scheme. For example: Scheme: https"
+                "RequestTrailers", // Flag for logging the HTTP Request Trailers. Request Trailers are currently not logged.
+                "Response", // Flag for logging the entire HTTP Response. Includes ResponsePropertiesAndHeaders and ResponseBody. Logging the response body has performance implications, as it requires buffering the entire response body up to ResponseBodyLogLimit.
+                "ResponseBody", // Flag for logging the HTTP Response Body. Logging the response body has performance implications, as it requires buffering the entire response body up to ResponseBodyLogLimit.
+                "ResponseHeaders", // Flag for logging the HTTP Response Headers. Response Headers are logged when the Body is written to or when StartAsync(CancellationToken) is called. Headers are redacted by default with the character '[Redacted]' unless specified in the ResponseHeaders. For example: Content-Length: 16 My-Custom-Response-Header: [Redacted]"
+                "ResponsePropertiesAndHeaders", // Flag for logging HTTP Response properties and headers. Includes ResponseStatusCode and ResponseHeaders.
+                "ResponseStatusCode", // Flag for logging the HTTP Response StatusCode. For example: StatusCode: 200"
+                "ResponseTrailers" // Flag for logging the HTTP Response Trailers. Response Trailers are currently not logged.
             ]
         }
     }
