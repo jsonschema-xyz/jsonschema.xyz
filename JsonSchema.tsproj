@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.TypeScript.MSBuild/5.3.3">
+    <ItemGroup>
+        <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.3.3" />
+    </ItemGroup>
+    <Target Name="Build">
+
+    </Target>
+</Project>

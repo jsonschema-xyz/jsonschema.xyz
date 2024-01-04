@@ -13,7 +13,7 @@ permissions:
 - private-use
 conditions:
 - include-copyright
-liimitations:
+limitations:
 - liability
 - warranty
 lastmod: 2023-08-29T17:13:51.216Z

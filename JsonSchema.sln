@@ -1,0 +1,28 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonSchema", "JsonSchema.tsproj", "{A5EADF7C-6E4D-4E6E-8ADE-3FA1E453BD13}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Local|Any CPU = Local|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Testing|Any CPU = Testing|Any CPU
+		Staging|Any CPU = Staging|Any CPU
+		Production|Any CPU = Production|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5EADF7C-6E4D-4E6E-8ADE-3FA1E453BD13}.Local|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5EADF7C-6E4D-4E6E-8ADE-3FA1E453BD13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5EADF7C-6E4D-4E6E-8ADE-3FA1E453BD13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5EADF7C-6E4D-4E6E-8ADE-3FA1E453BD13}.Testing|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5EADF7C-6E4D-4E6E-8ADE-3FA1E453BD13}.Staging|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5EADF7C-6E4D-4E6E-8ADE-3FA1E453BD13}.Production|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5EADF7C-6E4D-4E6E-8ADE-3FA1E453BD13}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0B933DE4-BCE1-4C44-94D3-18F1CE4A90E1}
+	EndGlobalSection
+EndGlobal
