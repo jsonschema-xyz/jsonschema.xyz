@@ -4,6 +4,7 @@
     "contentMediaType": "application/schema+json",
     "lastModified": "2023-12-31T19:08:00.0000+05:00Z",
     "description": "Specifies the addressing scheme that an instance of the Socket class can use.",
+    "$ref": "#/$defs/AddressFamily",
     "$defs": {
         "x-enumNames": {
             "type": "string",
