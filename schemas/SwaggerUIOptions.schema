@@ -5,952 +5,952 @@
     "type": "object",
     "additionalProperties": false,
     "properties": {
-      "RoutePrefix": {
-        "type": [
-          "null",
-          "string"
-        ],
-        "description": "Gets or sets a route prefix for accessing the swagger-ui"
-      },
-      "IndexStream": {
-        "description": "Gets or sets a Stream function for retrieving the swagger-ui page",
-        "oneOf": [
-          {
-            "type": "null"
-          },
-          {
-            "$ref": "#/definitions/FuncOfStream"
-          }
-        ]
-      },
-      "DocumentTitle": {
-        "type": [
-          "null",
-          "string"
-        ],
-        "description": "Gets or sets a title for the swagger-ui page"
-      },
-      "HeadContent": {
-        "type": [
-          "null",
-          "string"
-        ],
-        "description": "Gets or sets additional content to place in the head of the swagger-ui page"
-      },
-      "ConfigObject": {
-        "description": "Gets the JavaScript config object, represented as JSON, that will be passed to the SwaggerUI",
-        "oneOf": [
-          {
-            "type": "null"
-          },
-          {
-            "$ref": "#/definitions/ConfigObject"
-          }
-        ]
-      },
-      "OAuthConfigObject": {
-        "description": "Gets the JavaScript config object, represented as JSON, that will be passed to the initOAuth method",
-        "oneOf": [
-          {
-            "type": "null"
-          },
-          {
-            "$ref": "#/definitions/OAuthConfigObject"
-          }
-        ]
-      },
-      "Interceptors": {
-        "description": "Gets the interceptor functions that define client-side request/response interceptors",
-        "oneOf": [
-          {
-            "type": "null"
-          },
-          {
-            "$ref": "#/definitions/InterceptorFunctions"
-          }
-        ]
-      },
-      "$id": {
-        "type": "string",
-        "format": "uri",
-        "default": "https://jsonschema.xyz/SwaggerUIOptions.schema"
-      }
+        "RoutePrefix": {
+            "type": [
+                "null",
+                "string"
+            ],
+            "description": "Gets or sets a route prefix for accessing the swagger-ui"
+        },
+        "IndexStream": {
+            "description": "Gets or sets a Stream function for retrieving the swagger-ui page",
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/definitions/FuncOfStream"
+                }
+            ]
+        },
+        "DocumentTitle": {
+            "type": [
+                "null",
+                "string"
+            ],
+            "description": "Gets or sets a title for the swagger-ui page"
+        },
+        "HeadContent": {
+            "type": [
+                "null",
+                "string"
+            ],
+            "description": "Gets or sets additional content to place in the head of the swagger-ui page"
+        },
+        "ConfigObject": {
+            "description": "Gets the JavaScript config object, represented as JSON, that will be passed to the SwaggerUI",
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/definitions/ConfigObject"
+                }
+            ]
+        },
+        "OAuthConfigObject": {
+            "description": "Gets the JavaScript config object, represented as JSON, that will be passed to the initOAuth method",
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/definitions/OAuthConfigObject"
+                }
+            ]
+        },
+        "Interceptors": {
+            "description": "Gets the interceptor functions that define client-side request/response interceptors",
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/definitions/InterceptorFunctions"
+                }
+            ]
+        },
+        "$id": {
+            "type": "string",
+            "format": "uri",
+            "default": "https://jsonschema.xyz/SwaggerUIOptions.schema"
+        }
     },
     "definitions": {
-      "FuncOfStream": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/MulticastDelegate"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false
-          }
-        ]
-      },
-      "MulticastDelegate": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/Delegate"
-          },
-          {
-            "type": "object",
-            "x-abstract": true,
-            "additionalProperties": false
-          }
-        ]
-      },
-      "Delegate": {
-        "type": "object",
-        "x-abstract": true,
-        "additionalProperties": false,
-        "properties": {
-          "Target": {
-            "oneOf": [
-              {},
-              {
-                "type": "null"
-              }
+        "FuncOfStream": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MulticastDelegate"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false
+                }
             ]
-          },
-          "Method": {
-            "$ref": "#/definitions/MethodInfo"
-          }
-        }
-      },
-      "MethodInfo": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/MethodBase"
-          },
-          {
-            "type": "object",
-            "x-abstract": true,
-            "additionalProperties": false,
-            "properties": {
-              "MemberType": {
-                "$ref": "#/definitions/MemberTypes"
-              },
-              "ReturnParameter": {
-                "$ref": "#/definitions/ParameterInfo"
-              },
-              "ReturnType": {
-                "type": "string"
-              }
-            }
-          }
-        ]
-      },
-      "MemberTypes": {
-        "type": "integer",
-        "description": "",
-        "x-enumFlags": true,
-        "x-enumNames": [
-          "Constructor",
-          "Event",
-          "Field",
-          "Method",
-          "Property",
-          "TypeInfo",
-          "Custom",
-          "NestedType",
-          "All"
-        ],
-        "enum": [
-          1,
-          2,
-          4,
-          8,
-          16,
-          32,
-          64,
-          128,
-          191
-        ]
-      },
-      "ParameterInfo": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Attributes": {
-            "$ref": "#/definitions/ParameterAttributes"
-          },
-          "Member": {
-            "$ref": "#/definitions/MemberInfo"
-          },
-          "Name": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "ParameterType": {
-            "type": "string"
-          },
-          "Position": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "IsIn": {
-            "type": "boolean"
-          },
-          "IsLcid": {
-            "type": "boolean"
-          },
-          "IsOptional": {
-            "type": "boolean"
-          },
-          "IsOut": {
-            "type": "boolean"
-          },
-          "IsRetval": {
-            "type": "boolean"
-          },
-          "DefaultValue": {
-            "oneOf": [
-              {},
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "RawDefaultValue": {
-            "oneOf": [
-              {},
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "HasDefaultValue": {
-            "type": "boolean"
-          },
-          "CustomAttributes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/CustomAttributeData"
-            }
-          },
-          "MetadataToken": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "ParameterAttributes": {
-        "type": "integer",
-        "description": "",
-        "x-enumFlags": true,
-        "x-enumNames": [
-          "None",
-          "In",
-          "Out",
-          "Lcid",
-          "Retval",
-          "Optional",
-          "HasDefault",
-          "HasFieldMarshal",
-          "Reserved3",
-          "Reserved4",
-          "ReservedMask"
-        ],
-        "enum": [
-          0,
-          1,
-          2,
-          4,
-          8,
-          16,
-          4096,
-          8192,
-          16384,
-          32768,
-          61440
-        ]
-      },
-      "MemberInfo": {
-        "type": "object",
-        "x-abstract": true,
-        "additionalProperties": false,
-        "properties": {
-          "Module": {
-            "$ref": "#/definitions/Module"
-          },
-          "CustomAttributes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/CustomAttributeData"
-            }
-          },
-          "IsCollectible": {
-            "type": "boolean"
-          },
-          "MetadataToken": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "Module": {
-        "type": "object",
-        "x-abstract": true,
-        "additionalProperties": false,
-        "properties": {
-          "Assembly": {
-            "$ref": "#/definitions/Assembly"
-          },
-          "FullyQualifiedName": {
-            "type": "string"
-          },
-          "Name": {
-            "type": "string"
-          },
-          "MDStreamVersion": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "ModuleVersionId": {
-            "type": "string",
-            "format": "guid"
-          },
-          "ScopeName": {
-            "type": "string"
-          },
-          "ModuleHandle": {
-            "$ref": "#/definitions/ModuleHandle"
-          },
-          "CustomAttributes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/CustomAttributeData"
-            }
-          },
-          "MetadataToken": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "Assembly": {
-        "type": "object",
-        "x-abstract": true,
-        "additionalProperties": false,
-        "properties": {
-          "DefinedTypes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "ExportedTypes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "CodeBase": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "x-deprecated": true,
-            "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
-          },
-          "EntryPoint": {
-            "oneOf": [
-              {
-                "type": "null"
-              },
-              {
-                "$ref": "#/definitions/MethodInfo"
-              }
-            ]
-          },
-          "FullName": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "ImageRuntimeVersion": {
-            "type": "string"
-          },
-          "IsDynamic": {
-            "type": "boolean"
-          },
-          "Location": {
-            "type": "string"
-          },
-          "ReflectionOnly": {
-            "type": "boolean"
-          },
-          "IsCollectible": {
-            "type": "boolean"
-          },
-          "IsFullyTrusted": {
-            "type": "boolean"
-          },
-          "CustomAttributes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/CustomAttributeData"
-            }
-          },
-          "EscapedCodeBase": {
-            "type": "string",
-            "x-deprecated": true,
-            "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
-          },
-          "ManifestModule": {
-            "$ref": "#/definitions/Module"
-          },
-          "Modules": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Module"
-            }
-          },
-          "GlobalAssemblyCache": {
-            "type": "boolean",
-            "x-deprecated": true,
-            "x-deprecatedMessage": "The Global Assembly Cache is not supported."
-          },
-          "HostContext": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "SecurityRuleSet": {
-            "$ref": "#/definitions/SecurityRuleSet"
-          }
-        }
-      },
-      "CustomAttributeData": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "AttributeType": {
-            "type": "string"
-          },
-          "Constructor": {
-            "$ref": "#/definitions/ConstructorInfo"
-          },
-          "ConstructorArguments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/CustomAttributeTypedArgument"
-            }
-          },
-          "NamedArguments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/CustomAttributeNamedArgument"
-            }
-          }
-        }
-      },
-      "ConstructorInfo": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/MethodBase"
-          },
-          {
-            "type": "object",
-            "x-abstract": true,
-            "additionalProperties": false,
-            "properties": {
-              "MemberType": {
-                "$ref": "#/definitions/MemberTypes"
-              }
-            }
-          }
-        ]
-      },
-      "MethodBase": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/MemberInfo"
-          },
-          {
-            "type": "object",
-            "x-abstract": true,
-            "additionalProperties": false,
-            "properties": {
-              "MethodImplementationFlags": {
-                "$ref": "#/definitions/MethodImplAttributes"
-              },
-              "CallingConvention": {
-                "$ref": "#/definitions/CallingConventions"
-              },
-              "IsAbstract": {
-                "type": "boolean"
-              },
-              "IsConstructor": {
-                "type": "boolean"
-              },
-              "IsFinal": {
-                "type": "boolean"
-              },
-              "IsHideBySig": {
-                "type": "boolean"
-              },
-              "IsSpecialName": {
-                "type": "boolean"
-              },
-              "IsStatic": {
-                "type": "boolean"
-              },
-              "IsVirtual": {
-                "type": "boolean"
-              },
-              "IsAssembly": {
-                "type": "boolean"
-              },
-              "IsFamily": {
-                "type": "boolean"
-              },
-              "IsFamilyAndAssembly": {
-                "type": "boolean"
-              },
-              "IsFamilyOrAssembly": {
-                "type": "boolean"
-              },
-              "IsPrivate": {
-                "type": "boolean"
-              },
-              "IsPublic": {
-                "type": "boolean"
-              },
-              "IsConstructedGenericMethod": {
-                "type": "boolean"
-              },
-              "IsGenericMethod": {
-                "type": "boolean"
-              },
-              "IsGenericMethodDefinition": {
-                "type": "boolean"
-              },
-              "ContainsGenericParameters": {
-                "type": "boolean"
-              },
-              "IsSecurityCritical": {
-                "type": "boolean"
-              },
-              "IsSecuritySafeCritical": {
-                "type": "boolean"
-              },
-              "IsSecurityTransparent": {
-                "type": "boolean"
-              }
-            }
-          }
-        ]
-      },
-      "MethodImplAttributes": {
-        "type": "integer",
-        "description": "",
-        "x-enumNames": [
-          "IL",
-          "Managed",
-          "Native",
-          "OPTIL",
-          "CodeTypeMask",
-          "Runtime",
-          "ManagedMask",
-          "Unmanaged",
-          "NoInlining",
-          "ForwardRef",
-          "Synchronized",
-          "NoOptimization",
-          "PreserveSig",
-          "AggressiveInlining",
-          "AggressiveOptimization",
-          "InternalCall",
-          "MaxMethodImplVal"
-        ],
-        "enum": [
-          0,
-          0,
-          1,
-          2,
-          3,
-          3,
-          4,
-          4,
-          8,
-          16,
-          32,
-          64,
-          128,
-          256,
-          512,
-          4096,
-          65535
-        ]
-      },
-      "CallingConventions": {
-        "type": "integer",
-        "description": "",
-        "x-enumFlags": true,
-        "x-enumNames": [
-          "Standard",
-          "VarArgs",
-          "Any",
-          "HasThis",
-          "ExplicitThis"
-        ],
-        "enum": [
-          1,
-          2,
-          3,
-          32,
-          64
-        ]
-      },
-      "CustomAttributeTypedArgument": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "ArgumentType": {
-            "type": "string"
-          },
-          "Value": {
-            "oneOf": [
-              {},
-              {
-                "type": "null"
-              }
-            ]
-          }
-        }
-      },
-      "CustomAttributeNamedArgument": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "MemberInfo": {
-            "$ref": "#/definitions/MemberInfo"
-          },
-          "TypedValue": {
-            "$ref": "#/definitions/CustomAttributeTypedArgument"
-          },
-          "MemberName": {
-            "type": "string"
-          },
-          "IsField": {
-            "type": "boolean"
-          }
-        }
-      },
-      "SecurityRuleSet": {
-        "type": "integer",
-        "description": "",
-        "x-enumNames": [
-          "None",
-          "Level1",
-          "Level2"
-        ],
-        "enum": [
-          0,
-          1,
-          2
-        ]
-      },
-      "ModuleHandle": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "MDStreamVersion": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "ConfigObject": {
-        "type": "object",
-        "additionalProperties": {
-          "oneOf": [
-            {},
-            {
-              "type": "null"
-            }
-          ]
         },
-        "properties": {
-          "Urls": {
-            "type": [
-              "array",
-              "null"
-            ],
-            "description": "One or more Swagger JSON endpoints (url and name) to power the UI",
-            "items": {
-              "$ref": "#/definitions/UrlDescriptor"
+        "MulticastDelegate": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Delegate"
+                },
+                {
+                    "type": "object",
+                    "x-abstract": true,
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "Delegate": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "Target": {
+                    "oneOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "Method": {
+                    "$ref": "#/definitions/MethodInfo"
+                }
             }
-          },
-          "DeepLinking": {
-            "type": "boolean",
-            "description": "If set to true, enables deep linking for tags and operations"
-          },
-          "PersistAuthorization": {
-            "type": "boolean",
-            "description": "If set to true, it persists authorization data and it would not be lost on browser close/refresh"
-          },
-          "DisplayOperationId": {
-            "type": "boolean",
-            "description": "Controls the display of operationId in operations list"
-          },
-          "DefaultModelsExpandDepth": {
+        },
+        "MethodInfo": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MethodBase"
+                },
+                {
+                    "type": "object",
+                    "x-abstract": true,
+                    "additionalProperties": false,
+                    "properties": {
+                        "MemberType": {
+                            "$ref": "#/definitions/MemberTypes"
+                        },
+                        "ReturnParameter": {
+                            "$ref": "#/definitions/ParameterInfo"
+                        },
+                        "ReturnType": {
+                            "type": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "MemberTypes": {
             "type": "integer",
-            "description": "The default expansion depth for models (set to -1 completely hide the models)",
-            "format": "int32"
-          },
-          "DefaultModelExpandDepth": {
+            "description": "",
+            "x-enumFlags": true,
+            "x-enumNames": [
+                "Constructor",
+                "Event",
+                "Field",
+                "Method",
+                "Property",
+                "TypeInfo",
+                "Custom",
+                "NestedType",
+                "All"
+            ],
+            "enum": [
+                1,
+                2,
+                4,
+                8,
+                16,
+                32,
+                64,
+                128,
+                191
+            ]
+        },
+        "ParameterInfo": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Attributes": {
+                    "$ref": "#/definitions/ParameterAttributes"
+                },
+                "Member": {
+                    "$ref": "#/definitions/MemberInfo"
+                },
+                "Name": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "ParameterType": {
+                    "type": "string"
+                },
+                "Position": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "IsIn": {
+                    "type": "boolean"
+                },
+                "IsLcid": {
+                    "type": "boolean"
+                },
+                "IsOptional": {
+                    "type": "boolean"
+                },
+                "IsOut": {
+                    "type": "boolean"
+                },
+                "IsRetval": {
+                    "type": "boolean"
+                },
+                "DefaultValue": {
+                    "oneOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "RawDefaultValue": {
+                    "oneOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "HasDefaultValue": {
+                    "type": "boolean"
+                },
+                "CustomAttributes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomAttributeData"
+                    }
+                },
+                "MetadataToken": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "ParameterAttributes": {
             "type": "integer",
-            "description": "The default expansion depth for the model on the model-example section",
-            "format": "int32"
-          },
-          "DefaultModelRendering": {
-            "description": "Controls how the model is shown when the API is first rendered.\n(The user can always switch the rendering for a given model by clicking the 'Model' and 'Example Value' links)",
-            "oneOf": [
-              {
-                "$ref": "#/definitions/ModelRendering"
-              }
+            "description": "",
+            "x-enumFlags": true,
+            "x-enumNames": [
+                "None",
+                "In",
+                "Out",
+                "Lcid",
+                "Retval",
+                "Optional",
+                "HasDefault",
+                "HasFieldMarshal",
+                "Reserved3",
+                "Reserved4",
+                "ReservedMask"
+            ],
+            "enum": [
+                0,
+                1,
+                2,
+                4,
+                8,
+                16,
+                4096,
+                8192,
+                16384,
+                32768,
+                61440
             ]
-          },
-          "DisplayRequestDuration": {
-            "type": "boolean",
-            "description": "Controls the display of the request duration (in milliseconds) for Try-It-Out requests"
-          },
-          "DocExpansion": {
-            "description": "Controls the default expansion setting for the operations and tags.\nIt can be 'list' (expands only the tags), 'full' (expands the tags and operations) or 'none' (expands nothing)",
-            "oneOf": [
-              {
-                "$ref": "#/definitions/DocExpansion"
-              }
-            ]
-          },
-          "Filter": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "description": "If set, enables filtering. The top bar will show an edit box that you can use to filter the tagged operations\nthat are shown. Can be an empty string or specific value, in which case filtering will be enabled using that\nvalue as the filter expression. Filtering is case sensitive matching the filter expression anywhere inside the tag"
-          },
-          "MaxDisplayedTags": {
-            "type": [
-              "integer",
-              "null"
-            ],
-            "description": "If set, limits the number of tagged operations displayed to at most this many. The default is to show all operations",
-            "format": "int32"
-          },
-          "ShowExtensions": {
-            "type": "boolean",
-            "description": "Controls the display of vendor extension (x-) fields and values for Operations, Parameters, and Schema"
-          },
-          "ShowCommonExtensions": {
-            "type": "boolean",
-            "description": "Controls the display of extensions (pattern, maxLength, minLength, maximum, minimum) fields and values for Parameters"
-          },
-          "OAuth2RedirectUrl": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "description": "OAuth redirect URL"
-          },
-          "SupportedSubmitMethods": {
-            "type": [
-              "array",
-              "null"
-            ],
-            "description": "List of HTTP methods that have the Try it out feature enabled.\nAn empty array disables Try it out for all operations. This does not filter the operations from the display",
-            "items": {
-              "$ref": "#/definitions/SubmitMethod"
+        },
+        "MemberInfo": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "Module": {
+                    "$ref": "#/definitions/Module"
+                },
+                "CustomAttributes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomAttributeData"
+                    }
+                },
+                "IsCollectible": {
+                    "type": "boolean"
+                },
+                "MetadataToken": {
+                    "type": "integer",
+                    "format": "int32"
+                }
             }
-          },
-          "TryItOutEnabled": {
-            "type": "boolean",
-            "description": "Controls whether the \"Try it out\" section should be enabled by default."
-          },
-          "ValidatorUrl": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "description": "By default, Swagger-UI attempts to validate specs against swagger.io's online validator.\nYou can use this parameter to set a different validator URL, for example for locally deployed validators (Validator Badge).\nSetting it to null will disable validation"
-          },
-          "AdditionalItems": {
-            "type": [
-              "null",
-              "object"
-            ],
-            "additionalProperties": {}
-          }
-        }
-      },
-      "UrlDescriptor": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Url": {
-            "type": [
-              "null",
-              "string"
-            ]
-          },
-          "Name": {
-            "type": [
-              "null",
-              "string"
-            ]
-          }
-        }
-      },
-      "ModelRendering": {
-        "type": "integer",
-        "description": "",
-        "x-enumNames": [
-          "Example",
-          "Model"
-        ],
-        "enum": [
-          0,
-          1
-        ]
-      },
-      "DocExpansion": {
-        "type": "integer",
-        "description": "",
-        "x-enumNames": [
-          "List",
-          "Full",
-          "None"
-        ],
-        "enum": [
-          0,
-          1,
-          2
-        ]
-      },
-      "SubmitMethod": {
-        "type": "integer",
-        "description": "",
-        "x-enumNames": [
-          "Get",
-          "Put",
-          "Post",
-          "Delete",
-          "Options",
-          "Head",
-          "Patch",
-          "Trace"
-        ],
-        "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-        ]
-      },
-      "OAuthConfigObject": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "Username": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "description": "Default username for OAuth2 password flow."
-          },
-          "ClientId": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "description": "Default clientId"
-          },
-          "ClientSecret": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "description": "Default clientSecret"
-          },
-          "Realm": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "description": "Realm query parameter (for oauth1) added to authorizationUrl and tokenUrl"
-          },
-          "AppName": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "description": "Application name, displayed in authorization popup"
-          },
-          "ScopeSeparator": {
-            "type": [
-              "null",
-              "string"
-            ],
-            "description": "Scope separator for passing scopes, encoded before calling, default value is a space (encoded value %20)"
-          },
-          "Scopes": {
-            "type": [
-              "array",
-              "null"
-            ],
-            "description": "String array of initially selected oauth scopes, default is empty array",
-            "items": {
-              "type": "string"
+        },
+        "Module": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "Assembly": {
+                    "$ref": "#/definitions/Assembly"
+                },
+                "FullyQualifiedName": {
+                    "type": "string"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "MDStreamVersion": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "ModuleVersionId": {
+                    "type": "string",
+                    "format": "guid"
+                },
+                "ScopeName": {
+                    "type": "string"
+                },
+                "ModuleHandle": {
+                    "$ref": "#/definitions/ModuleHandle"
+                },
+                "CustomAttributes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomAttributeData"
+                    }
+                },
+                "MetadataToken": {
+                    "type": "integer",
+                    "format": "int32"
+                }
             }
-          },
-          "AdditionalQueryStringParams": {
-            "type": [
-              "null",
-              "object"
+        },
+        "Assembly": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "DefinedTypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "ExportedTypes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "CodeBase": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "x-deprecated": true,
+                    "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
+                },
+                "EntryPoint": {
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/MethodInfo"
+                        }
+                    ]
+                },
+                "FullName": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "ImageRuntimeVersion": {
+                    "type": "string"
+                },
+                "IsDynamic": {
+                    "type": "boolean"
+                },
+                "Location": {
+                    "type": "string"
+                },
+                "ReflectionOnly": {
+                    "type": "boolean"
+                },
+                "IsCollectible": {
+                    "type": "boolean"
+                },
+                "IsFullyTrusted": {
+                    "type": "boolean"
+                },
+                "CustomAttributes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomAttributeData"
+                    }
+                },
+                "EscapedCodeBase": {
+                    "type": "string",
+                    "x-deprecated": true,
+                    "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
+                },
+                "ManifestModule": {
+                    "$ref": "#/definitions/Module"
+                },
+                "Modules": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Module"
+                    }
+                },
+                "GlobalAssemblyCache": {
+                    "type": "boolean",
+                    "x-deprecated": true,
+                    "x-deprecatedMessage": "The Global Assembly Cache is not supported."
+                },
+                "HostContext": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "SecurityRuleSet": {
+                    "$ref": "#/definitions/SecurityRuleSet"
+                }
+            }
+        },
+        "CustomAttributeData": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "AttributeType": {
+                    "type": "string"
+                },
+                "Constructor": {
+                    "$ref": "#/definitions/ConstructorInfo"
+                },
+                "ConstructorArguments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomAttributeTypedArgument"
+                    }
+                },
+                "NamedArguments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CustomAttributeNamedArgument"
+                    }
+                }
+            }
+        },
+        "ConstructorInfo": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MethodBase"
+                },
+                {
+                    "type": "object",
+                    "x-abstract": true,
+                    "additionalProperties": false,
+                    "properties": {
+                        "MemberType": {
+                            "$ref": "#/definitions/MemberTypes"
+                        }
+                    }
+                }
+            ]
+        },
+        "MethodBase": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MemberInfo"
+                },
+                {
+                    "type": "object",
+                    "x-abstract": true,
+                    "additionalProperties": false,
+                    "properties": {
+                        "MethodImplementationFlags": {
+                            "$ref": "#/definitions/MethodImplAttributes"
+                        },
+                        "CallingConvention": {
+                            "$ref": "#/definitions/CallingConventions"
+                        },
+                        "IsAbstract": {
+                            "type": "boolean"
+                        },
+                        "IsConstructor": {
+                            "type": "boolean"
+                        },
+                        "IsFinal": {
+                            "type": "boolean"
+                        },
+                        "IsHideBySig": {
+                            "type": "boolean"
+                        },
+                        "IsSpecialName": {
+                            "type": "boolean"
+                        },
+                        "IsStatic": {
+                            "type": "boolean"
+                        },
+                        "IsVirtual": {
+                            "type": "boolean"
+                        },
+                        "IsAssembly": {
+                            "type": "boolean"
+                        },
+                        "IsFamily": {
+                            "type": "boolean"
+                        },
+                        "IsFamilyAndAssembly": {
+                            "type": "boolean"
+                        },
+                        "IsFamilyOrAssembly": {
+                            "type": "boolean"
+                        },
+                        "IsPrivate": {
+                            "type": "boolean"
+                        },
+                        "IsPublic": {
+                            "type": "boolean"
+                        },
+                        "IsConstructedGenericMethod": {
+                            "type": "boolean"
+                        },
+                        "IsGenericMethod": {
+                            "type": "boolean"
+                        },
+                        "IsGenericMethodDefinition": {
+                            "type": "boolean"
+                        },
+                        "ContainsGenericParameters": {
+                            "type": "boolean"
+                        },
+                        "IsSecurityCritical": {
+                            "type": "boolean"
+                        },
+                        "IsSecuritySafeCritical": {
+                            "type": "boolean"
+                        },
+                        "IsSecurityTransparent": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            ]
+        },
+        "MethodImplAttributes": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "IL",
+                "Managed",
+                "Native",
+                "OPTIL",
+                "CodeTypeMask",
+                "Runtime",
+                "ManagedMask",
+                "Unmanaged",
+                "NoInlining",
+                "ForwardRef",
+                "Synchronized",
+                "NoOptimization",
+                "PreserveSig",
+                "AggressiveInlining",
+                "AggressiveOptimization",
+                "InternalCall",
+                "MaxMethodImplVal"
             ],
-            "description": "Additional query parameters added to authorizationUrl and tokenUrl",
+            "enum": [
+                0,
+                0,
+                1,
+                2,
+                3,
+                3,
+                4,
+                4,
+                8,
+                16,
+                32,
+                64,
+                128,
+                256,
+                512,
+                4096,
+                65535
+            ]
+        },
+        "CallingConventions": {
+            "type": "integer",
+            "description": "",
+            "x-enumFlags": true,
+            "x-enumNames": [
+                "Standard",
+                "VarArgs",
+                "Any",
+                "HasThis",
+                "ExplicitThis"
+            ],
+            "enum": [
+                1,
+                2,
+                3,
+                32,
+                64
+            ]
+        },
+        "CustomAttributeTypedArgument": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "ArgumentType": {
+                    "type": "string"
+                },
+                "Value": {
+                    "oneOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            }
+        },
+        "CustomAttributeNamedArgument": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "MemberInfo": {
+                    "$ref": "#/definitions/MemberInfo"
+                },
+                "TypedValue": {
+                    "$ref": "#/definitions/CustomAttributeTypedArgument"
+                },
+                "MemberName": {
+                    "type": "string"
+                },
+                "IsField": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "SecurityRuleSet": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "None",
+                "Level1",
+                "Level2"
+            ],
+            "enum": [
+                0,
+                1,
+                2
+            ]
+        },
+        "ModuleHandle": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "MDStreamVersion": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "ConfigObject": {
+            "type": "object",
             "additionalProperties": {
-              "type": "string"
+                "oneOf": [
+                    {},
+                    {
+                        "type": "null"
+                    }
+                ]
+            },
+            "properties": {
+                "Urls": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "One or more Swagger JSON endpoints (url and name) to power the UI",
+                    "items": {
+                        "$ref": "#/definitions/UrlDescriptor"
+                    }
+                },
+                "DeepLinking": {
+                    "type": "boolean",
+                    "description": "If set to true, enables deep linking for tags and operations"
+                },
+                "PersistAuthorization": {
+                    "type": "boolean",
+                    "description": "If set to true, it persists authorization data and it would not be lost on browser close/refresh"
+                },
+                "DisplayOperationId": {
+                    "type": "boolean",
+                    "description": "Controls the display of operationId in operations list"
+                },
+                "DefaultModelsExpandDepth": {
+                    "type": "integer",
+                    "description": "The default expansion depth for models (set to -1 completely hide the models)",
+                    "format": "int32"
+                },
+                "DefaultModelExpandDepth": {
+                    "type": "integer",
+                    "description": "The default expansion depth for the model on the model-example section",
+                    "format": "int32"
+                },
+                "DefaultModelRendering": {
+                    "description": "Controls how the model is shown when the API is first rendered.\n(The user can always switch the rendering for a given model by clicking the 'Model' and 'Example Value' links)",
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/ModelRendering"
+                        }
+                    ]
+                },
+                "DisplayRequestDuration": {
+                    "type": "boolean",
+                    "description": "Controls the display of the request duration (in milliseconds) for Try-It-Out requests"
+                },
+                "DocExpansion": {
+                    "description": "Controls the default expansion setting for the operations and tags.\nIt can be 'list' (expands only the tags), 'full' (expands the tags and operations) or 'none' (expands nothing)",
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/DocExpansion"
+                        }
+                    ]
+                },
+                "Filter": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "If set, enables filtering. The top bar will show an edit box that you can use to filter the tagged operations\nthat are shown. Can be an empty string or specific value, in which case filtering will be enabled using that\nvalue as the filter expression. Filtering is case sensitive matching the filter expression anywhere inside the tag"
+                },
+                "MaxDisplayedTags": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "description": "If set, limits the number of tagged operations displayed to at most this many. The default is to show all operations",
+                    "format": "int32"
+                },
+                "ShowExtensions": {
+                    "type": "boolean",
+                    "description": "Controls the display of vendor extension (x-) fields and values for Operations, Parameters, and Schema"
+                },
+                "ShowCommonExtensions": {
+                    "type": "boolean",
+                    "description": "Controls the display of extensions (pattern, maxLength, minLength, maximum, minimum) fields and values for Parameters"
+                },
+                "OAuth2RedirectUrl": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "OAuth redirect URL"
+                },
+                "SupportedSubmitMethods": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "List of HTTP methods that have the Try it out feature enabled.\nAn empty array disables Try it out for all operations. This does not filter the operations from the display",
+                    "items": {
+                        "$ref": "#/definitions/SubmitMethod"
+                    }
+                },
+                "TryItOutEnabled": {
+                    "type": "boolean",
+                    "description": "Controls whether the \"Try it out\" section should be enabled by default."
+                },
+                "ValidatorUrl": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "By default, Swagger-UI attempts to validate specs against swagger.io's online validator.\nYou can use this parameter to set a different validator URL, for example for locally deployed validators (Validator Badge).\nSetting it to null will disable validation"
+                },
+                "AdditionalItems": {
+                    "type": [
+                        "null",
+                        "object"
+                    ],
+                    "additionalProperties": {}
+                }
             }
-          },
-          "UseBasicAuthenticationWithAccessCodeGrant": {
-            "type": "boolean",
-            "description": "Only activated for the accessCode flow. During the authorization_code request to the tokenUrl,\npass the Client Password using the HTTP Basic Authentication scheme\n(Authorization header with Basic base64encode(client_id + client_secret))"
-          },
-          "UsePkceWithAuthorizationCodeGrant": {
-            "type": "boolean",
-            "description": "Only applies to authorizatonCode flows. Proof Key for Code Exchange brings enhanced security for OAuth public clients.\nThe default is false"
-          }
-        }
-      },
-      "InterceptorFunctions": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "RequestInterceptorFunction": {
-            "type": [
-              "null",
-              "string"
+        },
+        "UrlDescriptor": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Url": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "Name": {
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            }
+        },
+        "ModelRendering": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "Example",
+                "Model"
             ],
-            "description": "MUST be a valid Javascript function.\nFunction to intercept remote definition, \"Try it out\", and OAuth 2.0 requests.\nAccepts one argument requestInterceptor(request) and must return the modified request, or a Promise that resolves to the modified request.\nEx: \"function (req) { req.headers['MyCustomHeader'] = 'CustomValue'; return req; }\""
-          },
-          "ResponseInterceptorFunction": {
-            "type": [
-              "null",
-              "string"
+            "enum": [
+                0,
+                1
+            ]
+        },
+        "DocExpansion": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "List",
+                "Full",
+                "None"
             ],
-            "description": "MUST be a valid Javascript function.\nFunction to intercept remote definition, \"Try it out\", and OAuth 2.0 responses.\nAccepts one argument responseInterceptor(response) and must return the modified response, or a Promise that resolves to the modified response.\nEx: \"function (res) { console.log(res); return res; }\""
-          }
+            "enum": [
+                0,
+                1,
+                2
+            ]
+        },
+        "SubmitMethod": {
+            "type": "integer",
+            "description": "",
+            "x-enumNames": [
+                "Get",
+                "Put",
+                "Post",
+                "Delete",
+                "Options",
+                "Head",
+                "Patch",
+                "Trace"
+            ],
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7
+            ]
+        },
+        "OAuthConfigObject": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Username": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Default username for OAuth2 password flow."
+                },
+                "ClientId": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Default clientId"
+                },
+                "ClientSecret": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Default clientSecret"
+                },
+                "Realm": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Realm query parameter (for oauth1) added to authorizationUrl and tokenUrl"
+                },
+                "AppName": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Application name, displayed in authorization popup"
+                },
+                "ScopeSeparator": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "Scope separator for passing scopes, encoded before calling, default value is a space (encoded value %20)"
+                },
+                "Scopes": {
+                    "type": [
+                        "array",
+                        "null"
+                    ],
+                    "description": "String array of initially selected oauth scopes, default is empty array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "AdditionalQueryStringParams": {
+                    "type": [
+                        "null",
+                        "object"
+                    ],
+                    "description": "Additional query parameters added to authorizationUrl and tokenUrl",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "UseBasicAuthenticationWithAccessCodeGrant": {
+                    "type": "boolean",
+                    "description": "Only activated for the accessCode flow. During the authorization_code request to the tokenUrl,\npass the Client Password using the HTTP Basic Authentication scheme\n(Authorization header with Basic base64encode(client_id + client_secret))"
+                },
+                "UsePkceWithAuthorizationCodeGrant": {
+                    "type": "boolean",
+                    "description": "Only applies to authorizatonCode flows. Proof Key for Code Exchange brings enhanced security for OAuth public clients.\nThe default is false"
+                }
+            }
+        },
+        "InterceptorFunctions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "RequestInterceptorFunction": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "MUST be a valid Javascript function.\nFunction to intercept remote definition, \"Try it out\", and OAuth 2.0 requests.\nAccepts one argument requestInterceptor(request) and must return the modified request, or a Promise that resolves to the modified request.\nEx: \"function (req) { req.headers['MyCustomHeader'] = 'CustomValue'; return req; }\""
+                },
+                "ResponseInterceptorFunction": {
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "description": "MUST be a valid Javascript function.\nFunction to intercept remote definition, \"Try it out\", and OAuth 2.0 responses.\nAccepts one argument responseInterceptor(response) and must return the modified response, or a Promise that resolves to the modified response.\nEx: \"function (res) { console.log(res); return res; }\""
+                }
+            }
         }
-      }
     }
-  }
+}

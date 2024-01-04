@@ -4,7 +4,7 @@ import fetch from "node-fetch";
 const url = new URL(window.location.href);
 const schemasUrl = `${url.protocol}://${url.host}:${url.port}/schemas/list-all`;
 
-const fetchSchemas: () => Promise<{ [key: string]: string }> = (async () => (await fetch(schemasUrl)).json());
+const fetchSchemas: () => Promise<{ [key: string]: string }> = (async () => (await fetch(schemasUrl)).json() as Promise<{ [key: string]: string }>);
 
 jquery(document).ready(() => {
     const schemasPlaceholder = jquery("#schemas");
