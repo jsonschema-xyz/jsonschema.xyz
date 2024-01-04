@@ -1,0 +1,1592 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "https://jsonschema.xyz/SwaggerGenOptions.schema",
+  "title": "SwaggerGenOptions",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "SwaggerGeneratorOptions": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/definitions/SwaggerGeneratorOptions"
+        }
+      ]
+    },
+    "SchemaGeneratorOptions": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/definitions/SchemaGeneratorOptions"
+        }
+      ]
+    },
+    "ParameterFilterDescriptors": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/FilterDescriptor"
+      }
+    },
+    "RequestBodyFilterDescriptors": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/FilterDescriptor"
+      }
+    },
+    "OperationFilterDescriptors": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/FilterDescriptor"
+      }
+    },
+    "DocumentFilterDescriptors": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/FilterDescriptor"
+      }
+    },
+    "SchemaFilterDescriptors": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/FilterDescriptor"
+      }
+    },
+    "$id": {
+      "type": "string",
+      "format": "uri",
+      "default": "https://jsonschema.xyz/SwaggerGenOptions.schema"
+    }
+  },
+  "definitions": {
+    "SwaggerGeneratorOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SwaggerDocs": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "additionalProperties": {
+            "$ref": "#/definitions/OpenApiInfo"
+          }
+        },
+        "DocInclusionPredicate": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/FuncOfStringAndApiDescriptionAndBoolean"
+            }
+          ]
+        },
+        "IgnoreObsoleteActions": {
+          "type": "boolean"
+        },
+        "ConflictingActionsResolver": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/FuncOfIEnumerableOfApiDescriptionAndApiDescription"
+            }
+          ]
+        },
+        "OperationIdSelector": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/FuncOfApiDescriptionAndString"
+            }
+          ]
+        },
+        "TagsSelector": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/FuncOfApiDescriptionAndIListOfString"
+            }
+          ]
+        },
+        "SortKeySelector": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/FuncOfApiDescriptionAndString"
+            }
+          ]
+        },
+        "InferSecuritySchemes": {
+          "type": "boolean"
+        },
+        "SecuritySchemesSelector": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/FuncOfIEnumerableOfAuthenticationSchemeAndIDictionaryOfStringAndOpenApiSecurityScheme"
+            }
+          ]
+        },
+        "DescribeAllParametersInCamelCase": {
+          "type": "boolean"
+        },
+        "Servers": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/OpenApiServer"
+          }
+        },
+        "SecuritySchemes": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "additionalProperties": {
+            "$ref": "#/definitions/OpenApiSecurityScheme"
+          }
+        },
+        "SecurityRequirements": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/OpenApiSecurityRequirement"
+          }
+        },
+        "SchemaComparer": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/IComparerOfString"
+            }
+          ]
+        },
+        "ParameterFilters": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/IParameterFilter"
+          }
+        },
+        "RequestBodyFilters": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/IRequestBodyFilter"
+          }
+        },
+        "OperationFilters": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/IOperationFilter"
+          }
+        },
+        "DocumentFilters": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/IDocumentFilter"
+          }
+        }
+      }
+    },
+    "OpenApiInfo": {
+      "type": "object",
+      "description": "Open API Info Object, it provides the metadata about the Open API.",
+      "additionalProperties": false,
+      "properties": {
+        "Title": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "REQUIRED. The title of the application."
+        },
+        "Description": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "A short description of the application."
+        },
+        "Version": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "REQUIRED. The version of the OpenAPI document."
+        },
+        "TermsOfService": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "A URL to the Terms of Service for the API. MUST be in the format of a URL.",
+          "format": "uri"
+        },
+        "Contact": {
+          "description": "The contact information for the exposed API.",
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/OpenApiContact"
+            }
+          ]
+        },
+        "License": {
+          "description": "The license information for the exposed API.",
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/OpenApiLicense"
+            }
+          ]
+        },
+        "Extensions": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "description": "This object MAY be extended with Specification Extensions.",
+          "additionalProperties": {
+            "$ref": "#/definitions/IOpenApiExtension"
+          }
+        }
+      }
+    },
+    "OpenApiContact": {
+      "type": "object",
+      "description": "Contact Object.",
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "The identifying name of the contact person/organization."
+        },
+        "Url": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "The URL pointing to the contact information. MUST be in the format of a URL.",
+          "format": "uri"
+        },
+        "Email": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "The email address of the contact person/organization.\nMUST be in the format of an email address."
+        },
+        "Extensions": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "description": "This object MAY be extended with Specification Extensions.",
+          "additionalProperties": {
+            "$ref": "#/definitions/IOpenApiExtension"
+          }
+        }
+      }
+    },
+    "IOpenApiExtension": {
+      "type": "object",
+      "description": "Interface requuired for implementing any custom extension",
+      "x-abstract": true,
+      "additionalProperties": false
+    },
+    "OpenApiLicense": {
+      "type": "object",
+      "description": "License Object.",
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "REQUIRED. The license name used for the API."
+        },
+        "Url": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "The URL pointing to the contact information. MUST be in the format of a URL.",
+          "format": "uri"
+        },
+        "Extensions": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "description": "This object MAY be extended with Specification Extensions.",
+          "additionalProperties": {
+            "$ref": "#/definitions/IOpenApiExtension"
+          }
+        }
+      }
+    },
+    "FuncOfStringAndApiDescriptionAndBoolean": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MulticastDelegate"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "MulticastDelegate": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Delegate"
+        },
+        {
+          "type": "object",
+          "x-abstract": true,
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Delegate": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false,
+      "properties": {
+        "Target": {
+          "oneOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "Method": {
+          "$ref": "#/definitions/MethodInfo"
+        }
+      }
+    },
+    "MethodInfo": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodBase"
+        },
+        {
+          "type": "object",
+          "x-abstract": true,
+          "additionalProperties": false,
+          "properties": {
+            "MemberType": {
+              "$ref": "#/definitions/MemberTypes"
+            },
+            "ReturnParameter": {
+              "$ref": "#/definitions/ParameterInfo"
+            },
+            "ReturnType": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "MemberTypes": {
+      "type": "integer",
+      "description": "",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "Constructor",
+        "Event",
+        "Field",
+        "Method",
+        "Property",
+        "TypeInfo",
+        "Custom",
+        "NestedType",
+        "All"
+      ],
+      "enum": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        191
+      ]
+    },
+    "ParameterInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Attributes": {
+          "$ref": "#/definitions/ParameterAttributes"
+        },
+        "Member": {
+          "$ref": "#/definitions/MemberInfo"
+        },
+        "Name": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "ParameterType": {
+          "type": "string"
+        },
+        "Position": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "IsIn": {
+          "type": "boolean"
+        },
+        "IsLcid": {
+          "type": "boolean"
+        },
+        "IsOptional": {
+          "type": "boolean"
+        },
+        "IsOut": {
+          "type": "boolean"
+        },
+        "IsRetval": {
+          "type": "boolean"
+        },
+        "DefaultValue": {
+          "oneOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "RawDefaultValue": {
+          "oneOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "HasDefaultValue": {
+          "type": "boolean"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "MetadataToken": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ParameterAttributes": {
+      "type": "integer",
+      "description": "",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "None",
+        "In",
+        "Out",
+        "Lcid",
+        "Retval",
+        "Optional",
+        "HasDefault",
+        "HasFieldMarshal",
+        "Reserved3",
+        "Reserved4",
+        "ReservedMask"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        4096,
+        8192,
+        16384,
+        32768,
+        61440
+      ]
+    },
+    "MemberInfo": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false,
+      "properties": {
+        "Module": {
+          "$ref": "#/definitions/Module"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "IsCollectible": {
+          "type": "boolean"
+        },
+        "MetadataToken": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Module": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false,
+      "properties": {
+        "Assembly": {
+          "$ref": "#/definitions/Assembly"
+        },
+        "FullyQualifiedName": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "MDStreamVersion": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ModuleVersionId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "ScopeName": {
+          "type": "string"
+        },
+        "ModuleHandle": {
+          "$ref": "#/definitions/ModuleHandle"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "MetadataToken": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Assembly": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false,
+      "properties": {
+        "DefinedTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExportedTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "CodeBase": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "x-deprecated": true,
+          "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
+        },
+        "EntryPoint": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/MethodInfo"
+            }
+          ]
+        },
+        "FullName": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "ImageRuntimeVersion": {
+          "type": "string"
+        },
+        "IsDynamic": {
+          "type": "boolean"
+        },
+        "Location": {
+          "type": "string"
+        },
+        "ReflectionOnly": {
+          "type": "boolean"
+        },
+        "IsCollectible": {
+          "type": "boolean"
+        },
+        "IsFullyTrusted": {
+          "type": "boolean"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "EscapedCodeBase": {
+          "type": "string",
+          "x-deprecated": true,
+          "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
+        },
+        "ManifestModule": {
+          "$ref": "#/definitions/Module"
+        },
+        "Modules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Module"
+          }
+        },
+        "GlobalAssemblyCache": {
+          "type": "boolean",
+          "x-deprecated": true,
+          "x-deprecatedMessage": "The Global Assembly Cache is not supported."
+        },
+        "HostContext": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "SecurityRuleSet": {
+          "$ref": "#/definitions/SecurityRuleSet"
+        }
+      }
+    },
+    "CustomAttributeData": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AttributeType": {
+          "type": "string"
+        },
+        "Constructor": {
+          "$ref": "#/definitions/ConstructorInfo"
+        },
+        "ConstructorArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeTypedArgument"
+          }
+        },
+        "NamedArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeNamedArgument"
+          }
+        }
+      }
+    },
+    "ConstructorInfo": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodBase"
+        },
+        {
+          "type": "object",
+          "x-abstract": true,
+          "additionalProperties": false,
+          "properties": {
+            "MemberType": {
+              "$ref": "#/definitions/MemberTypes"
+            }
+          }
+        }
+      ]
+    },
+    "MethodBase": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MemberInfo"
+        },
+        {
+          "type": "object",
+          "x-abstract": true,
+          "additionalProperties": false,
+          "properties": {
+            "MethodImplementationFlags": {
+              "$ref": "#/definitions/MethodImplAttributes"
+            },
+            "CallingConvention": {
+              "$ref": "#/definitions/CallingConventions"
+            },
+            "IsAbstract": {
+              "type": "boolean"
+            },
+            "IsConstructor": {
+              "type": "boolean"
+            },
+            "IsFinal": {
+              "type": "boolean"
+            },
+            "IsHideBySig": {
+              "type": "boolean"
+            },
+            "IsSpecialName": {
+              "type": "boolean"
+            },
+            "IsStatic": {
+              "type": "boolean"
+            },
+            "IsVirtual": {
+              "type": "boolean"
+            },
+            "IsAssembly": {
+              "type": "boolean"
+            },
+            "IsFamily": {
+              "type": "boolean"
+            },
+            "IsFamilyAndAssembly": {
+              "type": "boolean"
+            },
+            "IsFamilyOrAssembly": {
+              "type": "boolean"
+            },
+            "IsPrivate": {
+              "type": "boolean"
+            },
+            "IsPublic": {
+              "type": "boolean"
+            },
+            "IsConstructedGenericMethod": {
+              "type": "boolean"
+            },
+            "IsGenericMethod": {
+              "type": "boolean"
+            },
+            "IsGenericMethodDefinition": {
+              "type": "boolean"
+            },
+            "ContainsGenericParameters": {
+              "type": "boolean"
+            },
+            "IsSecurityCritical": {
+              "type": "boolean"
+            },
+            "IsSecuritySafeCritical": {
+              "type": "boolean"
+            },
+            "IsSecurityTransparent": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    },
+    "MethodImplAttributes": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "IL",
+        "Managed",
+        "Native",
+        "OPTIL",
+        "CodeTypeMask",
+        "Runtime",
+        "ManagedMask",
+        "Unmanaged",
+        "NoInlining",
+        "ForwardRef",
+        "Synchronized",
+        "NoOptimization",
+        "PreserveSig",
+        "AggressiveInlining",
+        "AggressiveOptimization",
+        "InternalCall",
+        "MaxMethodImplVal"
+      ],
+      "enum": [
+        0,
+        0,
+        1,
+        2,
+        3,
+        3,
+        4,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        4096,
+        65535
+      ]
+    },
+    "CallingConventions": {
+      "type": "integer",
+      "description": "",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "Standard",
+        "VarArgs",
+        "Any",
+        "HasThis",
+        "ExplicitThis"
+      ],
+      "enum": [
+        1,
+        2,
+        3,
+        32,
+        64
+      ]
+    },
+    "CustomAttributeTypedArgument": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ArgumentType": {
+          "type": "string"
+        },
+        "Value": {
+          "oneOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "CustomAttributeNamedArgument": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MemberInfo": {
+          "$ref": "#/definitions/MemberInfo"
+        },
+        "TypedValue": {
+          "$ref": "#/definitions/CustomAttributeTypedArgument"
+        },
+        "MemberName": {
+          "type": "string"
+        },
+        "IsField": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SecurityRuleSet": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "None",
+        "Level1",
+        "Level2"
+      ],
+      "enum": [
+        0,
+        1,
+        2
+      ]
+    },
+    "ModuleHandle": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MDStreamVersion": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "FuncOfIEnumerableOfApiDescriptionAndApiDescription": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MulticastDelegate"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FuncOfApiDescriptionAndString": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MulticastDelegate"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FuncOfApiDescriptionAndIListOfString": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MulticastDelegate"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FuncOfIEnumerableOfAuthenticationSchemeAndIDictionaryOfStringAndOpenApiSecurityScheme": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MulticastDelegate"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "OpenApiServer": {
+      "type": "object",
+      "description": "Server Object: an object representing a Server.",
+      "additionalProperties": false,
+      "properties": {
+        "Description": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "An optional string describing the host designated by the URL. CommonMark syntax MAY be used for rich text representation."
+        },
+        "Url": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "REQUIRED. A URL to the target host. This URL supports Server Variables and MAY be relative,\nto indicate that the host location is relative to the location where the OpenAPI document is being served.\nVariable substitutions will be made when a variable is named in {brackets}."
+        },
+        "Variables": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "description": "A map between a variable name and its value. The value is used for substitution in the server's URL template.",
+          "additionalProperties": {
+            "$ref": "#/definitions/OpenApiServerVariable"
+          }
+        },
+        "Extensions": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "description": "This object MAY be extended with Specification Extensions.",
+          "additionalProperties": {
+            "$ref": "#/definitions/IOpenApiExtension"
+          }
+        }
+      }
+    },
+    "OpenApiServerVariable": {
+      "type": "object",
+      "description": "Server Variable Object.",
+      "additionalProperties": false,
+      "properties": {
+        "Description": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "An optional description for the server variable. CommonMark syntax MAY be used for rich text representation."
+        },
+        "Default": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "REQUIRED. The default value to use for substitution, and to send, if an alternate value is not supplied.\nUnlike the Schema Object's default, this value MUST be provided by the consumer."
+        },
+        "Enum": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "An enumeration of string values to be used if the substitution options are from a limited set.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Extensions": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "description": "This object MAY be extended with Specification Extensions.",
+          "additionalProperties": {
+            "$ref": "#/definitions/IOpenApiExtension"
+          }
+        }
+      }
+    },
+    "OpenApiSecurityScheme": {
+      "type": "object",
+      "description": "Security Scheme Object.",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "description": "REQUIRED. The type of the security scheme. Valid values are \"apiKey\", \"http\", \"oauth2\", \"openIdConnect\".",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SecuritySchemeType"
+            }
+          ]
+        },
+        "Description": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "A short description for security scheme. CommonMark syntax MAY be used for rich text representation."
+        },
+        "Name": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "REQUIRED. The name of the header, query or cookie parameter to be used."
+        },
+        "In": {
+          "description": "REQUIRED. The location of the API key. Valid values are \"query\", \"header\" or \"cookie\".",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ParameterLocation"
+            }
+          ]
+        },
+        "Scheme": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "REQUIRED. The name of the HTTP Authorization scheme to be used\nin the Authorization header as defined in RFC7235."
+        },
+        "BearerFormat": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "A hint to the client to identify how the bearer token is formatted.\nBearer tokens are usually generated by an authorization server,\nso this information is primarily for documentation purposes."
+        },
+        "Flows": {
+          "description": "REQUIRED. An object containing configuration information for the flow types supported.",
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/OpenApiOAuthFlows"
+            }
+          ]
+        },
+        "OpenIdConnectUrl": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "REQUIRED. OpenId Connect URL to discover OAuth2 configuration values.",
+          "format": "uri"
+        },
+        "Extensions": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "description": "Specification Extensions.",
+          "additionalProperties": {
+            "$ref": "#/definitions/IOpenApiExtension"
+          }
+        },
+        "UnresolvedReference": {
+          "type": "boolean",
+          "description": "Indicates if object is populated with data or is just a reference to the data"
+        },
+        "Reference": {
+          "description": "Reference object.",
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/OpenApiReference"
+            }
+          ]
+        }
+      }
+    },
+    "SecuritySchemeType": {
+      "type": "integer",
+      "description": "The type of the security scheme",
+      "x-enumNames": [
+        "ApiKey",
+        "Http",
+        "OAuth2",
+        "OpenIdConnect"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "ParameterLocation": {
+      "type": "integer",
+      "description": "The location of the parameter.",
+      "x-enumNames": [
+        "Query",
+        "Header",
+        "Path",
+        "Cookie"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "OpenApiOAuthFlows": {
+      "type": "object",
+      "description": "OAuth Flows Object.",
+      "additionalProperties": false,
+      "properties": {
+        "Implicit": {
+          "description": "Configuration for the OAuth Implicit flow",
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/OpenApiOAuthFlow"
+            }
+          ]
+        },
+        "Password": {
+          "description": "Configuration for the OAuth Resource Owner Password flow.",
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/OpenApiOAuthFlow"
+            }
+          ]
+        },
+        "ClientCredentials": {
+          "description": "Configuration for the OAuth Client Credentials flow.",
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/OpenApiOAuthFlow"
+            }
+          ]
+        },
+        "AuthorizationCode": {
+          "description": "Configuration for the OAuth Authorization Code flow.",
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/OpenApiOAuthFlow"
+            }
+          ]
+        },
+        "Extensions": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "description": "Specification Extensions.",
+          "additionalProperties": {
+            "$ref": "#/definitions/IOpenApiExtension"
+          }
+        }
+      }
+    },
+    "OpenApiOAuthFlow": {
+      "type": "object",
+      "description": "OAuth Flow Object.",
+      "additionalProperties": false,
+      "properties": {
+        "AuthorizationUrl": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "REQUIRED. The authorization URL to be used for this flow.\nApplies to implicit and authorizationCode OAuthFlow.",
+          "format": "uri"
+        },
+        "TokenUrl": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "REQUIRED. The token URL to be used for this flow.\nApplies to password, clientCredentials, and authorizationCode OAuthFlow.",
+          "format": "uri"
+        },
+        "RefreshUrl": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "The URL to be used for obtaining refresh tokens.",
+          "format": "uri"
+        },
+        "Scopes": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "description": "REQUIRED. A map between the scope name and a short description for it.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "Extensions": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "description": "Specification Extensions.",
+          "additionalProperties": {
+            "$ref": "#/definitions/IOpenApiExtension"
+          }
+        }
+      }
+    },
+    "OpenApiReference": {
+      "type": "object",
+      "description": "A simple object to allow referencing other components in the specification, internally and externally.",
+      "additionalProperties": false,
+      "properties": {
+        "ExternalResource": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "External resource in the reference.\nIt maybe:\n1. a absolute/relative file path, for example:  ../commons/pet.json\n2. a Url, for example: http://localhost/pet.json"
+        },
+        "Type": {
+          "description": "The element type referenced.",
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/ReferenceType"
+            }
+          ]
+        },
+        "Id": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "The identifier of the reusable component of one particular ReferenceType.\nIf ExternalResource is present, this is the path to the component after the '#/'.\nFor example, if the reference is 'example.json#/path/to/component', the Id is 'path/to/component'.\nIf ExternalResource is not present, this is the name of the component without the reference type name.\nFor example, if the reference is '#/components/schemas/componentName', the Id is 'componentName'."
+        },
+        "IsExternal": {
+          "type": "boolean",
+          "description": "Gets a flag indicating whether this reference is an external reference."
+        },
+        "IsLocal": {
+          "type": "boolean",
+          "description": "Gets a flag indicating whether this reference is a local reference."
+        },
+        "ReferenceV3": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "Gets the full reference string for v3.0."
+        },
+        "ReferenceV2": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "Gets the full reference string for V2.0"
+        }
+      }
+    },
+    "ReferenceType": {
+      "type": "integer",
+      "description": "The reference type.",
+      "x-enumNames": [
+        "Schema",
+        "Response",
+        "Parameter",
+        "Example",
+        "RequestBody",
+        "Header",
+        "SecurityScheme",
+        "Link",
+        "Callback",
+        "Tag"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "OpenApiSecurityRequirement": {
+      "type": "object",
+      "description": "Security Requirement Object.\nEach name MUST correspond to a security scheme which is declared in\nthe Security Schemes under the Components Object.\nIf the security scheme is of type \"oauth2\" or \"openIdConnect\",\nthen the value is a list of scope names required for the execution.\nFor other security scheme types, the array MUST be empty.",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "IComparerOfString": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false
+    },
+    "IParameterFilter": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false
+    },
+    "IRequestBodyFilter": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false
+    },
+    "IOperationFilter": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false
+    },
+    "IDocumentFilter": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false
+    },
+    "SchemaGeneratorOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CustomTypeMappings": {
+          "type": [
+            "null",
+            "object"
+          ],
+          "additionalProperties": {
+            "$ref": "#/definitions/FuncOfOpenApiSchema"
+          }
+        },
+        "UseInlineDefinitionsForEnums": {
+          "type": "boolean"
+        },
+        "SchemaIdSelector": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/FuncOfTypeAndString"
+            }
+          ]
+        },
+        "IgnoreObsoleteProperties": {
+          "type": "boolean"
+        },
+        "UseAllOfForInheritance": {
+          "type": "boolean"
+        },
+        "UseOneOfForPolymorphism": {
+          "type": "boolean"
+        },
+        "SubTypesSelector": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/FuncOfTypeAndIEnumerableOfType"
+            }
+          ]
+        },
+        "DiscriminatorNameSelector": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/FuncOfTypeAndString"
+            }
+          ]
+        },
+        "DiscriminatorValueSelector": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/FuncOfTypeAndString"
+            }
+          ]
+        },
+        "UseAllOfToExtendReferenceSchemas": {
+          "type": "boolean"
+        },
+        "SupportNonNullableReferenceTypes": {
+          "type": "boolean"
+        },
+        "SchemaFilters": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/ISchemaFilter"
+          }
+        }
+      }
+    },
+    "FuncOfOpenApiSchema": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MulticastDelegate"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FuncOfTypeAndString": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MulticastDelegate"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FuncOfTypeAndIEnumerableOfType": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MulticastDelegate"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ISchemaFilter": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false
+    },
+    "FilterDescriptor": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "Arguments": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {}
+        }
+      }
+    }
+  }
+}
