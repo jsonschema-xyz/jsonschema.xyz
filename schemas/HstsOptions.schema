@@ -26,7 +26,7 @@
         "$schema": {
             "type": "string",
             "format": "uri",
-            "default": "https://jsonschema.xyz/HstsOptions.schema"
+            "default": "https://jsonschema.xyz/schemas/HstsOptions.schema"
         }
     }
 }
