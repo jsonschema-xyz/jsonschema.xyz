@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft/2019-09/schema",
-    "$id": "https://jsonschema.xyz/HstsOptions.schema",
+    "$id": "https://jsonschema.xyz/schemas/HstsOptions.schema",
     "lastModified": "2024-03-03T20:31:00.0000+05:00Z",
     "title": "HSTS Options",
     "contentMediaType": "application/schema+json",
