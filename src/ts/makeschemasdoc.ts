@@ -1,10 +1,12 @@
 import jquery from "jquery";
-import fetch from "node-fetch";
+const fetch = require("node-fetch").default;
+
+declare type Dictionary = { [key: string]: string };
 
 const url = new URL(window.location.href);
 const schemasUrl = `${url.protocol}://${url.host}:${url.port}/schemas/list-all`;
 
-const fetchSchemas: () => Promise<{ [key: string]: string }> = (async () => (await fetch(schemasUrl)).json() as Promise<{ [key: string]: string }>);
+const fetchSchemas: () => Promise<Dictionary> = (async () =>{ const _fetch = await fetch; return (await (await _fetch(schemasUrl)).json()) as Dictionary; });
 
 jquery(document).ready(() => {
     const schemasPlaceholder = jquery("#schemas");
