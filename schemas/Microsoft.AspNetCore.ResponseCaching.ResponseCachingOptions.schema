@@ -1,0 +1,74 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "$id": "https://jsonschema.xyz/schemas/Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.schema",
+    "title": "ResponseCachingOptions",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "SizeLimit": {
+            "type": "integer",
+            "format": "int64"
+        },
+        "MaximumBodySize": {
+            "type": "integer",
+            "format": "int64"
+        },
+        "UseCaseSensitivePaths": {
+            "type": "boolean"
+        },
+        "TimeProvider": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/TimeProvider"
+                }
+            ]
+        }
+    },
+    "$defs": {
+        "TimeProvider": {
+            "type": "object",
+            "x-abstract": true,
+            "additionalProperties": false,
+            "properties": {
+                "LocalTimeZone": {
+                    "$ref": "#/$defs/TimeZoneInfo"
+                },
+                "TimestampFrequency": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "TimeZoneInfo": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Id": {
+                    "type": "string"
+                },
+                "HasIanaId": {
+                    "type": "boolean"
+                },
+                "DisplayName": {
+                    "type": "string"
+                },
+                "StandardName": {
+                    "type": "string"
+                },
+                "DaylightName": {
+                    "type": "string"
+                },
+                "BaseUtcOffset": {
+                    "type": "string",
+                    "format": "duration"
+                },
+                "SupportsDaylightSavingTime": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}
