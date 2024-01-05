@@ -80,7 +80,7 @@
             "additionalProperties": false,
             "properties": {
                 "AddressFamily": {
-                    "$ref": "#/$defs/AddressFamily",
+                    "$ref": "https://jsonschema.xyz/schemas/Net/AddressFamily",
                     "description": "Gets the Internet Protocol (IP) address family."
                 },
                 "Address": {
