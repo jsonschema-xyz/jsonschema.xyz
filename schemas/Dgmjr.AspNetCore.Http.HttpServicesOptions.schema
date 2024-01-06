@@ -1,0 +1,1745 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "https://jsonschema.xyz/Dgmjr.AspNetCore.Http.HttpServicesOptions.schema",
+  "title": "Http Services Options",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "UseCookiePolicy": {
+      "type": "boolean"
+    },
+    "CookiePolicy": {
+      "$ref": "#/definitions/CookiePolicyOptions"
+    },
+    "Cors": {
+      "$ref": "#/definitions/CorsOptions"
+    },
+    "UseCors": {
+      "type": "boolean"
+    },
+    "FileServer": {
+      "$ref": "#/definitions/FileServerOptions"
+    },
+    "UseFileServer": {
+      "type": "boolean"
+    },
+    "UseForwardedHeaders": {
+      "type": "boolean"
+    },
+    "ForwardedHeaders": {
+      "$ref": "#/definitions/ForwardedHeadersOptions"
+    },
+    "Hsts": {
+      "$ref": "#/definitions/HstsOptions"
+    },
+    "UseHsts": {
+      "type": "boolean"
+    },
+    "HttpsRedirection": {
+      "$ref": "#/definitions/HttpsRedirectionOptions"
+    },
+    "UseHttpsRedirection": {
+      "type": "boolean"
+    },
+    "IIS": {
+      "$ref": "#/definitions/IISServerOptions"
+    },
+    "Kestrel": {
+      "$ref": "#/definitions/KestrelServerOptions"
+    },
+    "OutputCache": {
+      "$ref": "#/definitions/OutputCacheOptions"
+    },
+    "UseOutputCaching": {
+      "type": "boolean"
+    },
+    "RequestDecompression": {
+      "$ref": "#/definitions/RequestDecompressionOptions"
+    },
+    "UseRequestDecompression": {
+      "type": "boolean"
+    },
+    "ResponseCaching": {
+      "$ref": "#/definitions/ResponseCachingOptions"
+    },
+    "UseResponseCaching": {
+      "type": "boolean"
+    },
+    "ResponseCompression": {
+      "$ref": "#/definitions/ResponseCompressionOptions"
+    },
+    "UseResponseCompression": {
+      "type": "boolean"
+    },
+    "Session": {
+      "$ref": "#/definitions/SessionOptions"
+    },
+    "UseSession": {
+      "type": "boolean"
+    },
+    "$schema": {
+      "type": "string",
+      "description": "The URI of the schema itself (not necessarily the URI of the resource it describes).",
+      "format": "uri",
+      "default": "https://jsonschema.xyz/Dgmjr.AspNetCore.Http.HttpServicesOptions.schema"
+    },
+    "contentMediaType": {
+      "type": "string",
+      "description": "The content type of the file (usually \"application/json\")",
+      "format": "uri",
+      "default": "application/json"
+    },
+    "$id": {
+      "type": "string",
+      "description": "The URI of the JSON file itself (not necessarily the URI of the resource it describes).",
+      "format": "uri"
+    }
+  },
+  "definitions": {
+    "CookiePolicyOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MinimumSameSitePolicy": {
+          "$ref": "#/definitions/SameSiteMode"
+        },
+        "HttpOnly": {
+          "$ref": "#/definitions/HttpOnlyPolicy"
+        },
+        "Secure": {
+          "$ref": "#/definitions/CookieSecurePolicy"
+        },
+        "ConsentCookie": {
+          "$ref": "#/definitions/CookieBuilder"
+        },
+        "ConsentCookieValue": {
+          "type": "string"
+        },
+        "CheckConsentNeeded": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/FuncOfHttpContextAndBoolean"
+            }
+          ]
+        },
+        "OnAppendCookie": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/ActionOfAppendCookieContext"
+            }
+          ]
+        },
+        "OnDeleteCookie": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/ActionOfDeleteCookieContext"
+            }
+          ]
+        }
+      }
+    },
+    "SameSiteMode": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "None",
+        "Lax",
+        "Strict",
+        "Unspecified"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        -1
+      ]
+    },
+    "HttpOnlyPolicy": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "None",
+        "Always"
+      ],
+      "enum": [
+        0,
+        1
+      ]
+    },
+    "CookieSecurePolicy": {
+      "type": "integer",
+      "description": "Determines how cookie security properties are set.",
+      "x-enumNames": [
+        "SameAsRequest",
+        "Always",
+        "None"
+      ],
+      "enum": [
+        0,
+        1,
+        2
+      ]
+    },
+    "CookieBuilder": {
+      "type": "object",
+      "description": "Defines settings used to create a cookie.",
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "The name of the cookie."
+        },
+        "Path": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "The cookie path."
+        },
+        "Domain": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "The domain to associate the cookie with."
+        },
+        "HttpOnly": {
+          "type": "boolean",
+          "description": "Indicates whether a cookie is accessible by client-side script."
+        },
+        "SameSite": {
+          "description": "The SameSite attribute of the cookie. The default value is Lax",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SameSiteMode"
+            }
+          ]
+        },
+        "SecurePolicy": {
+          "description": "The policy that will be used to determine .\nThis is determined from the HttpContext passed to Build.",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/CookieSecurePolicy"
+            }
+          ]
+        },
+        "Expiration": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "Gets or sets the lifespan of a cookie.",
+          "format": "duration"
+        },
+        "MaxAge": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "description": "Gets or sets the max-age for the cookie.",
+          "format": "duration"
+        },
+        "IsEssential": {
+          "type": "boolean",
+          "description": "Indicates if this cookie is essential for the application to function correctly. If true then\nconsent policy checks may be bypassed. The default value is false."
+        },
+        "Extensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FuncOfHttpContextAndBoolean": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MulticastDelegate"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "MulticastDelegate": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Delegate"
+        },
+        {
+          "type": "object",
+          "x-abstract": true,
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Delegate": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false,
+      "properties": {
+        "Target": {
+          "oneOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "Method": {
+          "$ref": "#/definitions/MethodInfo"
+        }
+      }
+    },
+    "MethodInfo": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodBase"
+        },
+        {
+          "type": "object",
+          "x-abstract": true,
+          "additionalProperties": false,
+          "properties": {
+            "MemberType": {
+              "$ref": "#/definitions/MemberTypes"
+            },
+            "ReturnParameter": {
+              "$ref": "#/definitions/ParameterInfo"
+            },
+            "ReturnType": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "MemberTypes": {
+      "type": "integer",
+      "description": "",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "Constructor",
+        "Event",
+        "Field",
+        "Method",
+        "Property",
+        "TypeInfo",
+        "Custom",
+        "NestedType",
+        "All"
+      ],
+      "enum": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        191
+      ]
+    },
+    "ParameterInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Attributes": {
+          "$ref": "#/definitions/ParameterAttributes"
+        },
+        "Member": {
+          "$ref": "#/definitions/MemberInfo"
+        },
+        "Name": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "ParameterType": {
+          "type": "string"
+        },
+        "Position": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "IsIn": {
+          "type": "boolean"
+        },
+        "IsLcid": {
+          "type": "boolean"
+        },
+        "IsOptional": {
+          "type": "boolean"
+        },
+        "IsOut": {
+          "type": "boolean"
+        },
+        "IsRetval": {
+          "type": "boolean"
+        },
+        "DefaultValue": {
+          "oneOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "RawDefaultValue": {
+          "oneOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "HasDefaultValue": {
+          "type": "boolean"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "MetadataToken": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ParameterAttributes": {
+      "type": "integer",
+      "description": "",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "None",
+        "In",
+        "Out",
+        "Lcid",
+        "Retval",
+        "Optional",
+        "HasDefault",
+        "HasFieldMarshal",
+        "Reserved3",
+        "Reserved4",
+        "ReservedMask"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        4096,
+        8192,
+        16384,
+        32768,
+        61440
+      ]
+    },
+    "MemberInfo": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false,
+      "properties": {
+        "Module": {
+          "$ref": "#/definitions/Module"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "IsCollectible": {
+          "type": "boolean"
+        },
+        "MetadataToken": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Module": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false,
+      "properties": {
+        "Assembly": {
+          "$ref": "#/definitions/Assembly"
+        },
+        "FullyQualifiedName": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "MDStreamVersion": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ModuleVersionId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "ScopeName": {
+          "type": "string"
+        },
+        "ModuleHandle": {
+          "$ref": "#/definitions/ModuleHandle"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "MetadataToken": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Assembly": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false,
+      "properties": {
+        "DefinedTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExportedTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "CodeBase": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "x-deprecated": true,
+          "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
+        },
+        "EntryPoint": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/MethodInfo"
+            }
+          ]
+        },
+        "FullName": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "ImageRuntimeVersion": {
+          "type": "string"
+        },
+        "IsDynamic": {
+          "type": "boolean"
+        },
+        "Location": {
+          "type": "string"
+        },
+        "ReflectionOnly": {
+          "type": "boolean"
+        },
+        "IsCollectible": {
+          "type": "boolean"
+        },
+        "IsFullyTrusted": {
+          "type": "boolean"
+        },
+        "CustomAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeData"
+          }
+        },
+        "EscapedCodeBase": {
+          "type": "string",
+          "x-deprecated": true,
+          "x-deprecatedMessage": "Assembly.CodeBase and Assembly.EscapedCodeBase are only included for .NET Framework compatibility. Use Assembly.Location."
+        },
+        "ManifestModule": {
+          "$ref": "#/definitions/Module"
+        },
+        "Modules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Module"
+          }
+        },
+        "GlobalAssemblyCache": {
+          "type": "boolean",
+          "x-deprecated": true,
+          "x-deprecatedMessage": "The Global Assembly Cache is not supported."
+        },
+        "HostContext": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "SecurityRuleSet": {
+          "$ref": "#/definitions/SecurityRuleSet"
+        }
+      }
+    },
+    "CustomAttributeData": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AttributeType": {
+          "type": "string"
+        },
+        "Constructor": {
+          "$ref": "#/definitions/ConstructorInfo"
+        },
+        "ConstructorArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeTypedArgument"
+          }
+        },
+        "NamedArguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAttributeNamedArgument"
+          }
+        }
+      }
+    },
+    "ConstructorInfo": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MethodBase"
+        },
+        {
+          "type": "object",
+          "x-abstract": true,
+          "additionalProperties": false,
+          "properties": {
+            "MemberType": {
+              "$ref": "#/definitions/MemberTypes"
+            }
+          }
+        }
+      ]
+    },
+    "MethodBase": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MemberInfo"
+        },
+        {
+          "type": "object",
+          "x-abstract": true,
+          "additionalProperties": false,
+          "properties": {
+            "MethodImplementationFlags": {
+              "$ref": "#/definitions/MethodImplAttributes"
+            },
+            "CallingConvention": {
+              "$ref": "#/definitions/CallingConventions"
+            },
+            "IsAbstract": {
+              "type": "boolean"
+            },
+            "IsConstructor": {
+              "type": "boolean"
+            },
+            "IsFinal": {
+              "type": "boolean"
+            },
+            "IsHideBySig": {
+              "type": "boolean"
+            },
+            "IsSpecialName": {
+              "type": "boolean"
+            },
+            "IsStatic": {
+              "type": "boolean"
+            },
+            "IsVirtual": {
+              "type": "boolean"
+            },
+            "IsAssembly": {
+              "type": "boolean"
+            },
+            "IsFamily": {
+              "type": "boolean"
+            },
+            "IsFamilyAndAssembly": {
+              "type": "boolean"
+            },
+            "IsFamilyOrAssembly": {
+              "type": "boolean"
+            },
+            "IsPrivate": {
+              "type": "boolean"
+            },
+            "IsPublic": {
+              "type": "boolean"
+            },
+            "IsConstructedGenericMethod": {
+              "type": "boolean"
+            },
+            "IsGenericMethod": {
+              "type": "boolean"
+            },
+            "IsGenericMethodDefinition": {
+              "type": "boolean"
+            },
+            "ContainsGenericParameters": {
+              "type": "boolean"
+            },
+            "IsSecurityCritical": {
+              "type": "boolean"
+            },
+            "IsSecuritySafeCritical": {
+              "type": "boolean"
+            },
+            "IsSecurityTransparent": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    },
+    "MethodImplAttributes": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "IL",
+        "Managed",
+        "Native",
+        "OPTIL",
+        "CodeTypeMask",
+        "Runtime",
+        "ManagedMask",
+        "Unmanaged",
+        "NoInlining",
+        "ForwardRef",
+        "Synchronized",
+        "NoOptimization",
+        "PreserveSig",
+        "AggressiveInlining",
+        "AggressiveOptimization",
+        "InternalCall",
+        "MaxMethodImplVal"
+      ],
+      "enum": [
+        0,
+        0,
+        1,
+        2,
+        3,
+        3,
+        4,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        4096,
+        65535
+      ]
+    },
+    "CallingConventions": {
+      "type": "integer",
+      "description": "",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "Standard",
+        "VarArgs",
+        "Any",
+        "HasThis",
+        "ExplicitThis"
+      ],
+      "enum": [
+        1,
+        2,
+        3,
+        32,
+        64
+      ]
+    },
+    "CustomAttributeTypedArgument": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ArgumentType": {
+          "type": "string"
+        },
+        "Value": {
+          "oneOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "CustomAttributeNamedArgument": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MemberInfo": {
+          "$ref": "#/definitions/MemberInfo"
+        },
+        "TypedValue": {
+          "$ref": "#/definitions/CustomAttributeTypedArgument"
+        },
+        "MemberName": {
+          "type": "string"
+        },
+        "IsField": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SecurityRuleSet": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "None",
+        "Level1",
+        "Level2"
+      ],
+      "enum": [
+        0,
+        1,
+        2
+      ]
+    },
+    "ModuleHandle": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MDStreamVersion": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ActionOfAppendCookieContext": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MulticastDelegate"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ActionOfDeleteCookieContext": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MulticastDelegate"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CorsOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DefaultPolicyName": {
+          "type": "string"
+        }
+      }
+    },
+    "FileServerOptions": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SharedOptionsBase"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "StaticFileOptions": {
+              "$ref": "#/definitions/StaticFileOptions"
+            },
+            "DirectoryBrowserOptions": {
+              "$ref": "#/definitions/DirectoryBrowserOptions"
+            },
+            "DefaultFilesOptions": {
+              "$ref": "#/definitions/DefaultFilesOptions"
+            },
+            "EnableDirectoryBrowsing": {
+              "type": "boolean"
+            },
+            "EnableDefaultFiles": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    },
+    "StaticFileOptions": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SharedOptionsBase"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ContentTypeProvider": {
+              "$ref": "#/definitions/IContentTypeProvider"
+            },
+            "DefaultContentType": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "ServeUnknownFileTypes": {
+              "type": "boolean"
+            },
+            "HttpsCompression": {
+              "$ref": "#/definitions/HttpsCompressionMode"
+            },
+            "OnPrepareResponse": {
+              "$ref": "#/definitions/ActionOfStaticFileResponseContext"
+            },
+            "OnPrepareResponseAsync": {
+              "$ref": "#/definitions/FuncOfStaticFileResponseContextAndTask"
+            }
+          }
+        }
+      ]
+    },
+    "IContentTypeProvider": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false
+    },
+    "HttpsCompressionMode": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "Default",
+        "DoNotCompress",
+        "Compress"
+      ],
+      "enum": [
+        0,
+        1,
+        2
+      ]
+    },
+    "ActionOfStaticFileResponseContext": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MulticastDelegate"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FuncOfStaticFileResponseContextAndTask": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MulticastDelegate"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SharedOptionsBase": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false,
+      "properties": {
+        "RequestPath": {
+          "type": "string"
+        },
+        "FileProvider": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/IFileProvider"
+            }
+          ]
+        },
+        "RedirectToAppendTrailingSlash": {
+          "type": "boolean"
+        }
+      }
+    },
+    "IFileProvider": {
+      "type": "object",
+      "description": "A read-only file provider abstraction.",
+      "x-abstract": true,
+      "additionalProperties": false
+    },
+    "DirectoryBrowserOptions": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SharedOptionsBase"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Formatter": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/definitions/IDirectoryFormatter"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "IDirectoryFormatter": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false
+    },
+    "DefaultFilesOptions": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SharedOptionsBase"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "DefaultFileNames": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ForwardedHeadersOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ForwardedForHeaderName": {
+          "type": "string",
+          "description": "Use this header instead of XForwardedForHeaderName"
+        },
+        "ForwardedHostHeaderName": {
+          "type": "string",
+          "description": "Use this header instead of XForwardedHostHeaderName"
+        },
+        "ForwardedProtoHeaderName": {
+          "type": "string",
+          "description": "Use this header instead of XForwardedProtoHeaderName"
+        },
+        "ForwardedPrefixHeaderName": {
+          "type": "string"
+        },
+        "OriginalForHeaderName": {
+          "type": "string",
+          "description": "Use this header instead of XOriginalForHeaderName"
+        },
+        "OriginalHostHeaderName": {
+          "type": "string",
+          "description": "Use this header instead of XOriginalHostHeaderName"
+        },
+        "OriginalProtoHeaderName": {
+          "type": "string",
+          "description": "Use this header instead of XOriginalProtoHeaderName"
+        },
+        "OriginalPrefixHeaderName": {
+          "type": "string"
+        },
+        "ForwardedHeaders": {
+          "description": "Identifies which forwarders should be processed.",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ForwardedHeaders"
+            }
+          ]
+        },
+        "ForwardLimit": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Limits the number of entries in the headers that will be processed. The default value is 1.\nSet to null to disable the limit, but this should only be done if\nKnownProxies or KnownNetworks are configured.",
+          "format": "int32"
+        },
+        "KnownProxies": {
+          "type": "array",
+          "description": "Addresses of known proxies to accept forwarded headers from.",
+          "items": {
+            "$ref": "#/definitions/IPAddress"
+          }
+        },
+        "KnownNetworks": {
+          "type": "array",
+          "description": "Address ranges of known proxies to accept forwarded headers from.",
+          "items": {
+            "$ref": "#/definitions/IPNetwork"
+          }
+        },
+        "AllowedHosts": {
+          "type": "array",
+          "description": "The allowed values from x-forwarded-host. If the list is empty then all hosts are allowed.\nFailing to restrict this these values may allow an attacker to spoof links generated by your service. ",
+          "items": {
+            "type": "string"
+          }
+        },
+        "RequireHeaderSymmetry": {
+          "type": "boolean",
+          "description": "Require the number of header values to be in sync between the different headers being processed.\nThe default is 'false'."
+        }
+      }
+    },
+    "ForwardedHeaders": {
+      "type": "integer",
+      "description": "",
+      "x-enumFlags": true,
+      "x-enumNames": [
+        "None",
+        "XForwardedFor",
+        "XForwardedHost",
+        "XForwardedProto",
+        "XForwardedPrefix",
+        "All"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        15
+      ]
+    },
+    "IPAddress": {
+      "type": "object",
+      "description": "Provides an Internet Protocol (IP) address.",
+      "additionalProperties": false,
+      "properties": {
+        "AddressFamily": {
+          "description": "Gets the address family of the IP address.",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AddressFamily"
+            }
+          ]
+        },
+        "ScopeId": {
+          "type": "integer",
+          "description": "Gets or sets the IPv6 address scope identifier.",
+          "format": "int64"
+        },
+        "IsIPv6Multicast": {
+          "type": "boolean",
+          "description": "Gets whether the address is an IPv6 multicast global address."
+        },
+        "IsIPv6LinkLocal": {
+          "type": "boolean",
+          "description": "Gets whether the address is an IPv6 link local address."
+        },
+        "IsIPv6SiteLocal": {
+          "type": "boolean",
+          "description": "Gets whether the address is an IPv6 site local address."
+        },
+        "IsIPv6Teredo": {
+          "type": "boolean",
+          "description": "Gets whether the address is an IPv6 Teredo address."
+        },
+        "IsIPv6UniqueLocal": {
+          "type": "boolean"
+        },
+        "IsIPv4MappedToIPv6": {
+          "type": "boolean",
+          "description": "Gets whether the IP address is an IPv4-mapped IPv6 address."
+        },
+        "Address": {
+          "type": "integer",
+          "format": "int64",
+          "x-deprecated": true,
+          "x-deprecatedMessage": "IPAddress.Address is address family dependent and has been deprecated. Use IPAddress.Equals to perform comparisons instead."
+        }
+      }
+    },
+    "AddressFamily": {
+      "type": "integer",
+      "description": "Specifies the addressing scheme that an instance of the Socket class can use.",
+      "x-enumNames": [
+        "Unspecified",
+        "Unix",
+        "InterNetwork",
+        "ImpLink",
+        "Pup",
+        "Chaos",
+        "NS",
+        "Ipx",
+        "Iso",
+        "Osi",
+        "Ecma",
+        "DataKit",
+        "Ccitt",
+        "Sna",
+        "DecNet",
+        "DataLink",
+        "Lat",
+        "HyperChannel",
+        "AppleTalk",
+        "NetBios",
+        "VoiceView",
+        "FireFox",
+        "Banyan",
+        "Atm",
+        "InterNetworkV6",
+        "Cluster",
+        "Ieee12844",
+        "Irda",
+        "NetworkDesigners",
+        "Max",
+        "Packet",
+        "ControllerAreaNetwork",
+        "Unknown"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        6,
+        7,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        28,
+        29,
+        65536,
+        65537,
+        -1
+      ]
+    },
+    "IPNetwork": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Prefix": {
+          "$ref": "#/definitions/IPAddress"
+        },
+        "PrefixLength": {
+          "type": "integer",
+          "description": "The CIDR notation of the subnet mask ",
+          "format": "int32"
+        }
+      }
+    },
+    "HstsOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MaxAge": {
+          "type": "string",
+          "format": "duration"
+        },
+        "IncludeSubDomains": {
+          "type": "boolean"
+        },
+        "Preload": {
+          "type": "boolean"
+        },
+        "ExcludedHosts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "HttpsRedirectionOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "RedirectStatusCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "HttpsPort": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int32"
+        }
+      }
+    },
+    "IISServerOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AllowSynchronousIO": {
+          "type": "boolean"
+        },
+        "AutomaticAuthentication": {
+          "type": "boolean"
+        },
+        "AuthenticationDisplayName": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "MaxRequestBodyBufferSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MaxRequestBodySize": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int64"
+        }
+      }
+    },
+    "KestrelServerOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AllowHostHeaderOverride": {
+          "type": "boolean"
+        },
+        "AddServerHeader": {
+          "type": "boolean"
+        },
+        "AllowResponseHeaderCompression": {
+          "type": "boolean"
+        },
+        "AllowSynchronousIO": {
+          "type": "boolean"
+        },
+        "AllowAlternateSchemes": {
+          "type": "boolean"
+        },
+        "DisableStringReuse": {
+          "type": "boolean"
+        },
+        "EnableAltSvc": {
+          "type": "boolean",
+          "x-deprecated": true,
+          "x-deprecatedMessage": "This property is obsolete and will be removed in a future version. It no longer has any impact on runtime behavior. Use ListenOptions.DisableAltSvcHeader to configure \"Alt-Svc\" behavior."
+        },
+        "RequestHeaderEncodingSelector": {
+          "$ref": "#/definitions/FuncOfStringAndEncoding"
+        },
+        "ResponseHeaderEncodingSelector": {
+          "$ref": "#/definitions/FuncOfStringAndEncoding"
+        },
+        "ApplicationServices": {
+          "$ref": "#/definitions/IServiceProvider"
+        },
+        "Limits": {
+          "$ref": "#/definitions/KestrelServerLimits"
+        },
+        "ConfigurationLoader": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/KestrelConfigurationLoader"
+            }
+          ]
+        }
+      }
+    },
+    "FuncOfStringAndEncoding": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MulticastDelegate"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "IServiceProvider": {
+      "type": "object",
+      "description": "Defines a mechanism for retrieving a service object; that is, an object that provides custom support to other objects.",
+      "x-abstract": true,
+      "additionalProperties": false
+    },
+    "KestrelServerLimits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MaxResponseBufferSize": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int64"
+        },
+        "MaxRequestBufferSize": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int64"
+        },
+        "MaxRequestLineSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MaxRequestHeadersTotalSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MaxRequestHeaderCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MaxRequestBodySize": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int64"
+        },
+        "KeepAliveTimeout": {
+          "type": "string",
+          "format": "duration"
+        },
+        "RequestHeadersTimeout": {
+          "type": "string",
+          "format": "duration"
+        },
+        "MaxConcurrentConnections": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int64"
+        },
+        "MaxConcurrentUpgradedConnections": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int64"
+        },
+        "Http2": {
+          "$ref": "#/definitions/Http2Limits"
+        },
+        "Http3": {
+          "$ref": "#/definitions/Http3Limits"
+        },
+        "MinRequestBodyDataRate": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/MinDataRate"
+            }
+          ]
+        },
+        "MinResponseDataRate": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/MinDataRate"
+            }
+          ]
+        }
+      }
+    },
+    "Http2Limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MaxStreamsPerConnection": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "HeaderTableSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MaxFrameSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MaxRequestHeaderFieldSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "InitialConnectionWindowSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "InitialStreamWindowSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "KeepAlivePingDelay": {
+          "type": "string",
+          "format": "duration"
+        },
+        "KeepAlivePingTimeout": {
+          "type": "string",
+          "format": "duration"
+        }
+      }
+    },
+    "Http3Limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MaxRequestHeaderFieldSize": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "MinDataRate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "BytesPerSecond": {
+          "type": "number",
+          "format": "double"
+        },
+        "GracePeriod": {
+          "type": "string",
+          "format": "duration"
+        }
+      }
+    },
+    "KestrelConfigurationLoader": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Options": {
+          "$ref": "#/definitions/KestrelServerOptions"
+        },
+        "Configuration": {
+          "$ref": "#/definitions/IConfiguration"
+        }
+      }
+    },
+    "IConfiguration": {
+      "type": "object",
+      "description": "Represents a set of key/value application configuration properties.",
+      "x-abstract": true,
+      "additionalProperties": false
+    },
+    "OutputCacheOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SizeLimit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "MaximumBodySize": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "DefaultExpirationTimeSpan": {
+          "type": "string",
+          "format": "duration"
+        },
+        "UseCaseSensitivePaths": {
+          "type": "boolean"
+        },
+        "ApplicationServices": {
+          "$ref": "#/definitions/IServiceProvider"
+        }
+      }
+    },
+    "RequestDecompressionOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DecompressionProviders": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/IDecompressionProvider"
+          }
+        }
+      }
+    },
+    "IDecompressionProvider": {
+      "type": "object",
+      "x-abstract": true,
+      "additionalProperties": false
+    },
+    "ResponseCachingOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SizeLimit": {
+          "type": "integer",
+          "description": "The size limit for the response cache middleware in bytes. The default is set to 100 MB.",
+          "format": "int64"
+        },
+        "MaximumBodySize": {
+          "type": "integer",
+          "description": "The largest cacheable size for the response body in bytes. The default is set to 64 MB.",
+          "format": "int64"
+        },
+        "UseCaseSensitivePaths": {
+          "type": "boolean",
+          "description": "true if request paths are case-sensitive; otherwise false. The default is to treat paths as case-insensitive."
+        }
+      }
+    },
+    "ResponseCompressionOptions": {
+      "type": "object",
+      "description": "Options for the HTTP response compression middleware.",
+      "additionalProperties": false,
+      "properties": {
+        "MimeTypes": {
+          "type": "array",
+          "description": "Response Content-Type MIME types to compress.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExcludedMimeTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "EnableForHttps": {
+          "type": "boolean",
+          "description": "Indicates if responses over HTTPS connections should be compressed. The default is 'false'.\nEnable compression on HTTPS connections may expose security problems."
+        },
+        "Providers": {
+          "description": "The ICompressionProviders to use for responses.",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/CompressionProviderCollection"
+            }
+          ]
+        }
+      }
+    },
+    "CompressionProviderCollection": {
+      "type": "array",
+      "description": "A Collection of ICompressionProvider's that also allows them to be instantiated from an IServiceProvider.",
+      "items": {
+        "$ref": "#/definitions/ICompressionProvider"
+      }
+    },
+    "ICompressionProvider": {
+      "type": "object",
+      "description": "Provides a specific compression implementation to compress HTTP responses.",
+      "x-abstract": true,
+      "additionalProperties": false,
+      "properties": {
+        "EncodingName": {
+          "type": "string",
+          "description": "The encoding name used in the 'Accept-Encoding' request header and 'Content-Encoding' response header."
+        },
+        "SupportsFlush": {
+          "type": "boolean",
+          "description": "Indicates if the given provider supports Flush and FlushAsync. If not, compression may be disabled in some scenarios."
+        }
+      }
+    },
+    "SessionOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Cookie": {
+          "$ref": "#/definitions/CookieBuilder"
+        },
+        "IdleTimeout": {
+          "type": "string",
+          "format": "duration"
+        },
+        "IOTimeout": {
+          "type": "string",
+          "format": "duration"
+        }
+      }
+    }
+  },
+  "lastModified": "2024-01-06T15:36:30.2935520-05:00",
+  "contentMediaType": "application/schema+json",
+  "x-generator": "generator.jsonschema.xyz",
+  "x-generator-author": "David G. Moore, Jr.",
+  "x-generator-author-github-url": "https://github.com/dgmjr",
+  "x-generator-description": "This Website provides JSON schemas for any given data type.",
+  "x-generator-email": "json@jsonschema.xyz",
+  "x-generator-url": "https://generator.jsonschema.xyz",
+  "x-generator-version": "v0.0.1"
+}
