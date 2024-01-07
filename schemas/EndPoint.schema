@@ -1,0 +1,67 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://jsonschema.xyz/EndPoint.schema",
+    "$comment": "The EndPoint class provides an abstract base class that represents a network resource or service. Descendant classes combine network connection information to form a connection point to a service.",
+    "contentMediaType": "application/schema+json",
+    "lastModified": "2023-12-31T19:08:00.0000+05:00Z",
+    "description": "Identifies a network address. This is an abstract class.",
+    "x-abstract": true,
+    "additionalProperties": false,
+    "anyOf": [
+        {
+            "$ref": "https://jsonschema.xyz/IPEndPoint.schema"
+        },
+        {
+            "$ref": "https://jsonschema.xyz/DnsEndPoint.schema"
+        },
+        {
+            "$ref": "https://jsonschema.xyz/UnixDomainSocketEndPoint.schema"
+        }
+    ],
+    "$defs": {
+        "IPEndPoint": {
+            "$anchor": "IPEndPoint",
+            "$id": "#IPEndPoint",
+            "title": "IP End Point",
+            "description": "Represents a network endpoint as an IP address and a port number.",
+            "contentMediaType": "application/schema+json",
+            "lastModified": "2023-12-31T19:08:00.0000+05:00Z",
+            "properties": {
+                "Address": {
+                    "$ref": "#/$defs/IPAddress",
+                    "description": "Gets or sets the IP address of the endpoint.",
+                    "format": "hostname"
+                },
+                "AddressFamily": {
+                    "$ref": "#/$defs/AddressFamily",
+                    "description": "Gets the Internet Protocol (IP) address family.",
+                    "const": "Unix"
+                }
+            }
+        },
+        "DnsEndPoint": {
+            "$anchor": "DnsEndPoint",
+            "$id": "#DnsEndPoint",
+            "type": "object",
+            "additionalProperties": false,
+            "allOf": [
+
+            ],
+            "properties": {
+                "Host": {
+                    "type": "string",
+                    "description": "Gets the host name or string representation of the Internet Protocol (IP) address of the host.",
+                    "format": "hostname"
+                },
+                "AddressFamily": {
+                    "$ref": "#/$defs/AddressFamily",
+                    "description": "Gets the Internet Protocol (IP) address family."
+                },
+                "Port": {
+                    "$ref": "#/$defs/TcpPort",
+                    "description": "Gets the port number of the DnsEndPoint."
+                }
+            }
+        }
+    }
+}

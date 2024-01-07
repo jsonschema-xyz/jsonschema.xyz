@@ -1,0 +1,17 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://jsonschema.xyz/UnixDomainSocketEndPoint.schema",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "AddressFamily": {
+            "$ref": "https://jsonschema.xyz/AddressFamily.schema",
+            "description": "Gets the Internet Protocol (IP) address family.",
+            "const": "Unix"
+        },
+        "Path": {
+            "type": "string",
+            "description": "Gets the path of the Unix domain socket."
+        }
+    }
+}

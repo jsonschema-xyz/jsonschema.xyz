@@ -1,0 +1,24 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "https://jsonschema.xyz/schemas/Net/IPEndPoint.schema",
+    "title": "IP End Point",
+    "description": "Represents a network endpoint as an IP address and a port number.",
+    "contentMediaType": "application/schema+json",
+    "lastModified": "2023-12-31T19:08:00.0000+05:00Z",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "AddressFamily": {
+            "$ref": "https://jsonschema.xyz/AddressFamily.schema",
+            "description": "Gets the Internet Protocol (IP) address family."
+        },
+        "Address": {
+            "$ref": "https://jsonschema.xyz/IPAddress.schema",
+            "description": "Gets or sets the IP address of the endpoint."
+        },
+        "Port": {
+            "$ref": "https://jsonschema.xyz/schemas/Net/TcpPort.schema",
+            "description": "Gets or sets the port number of the endpoint."
+        }
+    }
+}

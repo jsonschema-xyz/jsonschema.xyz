@@ -1,8 +1,7 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://jsonschema.xyz/schemas/Net/TcpPort.schema",
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "$id": "https://jsonschema.xyz/TcpPort.schema",
     "contentMediaType": "application/schema+json",
-    "lastModified": "2023-12-31T19:08:00.0000+05:00Z",
     "type": "integer",
     "minimum": 0,
     "maximum": 65535,

@@ -1,0 +1,52 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://jsonschema.xyz/IPAddress.schema",
+    "$comment": "The IPAddress class provides an Internet Protocol (IP) address.",
+    "contentMediaType": "application/schema+json",
+    "title": "IP Address",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "AddressFamily": {
+            "$ref": "https://jsonschema.xyz/AddressFamily",
+            "description": "Gets the address family of the IP address."
+        },
+        "ScopeId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Gets or sets the IPv6 address scope identifier."
+        },
+        "IsIPv6Multicast": {
+            "type": "boolean",
+            "description": "Gets whether the address is an IPv6 multicast global address."
+        },
+        "IsIPv6LinkLocal": {
+            "type": "boolean",
+            "description": "Gets whether the address is an IPv6 link local address."
+        },
+        "IsIPv6SiteLocal": {
+            "type": "boolean",
+            "description": "Gets whether the address is an IPv6 site local address."
+        },
+        "IsIPv6Teredo": {
+            "type": "boolean",
+            "description": "Gets whether the address is an IPv6 Teredo address."
+        },
+        "IsIPv6UniqueLocal": {
+            "type": "boolean",
+            "description": "Gets whether the address is an IPv6 Unique Local address."
+        },
+        "IsIPv4MappedToIPv6": {
+            "type": "boolean",
+            "description": "Gets whether the IP address is an IPv4-mapped IPv6 address."
+        },
+        "Address": {
+            "type": "integer",
+            "format": "int64",
+            "description": "An Internet Protocol (IP) address.",
+            "deprecated": true,
+            "x-deprecated": true,
+            "x-deprecatedMessage": "IPAddress.Address is address family dependent and has been deprecated. Use IPAddress.Equals to perform comparisons instead."
+        }
+    }
+}
